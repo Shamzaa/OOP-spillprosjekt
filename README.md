@@ -23,7 +23,6 @@ Iterativ:
 - movement
 - interacton
 - battle
-- 
 
 ### TODO
 - Tittel til spillet
