@@ -6,7 +6,7 @@ public class Player extends Entity{
 	Player(float x, float y, float z){
 		position = new Vector3f(x, y, z);
 		// TODO: current sprite, other info loaded from file?
-		sprite = new Sprite();
+		//sprite = new Sprite();
 	}
 	
 	public void move(int x, int y){
