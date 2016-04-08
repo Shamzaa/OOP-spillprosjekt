@@ -2,7 +2,9 @@ package game.entity;
 import game.math.Vector3f;
 import game.graphics.*;
 
-public class Player extends Entity{
+public class Player extends Fighter{
+	
+	// other information sugested for init: HP, *MP*, inventory from json, 
 	Player(float x, float y, float z){
 		position = new Vector3f(x, y, z);
 		// TODO: current sprite, other info loaded from file?
