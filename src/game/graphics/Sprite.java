@@ -28,13 +28,17 @@ public class Sprite implements Drawable{
 	}
 	public void draw(Graphics2D g){
 		int xx = (int)(image.getWidth()/dimension.getX());
+		
+		Vector3f src = new Vector3f(((srcPos.getX() + cFrame%xx)*dimension.getX()),
+									((srcPos.getY() + (int)(cFrame/xx)*xx)*dimension.getY()),0);
+		System.out.println(src + " " + dimension);
 		g.drawImage(image, 0, 0, 
 				(int)dimension.getX(),
 				(int)dimension.getY(),
-				(int)srcPos.getX() + cFrame%xx,
-				(int)srcPos.getY() + (int)(cFrame/xx)*xx, 
-				(int)dimension.getX(),
-				(int)dimension.getY(), null);
+				(int)src.getX(),
+				(int)src.getY(), 
+				(int)(src.getX() + dimension.getX()),
+				(int)(src.getY() + dimension.getY()), null);
 	}
 	private void inc(){
 		cFrame = (cFrame + 1)%(int)srcPos.getZ();
@@ -44,7 +48,7 @@ public class Sprite implements Drawable{
 	}
 	
 	public float getDepth(){
-		return depth;
+		return depth - position.getZ()*dimension.getY();
 	}
 	
 	public void setPosition(Vector3f position){
