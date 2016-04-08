@@ -10,11 +10,11 @@ public class Vector3f {
 	public void setX(float x){
 		this.x = x;
 	}
-	public void setY(float x){
-		this.x = x;
+	public void setY(float y){
+		this.y = y;
 	}
-	public void setZ(float x){
-		this.x = x;
+	public void setZ(float z){
+		this.z = z;
 	}
 	public float getX(){
 		return x;
