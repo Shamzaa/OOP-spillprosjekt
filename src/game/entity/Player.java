@@ -1,8 +1,9 @@
 package game.entity;
+import game.math.Vector3f;
 
 public class Player extends Entity{
-	Player(int x, int y){
-		//position = new Vector(x, y);
+	Player(float x, float y, float z){
+		position = new Vector3f(x, y, z);
 		// TODO: current sprite, other info loaded from file?
 	}
 	
@@ -17,8 +18,9 @@ public class Player extends Entity{
 		 	and return x and y values for .setPosition
 		 */
 		
-		//position.setPosition(x, y);
-		// z-value gets calculated in .setPosition
+		position.setX(x);
+		position.setY(y);
+		// calculate z?
 		
 		if(x > 0){
 			// turn sprite to right

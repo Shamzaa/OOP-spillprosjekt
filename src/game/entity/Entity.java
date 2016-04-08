@@ -1,7 +1,9 @@
 package game.entity;
 
+import game.math.Vector3f;
+
 public class Entity {
-	//protected Vector position;
+	protected Vector3f position;
 	/* vars needed:
 	 * sprite
 	 * size?
