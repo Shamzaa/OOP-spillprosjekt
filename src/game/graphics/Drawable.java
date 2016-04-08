@@ -14,4 +14,6 @@ public interface Drawable {
 	public void setRotation(float r);
 	public Vector3f getCenter();
 	public void setCenter(Vector3f center);
+	public Vector3f getScale();
+	public void setScale(Vector3f scale);
 }
