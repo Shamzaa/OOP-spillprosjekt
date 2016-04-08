@@ -46,4 +46,7 @@ public class Sprite implements Drawable{
 	public void setCenter(Vector3f center){
 		this.center = center;
 	}
+	
+	// validation methods:
+	
 }
