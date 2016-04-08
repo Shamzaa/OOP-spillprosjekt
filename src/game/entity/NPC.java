@@ -1,4 +1,4 @@
-package drawable;
+package game.entity;
 
 public class NPC extends Entity{
 	

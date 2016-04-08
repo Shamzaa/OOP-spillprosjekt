@@ -1,4 +1,4 @@
-package drawable;
+package game.entity;
 
 public class Player extends Entity{
 	Player(int x, int y){

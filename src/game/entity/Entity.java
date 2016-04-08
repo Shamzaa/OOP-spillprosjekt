@@ -1,4 +1,4 @@
-package drawable;
+package game.entity;
 
 public class Entity {
 	protected Vector position;
