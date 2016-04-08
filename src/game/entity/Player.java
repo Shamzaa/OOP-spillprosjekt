@@ -23,6 +23,7 @@ public class Player extends Entity{
 		position.setX(x);
 		position.setY(y);
 		// calculate z?
+		sprite.setPosition(position);
 		
 		if(x > 0){
 			// turn sprite to right
