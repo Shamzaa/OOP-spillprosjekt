@@ -8,5 +8,5 @@ public class NPC extends Entity{
 		position = new Vector(x, y);
 	}
 	
-	// TODO: patrol method? 
+	// TODO: patrol method?, trigger dialogue object(observatør-observert-teknikken?)
 }
