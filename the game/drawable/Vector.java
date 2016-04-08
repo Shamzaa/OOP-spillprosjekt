@@ -12,7 +12,7 @@ public class Vector {
 		// no need for validation?
 	}
 	
-	// TODO: make movement relevant? 
+
 	public void setPosition(int x, int y){
 		position[0] = x;
 		position[1] = y;
