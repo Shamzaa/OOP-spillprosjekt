@@ -2,7 +2,7 @@ package game.entity;
 
 public class Player extends Entity{
 	Player(int x, int y){
-		position = new Vector(x, y);
+		//position = new Vector(x, y);
 		// TODO: current sprite, other info loaded from file?
 	}
 	
@@ -17,7 +17,7 @@ public class Player extends Entity{
 		 	and return x and y values for .setPosition
 		 */
 		
-		position.setPosition(x, y);
+		//position.setPosition(x, y);
 		// z-value gets calculated in .setPosition
 		
 		if(x > 0){
