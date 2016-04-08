@@ -28,15 +28,18 @@ Iterativ:
 - Tittel til spillet
 - interface for grafikk ✓
 - javafx canvas vs Jpanel
-- Lyd/Musikk
+- Lyd
+  - Lydeffecter
+  - Musikk
 - Camera class
 - Sprite class
 - Entity class
   - NPC class
-    - Hostile
     - Vendor
     - etc
-  - Player class
+  - Fighter class
+  	- Player
+  	- Hostile
 
 - Level class
   - BattleScene class
