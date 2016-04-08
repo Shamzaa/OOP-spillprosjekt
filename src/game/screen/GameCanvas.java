@@ -37,21 +37,22 @@ public class GameCanvas extends JPanel{
 	@Override
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-		System.out.println("Render");
 		Graphics2D g2 = (Graphics2D) g;
 		drawQueue.sort(new DrawableCompare());
 		cameraPos.add(new Vector3f(1,0,0));
 		g2.translate(cameraPos.getX(),cameraPos.getY());
 		g2.translate(128, 128);
-		rotation += Math.PI * 0.005;
+		rotation += Math.PI * 0.0005;
 		g2.rotate(rotation);
-		g2.translate(-128, -128);
-		g.drawImage(imgTest, 0, 0,256,256,null);
+		g2.scale(2, 2);
+		g2.translate(-64, -64);
+		g.drawImage(imgTest, 0, 0,128,128,null);
 		AffineTransform tmpTransform;
 		for(Drawable i : drawQueue){
 			tmpTransform = g2.getTransform(); //<-- 'push' transform
 			g2.getTransform();
 			g2.translate(i.getPosition().getX(),i.getPosition().getY());
+			g2.scale(i.getScale().getX(), i.getScale().getY());
 			g2.rotate(i.getRotation());
 			g2.translate(-i.getCenter().getX(), -i.getCenter().getY());
 			i.draw(g2);
