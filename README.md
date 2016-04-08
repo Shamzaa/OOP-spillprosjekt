@@ -26,6 +26,25 @@ Iterativ:
 
 ### TODO
 - Tittel til spillet
-- interface for grafikk
-- javafx vs canvas
+- interface for grafikk ✓
+- javafx canvas vs Jpanel
+- Lyd/Musikk
+- Camera class
+- Sprite class
+- Entity class
+  - NPC class
+    - Hostile
+    - Vendor
+    - etc
+  - Player class
+
+- Level class
+  - BattleScene class
+
+  
+- Game class
+- ResourceLoader class
+
+- Save/Load functionality
+
 
