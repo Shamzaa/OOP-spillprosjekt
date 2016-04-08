@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import game.graphics.Drawable;
 import game.graphics.DrawableCompare;
+import game.graphics.Sprite;
 import game.math.Vector3f;
 
 public class GameCanvas extends JPanel{
@@ -20,13 +21,20 @@ public class GameCanvas extends JPanel{
 	Vector3f cameraPos = new Vector3f(0,0,0);
 	float rotation = 0;
 	BufferedImage imgTest;
-	
+	Sprite test1;
+	Sprite test2;
 	public GameCanvas(){
 		try {
 			imgTest = ImageIO.read(new File("res/testImage.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		test1 = new Sprite(imgTest,new Vector3f(128,128,0),new Vector3f(0,0,0),new Vector3f(16,16,0),new Vector3f(32,32,0));
+		test1.setScale(new Vector3f(4,4,0));
+		test2 = new Sprite(imgTest,new Vector3f(128+64,128+64,0),new Vector3f(1,0,0),new Vector3f(16,16,0),new Vector3f(32,32,0));
+		test2.setScale(new Vector3f(4,4,0));
+		test2.setDepth(1);
+	
 	}
 	public void setCameraPos(Vector3f pos){
 		cameraPos = pos;
@@ -38,16 +46,20 @@ public class GameCanvas extends JPanel{
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
+		drawQueue.add(test1);
+		drawQueue.add(test2);
 		drawQueue.sort(new DrawableCompare());
 		cameraPos.add(new Vector3f(1,0,0));
 		g2.translate(cameraPos.getX(),cameraPos.getY());
-		g2.translate(128, 128);
+		g2.translate(0, 0);
 		rotation += Math.PI * 0.0005;
-		g2.rotate(rotation);
-		g2.scale(2, 2);
-		g2.translate(-64, -64);
-		g.drawImage(imgTest, 0, 0,128,128,null);
+		//test.setRotation(rotation);
+		//g2.rotate(rotation);
+		//g2.scale(2, 2);
+		//g2.translate(-64, -64);
+		//g.drawImage(imgTest, 0, 0,128,128,null);
 		AffineTransform tmpTransform;
+		
 		for(Drawable i : drawQueue){
 			tmpTransform = g2.getTransform(); //<-- 'push' transform
 			g2.getTransform();
