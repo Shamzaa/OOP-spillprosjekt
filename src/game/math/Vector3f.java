@@ -7,6 +7,9 @@ public class Vector3f {
 		this.y = y;
 		this.z = z;
 	}
+	public Vector3f(Vector3f v){
+		this(v.x,v.y,v.z);
+	}
 	public void setX(float x){
 		this.x = x;
 	}
@@ -25,9 +28,7 @@ public class Vector3f {
 	public float getZ(){
 		return z;
 	}
-	public void add(Vector3f vec) {
-		this.x += vec.x;
-		this.y += vec.y;
-		this.z += vec.z;
+	public Vector3f add(Vector3f vec) {
+		return new Vector3f(x + vec.x, y + vec.y, z + vec.z);
 	}
 }
