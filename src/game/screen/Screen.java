@@ -27,17 +27,14 @@ public class Screen extends JFrame{
 		setLocationRelativeTo(null);
 		setResizable(false);
 		
+		setVisible(true);
+		pack();
+		
+		
 	}
 	public GameCanvas getCanvas(){
 		return canvas;
 	}
-	public static void main(String[] args){
-		Screen s = new Screen();
-		s.setVisible(true);
-		s.pack();
-		while(true){
-			s.repaint();
-		}
-	}
+
 	
 }
