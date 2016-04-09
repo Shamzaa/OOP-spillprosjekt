@@ -5,6 +5,9 @@ import game.graphics.*;
 
 public class Entity {
 	protected Vector3f position;
+	protected Vector3f walkDir = new Vector3f(0,0,0);
+	protected Vector3f facing = new Vector3f(0,0,0);
+	
 	protected Sprite sprite;
 	private boolean dead = false;
 	/* vars needed:
