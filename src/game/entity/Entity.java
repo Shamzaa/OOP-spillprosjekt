@@ -6,6 +6,7 @@ import game.graphics.*;
 public class Entity {
 	protected Vector3f position;
 	protected Sprite sprite;
+	private boolean dead = false;
 	/* vars needed:
 	 * sprite
 	 * size?
@@ -14,8 +15,25 @@ public class Entity {
 	 */
 	
 	// other init vars needed: filepath to sprite, file containing options to import
-
-	public void setPosition(int x, int y){
-		//position.setPosition(x, y);
+	public void update(long dtime){
+		
+	}
+	public void render(){
+		
+	}
+	public void setPosition(Vector3f position){
+		this.position = position;
+	}
+	public Vector3f getPosition(){
+		return position;
+	}
+	
+	
+	public boolean isAlive(){
+		return dead;
+	}
+	
+	protected void kill(){
+		dead = true;
 	}
 }
