@@ -50,4 +50,6 @@ Iterativ:
 
 - Save/Load functionality
 
+### Requirements
+ - [http://mvnrepository.com/artifact/org.json/json](Java json library)
 
