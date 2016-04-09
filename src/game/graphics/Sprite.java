@@ -16,6 +16,8 @@ public class Sprite implements Drawable{
 	private BufferedImage image;
 	private Vector3f scale = new Vector3f(1,1,0);
 	private Vector3f dimension = new Vector3f(32,32,0); 
+	private int fps = 12;
+	private long timeAcc = 0;
 	public Sprite(BufferedImage img,Vector3f pos, Vector3f srcPos, Vector3f center, Vector3f dimension){
 		image = img;
 		position = pos;
@@ -26,12 +28,22 @@ public class Sprite implements Drawable{
 	public Sprite(BufferedImage img,Vector3f pos, int srcX,int srcY, int length, Vector3f center, Vector3f dimension){
 		this(img,pos,new Vector3f(srcX,srcY,length),center,dimension);
 	}
+	public Sprite(Sprite spr){
+		//Copy sprite
+		this(spr.image,spr.position,spr.srcPos,spr.center,spr.dimension);
+		this.fps = spr.fps;
+	}
+	public void setFPS(int fps){
+		this.fps = fps;
+	}
+	public int getFPS(){
+		return fps;
+	}
 	public void draw(Graphics2D g){
 		int xx = (int)(image.getWidth()/dimension.getX());
 		
 		Vector3f src = new Vector3f(((srcPos.getX() + cFrame%xx)*dimension.getX()),
 									((srcPos.getY() + (int)(cFrame/xx)*xx)*dimension.getY()),0);
-		System.out.println(src + " " + dimension);
 		g.drawImage(image, 0, 0, 
 				(int)dimension.getX(),
 				(int)dimension.getY(),
@@ -43,10 +55,17 @@ public class Sprite implements Drawable{
 	private void inc(){
 		cFrame = (cFrame + 1)%(int)srcPos.getZ();
 	}
+	public void update(long dtime){
+		timeAcc += dtime;
+		if(timeAcc > 1000/fps){
+			inc();
+			timeAcc -= 1000/fps;
+		}
+	}
 	public void setDepth(float depth){
 		this.depth = depth;
 	}
-	
+	@Override
 	public float getDepth(){
 		return depth - position.getZ()*dimension.getY();
 	}
@@ -58,7 +77,7 @@ public class Sprite implements Drawable{
 	public Vector3f getPosition(){
 		return position;
 	}
-	
+	@Override
 	public float getRotation(){
 		return rotation;
 	}
@@ -66,7 +85,7 @@ public class Sprite implements Drawable{
 	public void setRotation(float rotation){
 		this.rotation = rotation;
 	}
-	
+	@Override
 	public Vector3f getCenter(){
 		return center;
 	}
@@ -78,7 +97,6 @@ public class Sprite implements Drawable{
 	public Vector3f getScale() {
 		return scale;
 	}
-	@Override
 	public void setScale(Vector3f scale) {
 		this.scale = scale;
 	}
