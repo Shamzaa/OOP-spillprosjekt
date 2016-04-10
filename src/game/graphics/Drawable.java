@@ -11,4 +11,5 @@ public interface Drawable {
 	public float getRotation();
 	public Vector3f getCenter();
 	public Vector3f getScale();
+	public Vector3f getDimension();
 }

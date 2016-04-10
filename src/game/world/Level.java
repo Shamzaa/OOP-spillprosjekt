@@ -1,23 +1,28 @@
 package game.world;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import org.json.JSONObject;
 
+import game.Game;
 import game.entity.Entity;
 import game.graphics.Camera;
 import game.math.Vector3f;
 import game.tile.Tile;
 
-public class Level{
+public class Level implements KeyListener, MouseListener{
 	public static final int entityMapRes = 32;
 	public static final int MAX_Z = 3;
 	private Tile[] tiles;
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
 	private ArrayList<Entity>[] entityMap;
-	private Camera camera;
-	private int width;
-	
+	private Camera camera = new Camera(new Vector3f(0,0,0));
+	private int width, height;
+	private ArrayList<KeyListener> keyListeners = new ArrayList<KeyListener>(5);
 	@SuppressWarnings("unchecked")
 	public Level(int width,int height){
 		tiles = new Tile[width*height*MAX_Z];
@@ -26,20 +31,27 @@ public class Level{
 			entityMap[i] = new ArrayList<Entity>(10);
 		}
 		this.width = width;
+		this.height = height;
 	}
 	public Level(JSONObject levelMeta) {
+	}
+	public Camera getCamera(){
+		return camera;
 	}
 	public void render(){
 		Tile tmp;
 		int start = 0;
 		int end = tiles.length;
+		int layerSize = width*height;
 		for(int i=start; i<end;i++){
 			tmp = tiles[i];
 			if(tmp != null){
-				int x = (i%width)*Tile.SIZE;
-				int y = ((int)((i/width))*Tile.SIZE)%getHeight();
-				int z = (int)(i/(width*getHeight()));
-				tmp.getSprite().setPosition(new Vector3f(x,y,z));
+				int x = (i%width);
+				int y = Math.floorDiv(i, width)%getHeight();
+				int z = Math.floorDiv(i, layerSize);
+				//System.out.println(i + " : " + y + " : " + Math.floorDiv(i,width)*);
+				tmp.getSprite().setPosition(new Vector3f(x*Tile.SIZE,y*Tile.SIZE,z*Tile.SIZE));
+				tmp.getSprite().setDepth(-(y+Tile.SIZE+z*Tile.SIZE));
 				tmp.render();
 			}
 		}
@@ -49,7 +61,11 @@ public class Level{
 	}
 	public void update(long dtime){
 		for(Entity i : entities){
-			entityMap[getEntityMapIndex(i.getPosition())].add(i);
+			if(i.getPosition().getX() > 0 && i.getPosition().getX() < width*Tile.SIZE){
+				int index = getEntityMapIndex(i.getPosition());
+				if(index > 0 && index < entityMap.length)
+					entityMap[getEntityMapIndex(i.getPosition())].add(i);
+			}
 		}
 		for(Entity i: entities){
 			i.update(dtime);
@@ -73,7 +89,7 @@ public class Level{
 		return (int)((position.getX()/Tile.SIZE)/entityMapRes) + (int)((position.getY()/Tile.SIZE)/entityMapRes) * width;
 	}
 	public int getHeight(){
-		return tiles.length/width;
+		return height;
 	}
 	public Tile getTileAt(Vector3f position){
 		return getTileAt(getIndex(position));
@@ -85,15 +101,64 @@ public class Level{
 		tiles[index] = t;
 	}
 	public int getIndex(Vector3f position){
-		return (int) ((position.getX()+ position.getY()*width)*position.getZ());
+		return (int) (position.getX()+ position.getY()*width + position.getZ()*width*getHeight());
 	}
 	public Tile getTileAt(int index){
 		return tiles[index];
 	}
+	public void destroyEntity(Entity ent){
+		removeEntity(ent);
+		ent.destory();
+	}
+	public void addEntity(Entity ent){
+		entities.add(ent);
+	}
+	public void removeEntity(Entity ent){
+		entities.remove(ent);	
+	}
+	public void removeEntity(int index){
+		entities.remove(index);
+	}
 	public void enter(){
-		
+		Game.getCanvas().setCamera(camera);
 	}
 	public void leave(){
 		
+	}
+	public void addListener(KeyListener listener){
+		keyListeners.add(listener);
+	}
+	public void removeListener(KeyListener listener){
+		keyListeners.remove(listener);
+	}
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+	}
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+	}
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+	}
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+	}
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+	}
+	@Override
+	public void keyPressed(KeyEvent key) {
+		for(KeyListener i : keyListeners){
+			i.keyPressed(key);
+		}
+	}
+	@Override
+	public void keyReleased(KeyEvent key) {
+		for(KeyListener i : keyListeners){
+			i.keyReleased(key);
+		}
+	}
+	@Override
+	public void keyTyped(KeyEvent arg0) {
 	}
 }

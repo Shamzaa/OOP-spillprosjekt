@@ -39,6 +39,9 @@ public class Sprite implements Drawable{
 	public int getFPS(){
 		return fps;
 	}
+	public void setCurrentFrame(int frame){
+		this.cFrame = frame%(int)srcPos.getZ();
+	}
 	public void draw(Graphics2D g){
 		int xx = (int)(image.getWidth()/dimension.getX());
 		
@@ -67,9 +70,11 @@ public class Sprite implements Drawable{
 	}
 	@Override
 	public float getDepth(){
-		return depth - position.getZ()*dimension.getY();
+		return depth;
 	}
-	
+	public Vector3f getOffset(){
+		return dimension.mul(center);
+	}
 	public void setPosition(Vector3f position){
 		this.position = position;
 	}
@@ -99,6 +104,11 @@ public class Sprite implements Drawable{
 	}
 	public void setScale(Vector3f scale) {
 		this.scale = scale;
+	}
+	@Override
+	public Vector3f getDimension() {
+		// TODO Auto-generated method stub
+		return dimension;
 	}
 	
 	// validation methods:

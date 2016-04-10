@@ -1,6 +1,7 @@
 package game.math;
 
 import java.lang.Math;
+import java.util.Locale;
 public class Vector3f {
 	float x,y,z;
 	public Vector3f(float x, float y, float z){
@@ -86,5 +87,8 @@ public class Vector3f {
 	
 	public float getLength(){
 		return (float)Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));	
+	}
+	public String toString(){
+		return String.format(Locale.ENGLISH,"(%.2f,%.2f,%.2f)", x,y,z);
 	}
 }

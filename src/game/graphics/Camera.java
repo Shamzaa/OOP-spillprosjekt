@@ -15,10 +15,12 @@ public class Camera {
 	private Vector3f scale = new Vector3f(1f,1f,0);
 	private Vector3f center = new Vector3f(0.5f,0.5f,0f);
 	private Vector3f screenSpace = new Vector3f(0,0,0);
-	private Vector3f target = null;
-	public Camera(final Vector3f position, final Vector3f screenSpace){
+	private Entity target = null;
+	public Camera(final Vector3f position){
 		this.position = new Vector3f(position);
-		this.screenSpace = new Vector3f(screenSpace);
+	}
+	public void setScreenSpace(final Vector3f screenSpace){
+		this.screenSpace = screenSpace;
 	}
 	public void setPosition(final Vector3f position){
 		this.position = new Vector3f(position);
@@ -29,19 +31,39 @@ public class Camera {
 	public void setRotation(double rotation){
 		this.rotation = rotation;
 	}
-	public void setTarget(final Vector3f target){
+	public void setTarget(final Entity target){
 		this.target = target;
+	}
+	public final Vector3f getPosition(){
+		return position;
+	}
+	public double getRotation(){
+		return rotation;
+	}
+	public final Vector3f getScale(){
+		return scale;
+	}
+	public final Vector3f getCenter(){
+		return center;
 	}
 	public AffineTransform transform(AffineTransform transform){
 		AffineTransform t = (AffineTransform) transform.clone();
 		if(target != null){
-			setPosition(target);
+			setPosition(target.getPosition());
 		}
-		
-		t.translate(-position.getX(), -position.getY());
-		t.rotate(rotation);
+		float offsetX = center.getX()*screenSpace.getX();
+		float offsetY = center.getY()*screenSpace.getY();
+		t.translate(-position.getX() + offsetX, -position.getY() + offsetY);
 		t.scale(scale.getX(),scale.getY());
-		t.translate(-center.getX()*screenSpace.getX(), -center.getY()*screenSpace.getY());
+		t.rotate(rotation);
+		//t.translate(-offsetX,-offsetY);
+		/*
+		 *     context.translate(this.pos.x+context.canvas.width/2,this.pos.y+context.canvas.height/2);
+        context.scale(this.scale.x,this.scale.y);
+        context.rotate(this.rot.z);
+        context.translate(-context.canvas.width/2,-context.canvas.height/2);
+    
+		 * */
 		return t;
 	}
 }

@@ -1,8 +1,14 @@
 package game.entity;
 
+import game.graphics.Sprite;
+import game.math.Vector3f;
 import game.mechanics.Inventory;
 
-public class Fighter extends Entity{
+public abstract class Fighter extends Entity{
+	public Fighter(Vector3f position, Sprite[] sprites) {
+		super(position, sprites);
+	}
+
 	// % base health
 	private int baseHealth = 1000;
 	// % based damage reduction from hits
