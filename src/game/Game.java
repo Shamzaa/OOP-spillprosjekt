@@ -34,6 +34,24 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 	private boolean VK_A,VK_S,VK_D,VK_W,VK_Q,VK_E,VK_pluss,VK_minus;
 	private int rot = 0;
 	private static Game game = null;
+	private BufferedImage imageTest = ResourceManager.getImage("res/testImage.png");
+	private BufferedImage imageTest2 = ResourceManager.getImage("res/maintest.png");
+	private Sprite spriteTest = new Sprite(imageTest,new Vector3f(0,0,0),new Vector3f(0,0,1),new Vector3f(0,0,0),new Vector3f(32,32,0));
+	private Sprite spriteTest2 = new Sprite(imageTest,new Vector3f(0,0,0),new Vector3f(1,0,1),new Vector3f(0,0,0),new Vector3f(32,32,0));
+	
+	private Sprite spritePlayer0 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,0,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
+	private Sprite spritePlayer1 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,1,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
+	private Sprite spritePlayer2 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,2,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
+	private Sprite spritePlayer3 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,3,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
+	private Player playerTest = new Player(new Vector3f(64,32,1),new Sprite[]{
+			spritePlayer0,
+			spritePlayer1,
+			spritePlayer2,
+			spritePlayer3
+	});
+	
+	
+	private long ctime,dtime,ltime,timeAcc,frames;
 	
 	public Game(JSONObject obj){
 		Game.game = this;
@@ -53,56 +71,21 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 		//game.gameScreen.getCanvas().setRequestFocusEnabled(true);
 	}
 	public static void run(){
-		long dtime;
-		long ctime;
-		long ltime = System.currentTimeMillis();
-		long timeAcc = 0;
-		long frames = 0;
-		BufferedImage imageTest = ResourceManager.getImage("res/testImage.png");
-		BufferedImage imageTest2 = ResourceManager.getImage("res/testImage2.png");
-		Sprite spriteTest = new Sprite(imageTest,new Vector3f(0,0,0),new Vector3f(0,0,1),new Vector3f(0,0,0),new Vector3f(32,32,0));
-		Sprite spriteTest2 = new Sprite(imageTest,new Vector3f(0,0,0),new Vector3f(1,0,1),new Vector3f(0,0,0),new Vector3f(32,32,0));
-		
-		Sprite spritePlayer0 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,0,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
-		Sprite spritePlayer1 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,1,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
-		Sprite spritePlayer2 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,2,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
-		Sprite spritePlayer3 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,3,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
-		Player playerTest = new Player(new Vector3f(64,32,1),new Sprite[]{
-				spritePlayer0,
-				spritePlayer1,
-				spritePlayer2,
-				spritePlayer3
-				
-		});
-		spriteTest.setFPS(2);
-		Tile testTile = new Tile(spriteTest);
-		Tile testTile2 = new Tile(spriteTest2);
+		game.ltime = System.currentTimeMillis();
+		game.spriteTest.setFPS(2);
+		Tile testTile = new Tile(game.spriteTest);
+		Tile testTile2 = new Tile(game.spriteTest2);
 		for(int i=0; i<32*32;i++){
 			game.currentLevel.setTileAt(new Tile(testTile), i);
 		}
 		for(int i=0; i<32;i++){
 			game.currentLevel.setTileAt(new Tile(testTile2), new Vector3f(i,0,1));
 		}
-		game.currentLevel.addEntity(playerTest);
-		playerTest.enter(game.currentLevel);
-		//Timer upTimer = new Timer(12,game);
-		while(true){
-			ctime = System.currentTimeMillis();
-			dtime = ctime - ltime;
-			if(dtime > 12 && game.gameScreen.getCanvas().isReady()){
-				ltime = ctime;
-				timeAcc += dtime;
-				frames++;
-				game.currentLevel.update(dtime);
-				game.currentLevel.render();
-				game.gameScreen.getCanvas().repaint();
-				if(timeAcc > 1000){
-					System.out.println("FPS: " + frames);
-					timeAcc = 0;
-					frames = 0;
-				}
-			}
-		}
+		game.currentLevel.addEntity(game.playerTest);
+		game.playerTest.enter(game.currentLevel);
+		Timer upTimer = new Timer(10,game);
+		upTimer.start();
+
 	}
 	public static Level getCurrentLevel(){
 		return game.currentLevel;
@@ -169,8 +152,19 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		ctime = System.currentTimeMillis();
+		dtime = ctime - ltime;
+		ltime = ctime;
+		timeAcc += dtime;
+		frames++;
+		game.currentLevel.update(dtime);
+		game.currentLevel.render();
+		game.gameScreen.getCanvas().render();
+		if(timeAcc > 1000){
+			System.out.println("FPS: " + frames);
+			timeAcc = 0;
+			frames = 0;
+		}
 	}
 
 }

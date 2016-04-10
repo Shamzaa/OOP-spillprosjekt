@@ -32,9 +32,12 @@ public class GameCanvas extends JPanel{
 	public void addToQueue(Drawable d){
 		drawQueue.add(d);
 	}
+	public void render(){
+		ready = false;
+		repaint();
+	}
 	@Override
 	protected void paintComponent(Graphics g){
-		ready = false;
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		camera.setScreenSpace(new Vector3f(this.getWidth(),this.getHeight(),0));
