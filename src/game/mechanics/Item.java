@@ -6,7 +6,7 @@ public class Item {
 	private String name;
 	private boolean stackable;
 	private String itemId;
-	private boolean dead = false;
+
 	// some sort of pointer to a file for information
 	private static HashMap<String,Item> itemMap = new HashMap<String,Item>();
 	public Item(String name,String itemId){
@@ -37,9 +37,7 @@ public class Item {
 	public String getName(){
 		return name;
 	}
-	public void kill(){
-		dead = true;
-	}
+
 	public boolean isStackable(){
 		return stackable;
 	}
