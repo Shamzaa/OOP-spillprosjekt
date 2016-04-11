@@ -1,8 +1,11 @@
 package game.entity;
 
+import game.math.Rectangle;
+import game.math.Shape;
 import game.math.Vector3f;
 import game.tile.Tile;
 import game.world.Level;
+
 import game.Game;
 import game.graphics.*;
 
@@ -10,10 +13,12 @@ public abstract class Entity {
 	protected Vector3f position;
 	protected Vector3f walkDir = new Vector3f(0,0,0);
 	protected Vector3f facing = new Vector3f(0,0,0);
-	protected double walkSpeed = 128;
+	protected double walkSpeed = 256;
 	protected Sprite[] sprites;
 	protected Sprite currentSprite;
+	protected Shape shape;
 	private boolean dead = false;
+	
 	/* vars needed:
 	 * sprite
 	 * size?
@@ -26,6 +31,7 @@ public abstract class Entity {
 		this.position = position;
 		this.sprites = sprites;
 		currentSprite = sprites[0];
+		shape = new Rectangle(position,currentSprite.getDimension().mul(new Vector3f(1,0.25f,0)));
 	}
 	
 	public void update(long dtime){
@@ -35,7 +41,11 @@ public abstract class Entity {
 		if(walkDir.getLength() > 0){
 			face(walkDir);
 			currentSprite.update(dtime);
-			setPosition(position.add(walkDir.normalize().scale((float) (walkSpeed*dtime/1000))));
+			Vector3f deltaPos = walkDir.normalize().scale((float) (walkSpeed*dtime/1000));
+			Vector3f newPos = position.add(deltaPos);
+			shape.setPosition(newPos);
+			
+			setPosition(newPos);
 		}else{
 			currentSprite.setCurrentFrame(0);
 		}
@@ -43,9 +53,9 @@ public abstract class Entity {
 	public void face(Vector3f dir){
 		facing = dir;
 		if(facing.getY() < 0){
-			currentSprite = sprites[2];
-		}else if(facing.getY() > 0){
 			currentSprite = sprites[3];
+		}else if(facing.getY() > 0){
+			currentSprite = sprites[2];
 		}else if(facing.getX() > 0){
 			currentSprite = sprites[0];
 		}else if(facing.getX() < 0){
@@ -55,11 +65,20 @@ public abstract class Entity {
 	public void render(){
 		if(currentSprite != null){
 			currentSprite.setPosition(position);
-			currentSprite.setDepth(-position.getY() - (currentSprite.getDimension().getY() - currentSprite.getOffset().getY()) - position.getZ()*Tile.SIZE);
+			currentSprite.setDepth(calcDepth());
+			shape.setDepth(calcDepth() - 1.0f);
+			
 			Game.getCanvas().addToQueue(currentSprite);
+			Game.getCanvas().addToQueue(shape);
 		}
 	}
+	protected float calcDepth(){
+		return -position.getY() - (currentSprite.getDimension().getY() - currentSprite.getOffset().getY()) - position.getZ()*Tile.SIZE;
+	}
 	public void setPosition(Vector3f position){
+		Vector3f sPos = (position.sub(sprites[0].getOffset()));
+		sPos = sPos.add(sprites[0].getDimension().sub(shape.getDimension()).mul(new Vector3f(0,1,0)));
+		shape.setPosition(sPos);
 		this.position = position;
 	}
 	public Vector3f getPosition(){

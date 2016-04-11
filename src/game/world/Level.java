@@ -23,6 +23,7 @@ public class Level implements KeyListener, MouseListener{
 	private Camera camera = new Camera(new Vector3f(0,0,0));
 	private int width, height;
 	private ArrayList<KeyListener> keyListeners = new ArrayList<KeyListener>(5);
+	
 	@SuppressWarnings("unchecked")
 	public Level(int width,int height){
 		tiles = new Tile[width*height*MAX_Z];
@@ -52,6 +53,8 @@ public class Level implements KeyListener, MouseListener{
 				//System.out.println(i + " : " + y + " : " + Math.floorDiv(i,width)*);
 				tmp.getSprite().setPosition(new Vector3f(x*Tile.SIZE,y*Tile.SIZE,z*Tile.SIZE));
 				tmp.getSprite().setDepth(-(y+Tile.SIZE+z*Tile.SIZE));
+				tmp.getShape().setPosition(tmp.getSprite().getPosition());
+				tmp.getShape().setDepth(tmp.getSprite().getDepth()-1);
 				tmp.render();
 			}
 		}
@@ -63,8 +66,9 @@ public class Level implements KeyListener, MouseListener{
 		for(Entity i : entities){
 			if(i.getPosition().getX() > 0 && i.getPosition().getX() < width*Tile.SIZE){
 				int index = getEntityMapIndex(i.getPosition());
-				if(index > 0 && index < entityMap.length)
+				if(index > 0 && index < entityMap.length){
 					entityMap[getEntityMapIndex(i.getPosition())].add(i);
+				}
 			}
 		}
 		for(Entity i: entities){
@@ -72,6 +76,7 @@ public class Level implements KeyListener, MouseListener{
 		}
 		for(Tile t : tiles){
 			if(t != null){
+				t.getShape().setPosition(t.getSprite().getPosition());
 				t.update(dtime);
 			}
 		}
@@ -92,7 +97,12 @@ public class Level implements KeyListener, MouseListener{
 		return height;
 	}
 	public Tile getTileAt(Vector3f position){
-		return getTileAt(getIndex(position));
+		if(position.getX() < width && position.getX() >= 0 && 
+		   position.getY() < height && position.getY() >= 0)
+		{
+			return getTileAt(getIndex(position));
+		}
+		return null;
 	}
 	public void setTileAt(Tile t, Vector3f position){
 		tiles[getIndex(position)] = t;
@@ -103,9 +113,16 @@ public class Level implements KeyListener, MouseListener{
 	public int getIndex(Vector3f position){
 		return (int) (position.getX()+ position.getY()*width + position.getZ()*width*getHeight());
 	}
-	public Tile getTileAt(int index){
-		return tiles[index];
+	public Vector3f getPosition(int index){
+		return new Vector3f(index%width,Math.floorDiv(index, width),Math.floorDiv(index, width*height) );
 	}
+	public Tile getTileAt(int index){
+		if(index >= 0 && index < tiles.length){
+			return tiles[index];
+		}
+		return null;
+	}
+	
 	public void destroyEntity(Entity ent){
 		removeEntity(ent);
 		ent.destory();

@@ -20,7 +20,9 @@ import game.math.Vector3f;
 import game.resource.ResourceManager;
 import game.screen.GameCanvas;
 import game.screen.Screen;
+import game.tile.Ground;
 import game.tile.Tile;
+import game.tile.Wall;
 import game.world.Level;
 
 public class Game implements KeyListener, MouseListener, ActionListener{
@@ -73,13 +75,13 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 	public static void run(){
 		game.ltime = System.currentTimeMillis();
 		game.spriteTest.setFPS(2);
-		Tile testTile = new Tile(game.spriteTest);
-		Tile testTile2 = new Tile(game.spriteTest2);
+		Tile testTile = new Ground(game.spriteTest);
+		Tile testTile2 = new Wall(game.spriteTest2);
 		for(int i=0; i<32*32;i++){
-			game.currentLevel.setTileAt(new Tile(testTile), i);
+			game.currentLevel.setTileAt(new Ground(testTile), i);
 		}
 		for(int i=0; i<32;i++){
-			game.currentLevel.setTileAt(new Tile(testTile2), new Vector3f(i,0,1));
+			game.currentLevel.setTileAt(new Wall(testTile2), new Vector3f(i,0,1));
 		}
 		game.currentLevel.addEntity(game.playerTest);
 		game.playerTest.enter(game.currentLevel);

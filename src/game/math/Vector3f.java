@@ -3,7 +3,7 @@ package game.math;
 import java.lang.Math;
 import java.util.Locale;
 public class Vector3f {
-	float x,y,z;
+	private float x,y,z;
 	public Vector3f(float x, float y, float z){
 		this.x = x;
 		this.y = y;
