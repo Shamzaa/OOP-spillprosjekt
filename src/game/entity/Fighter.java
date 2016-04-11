@@ -61,7 +61,9 @@ public abstract class Fighter extends Entity{
 		return fighting;
 	}
 	public void attack(Fighter enemy){
-		// TODO: add item/spell in attack parameter?
+		// TODO: calculate damage done based on weapon
+		int damage = 100;
+		enemy.hit(damage);
 		
 	}
 
