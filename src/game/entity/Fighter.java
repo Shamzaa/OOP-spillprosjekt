@@ -19,7 +19,7 @@ public abstract class Fighter extends Entity{
 	private int healthPoints = 500;
 	private double resistance = 0.35;
 	private Inventory inventory;
-	private boolean fighting = true;
+	private boolean fighting = false;
 	private ColorRect healthBarBG;
 	private ColorRect healthBar;
 	public Fighter(Vector3f position, Sprite[] sprites) {

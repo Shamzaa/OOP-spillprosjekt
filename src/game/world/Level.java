@@ -47,14 +47,6 @@ public class Level implements KeyListener, MouseListener{
 		for(int i=start; i<end;i++){
 			tmp = tiles[i];
 			if(tmp != null){
-				int x = (i%width);
-				int y = Math.floorDiv(i, width)%getHeight();
-				int z = Math.floorDiv(i, layerSize);
-				//System.out.println(i + " : " + y + " : " + Math.floorDiv(i,width)*);
-				tmp.getSprite().setPosition(new Vector3f(x*Tile.SIZE,y*Tile.SIZE,z*Tile.SIZE));
-				tmp.getSprite().setDepth(-(y+Tile.SIZE+z*Tile.SIZE));
-				tmp.getShape().setPosition(tmp.getSprite().getPosition());
-				tmp.getShape().setDepth(tmp.getSprite().getDepth()-1);
 				tmp.render();
 			}
 		}
@@ -96,22 +88,41 @@ public class Level implements KeyListener, MouseListener{
 	public int getHeight(){
 		return height;
 	}
-	public Tile getTileAt(Vector3f position){
-		if(position.getX() < width && position.getX() >= 0 && 
+	public Tile getTileAt(Vector3f position,boolean worldCoord){
+		/*if(position.getX() < width && position.getX() >= 0 && 
 		   position.getY() < height && position.getY() >= 0)
-		{
-			return getTileAt(getIndex(position));
-		}
-		return null;
+		{*/
+		return getTileAt(getIndex(position,worldCoord));
+		//}
+		//return null;
+	}
+	public Tile getTileAt(Vector3f position){
+		return getTileAt(position,false);
 	}
 	public void setTileAt(Tile t, Vector3f position){
-		tiles[getIndex(position)] = t;
+		setTileAt(t,getIndex(position,false));
+	}
+	public void setTileAt(Tile t, Vector3f position,boolean worldCoord){
+		setTileAt(t,getIndex(position,worldCoord));
 	}
 	public void setTileAt(Tile t, int index){
+		if(t != null){
+			int layerSize = width*height;
+			int x = (index%width);
+			int y = Math.floorDiv(index, width)%getHeight();
+			int z = Math.floorDiv(index, layerSize);
+			t.setPosition(new Vector3f(x*Tile.SIZE,y*Tile.SIZE,z*Tile.SIZE));
+		}
 		tiles[index] = t;
 	}
+	public int getIndex(Vector3f position,boolean worldCoord){
+		if(worldCoord){
+			position = position.div(new Vector3f(Tile.SIZE,Tile.SIZE,1));
+		}
+		return (int) (Math.floor(position.getX())+ Math.floor(position.getY())*width + Math.floor(position.getZ())*width*getHeight());
+	}
 	public int getIndex(Vector3f position){
-		return (int) (position.getX()+ position.getY()*width + position.getZ()*width*getHeight());
+		return getIndex(position,false);
 	}
 	public Vector3f getPosition(int index){
 		return new Vector3f(index%width,Math.floorDiv(index, width),Math.floorDiv(index, width*height) );

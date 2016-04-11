@@ -39,12 +39,11 @@ public abstract class Entity {
 			Game.getCurrentLevel().destroyEntity(this);
 		}
 		if(walkDir.getLength() > 0){
+			
 			face(walkDir);
 			currentSprite.update(dtime);
 			Vector3f deltaPos = walkDir.normalize().scale((float) (walkSpeed*dtime/1000));
 			Vector3f newPos = position.add(deltaPos);
-			shape.setPosition(newPos);
-			
 			setPosition(newPos);
 		}else{
 			currentSprite.setCurrentFrame(0);

@@ -16,18 +16,24 @@ public class Rectangle extends Shape{
 		this.dimension = dimension;
 	}
 
-	public boolean overlaps(Rectangle rect){
-		if(withinRadius(rect)){
+	public boolean overlaps(Rectangle rect,boolean checkOther){
+		//if(withinRadius(rect)){
 			Vector3f p1 = getPosition();
 			Vector3f p2 = rect.getPosition();
 			Vector3f e1 = p1.add(dimension);
 			Vector3f e2 = p2.add(rect.dimension);
-			//Vector3f AB = p1.add(getCenter()).sub(p2.add(rect.getCenter()));
-			return  p1.getX() < e2.getX() && e2.getX() > p1.getX() &&
-					p1.getY() < e2.getY() && e2.getY() > p1.getY();
+			System.out.println((p1.getX() < e2.getX()) + " " + (e1.getX() > p2.getX())
+					+ " " + (p1.getY() < e2.getY()) + " " + (e1.getY() > p2.getY()));
 			
-		}
-		return false;
+			return (p1.getX() < e2.getX() && e1.getX() > p2.getX() &&
+					p1.getY() < e2.getY() && e1.getY() > p2.getY()) || (!checkOther ? false : rect.overlaps(this,false));
+			
+		//}
+		//return false;
+	}
+	public boolean overlaps(Rectangle rect){
+		return overlaps(rect,true);
+		
 	}
 
 	@Override
@@ -36,7 +42,7 @@ public class Rectangle extends Shape{
 	}
 
 	public Vector3f getShapeCenter() {
-		return dimension.scale(0.5f);
+		return dimension.scale(0f);
 	}
 	@Override
 	public Vector3f getCenter() {
@@ -59,7 +65,7 @@ public class Rectangle extends Shape{
 	public void draw(Graphics2D g) {
 		if(DO_DRAW){
 			Color old = g.getColor();
-			g.setColor(new Color(255,0,0));
+			g.setColor(new Color(0,0,255));
 			g.drawRect(0,0,(int) dimension.getX(),(int) dimension.getY());
 			g.setColor(old);
 		}

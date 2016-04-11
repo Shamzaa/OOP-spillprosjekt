@@ -1,0 +1,39 @@
+{
+    "image" = "res/levels/example.png",
+    "imageMeta" = {
+        10 = {
+                "sprite" = {
+                    "image" = "res/tiles/standard.png",
+                    "index" = [0,0,1]
+                },
+                "class" = "game.tile.Wall"
+            }
+        },
+        20 = {
+                "sprite" = {
+                    "image" = "res/tiles/standard.png",
+                    "index" = [1,0,1]
+                },
+                "class" = "game.tile.Ground"
+            }
+            
+        }
+    },
+    "tileMeta" = [
+        {
+            "position" = [25,5,0],
+            "data" = {}
+        }
+    ]
+    ,
+    "entities" = [
+        {
+            class = "game.entity.Player",
+            
+        }
+    ]
+
+
+
+
+}
