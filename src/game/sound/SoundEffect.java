@@ -4,7 +4,7 @@ import java.net.URL;
 import javax.sound.sampled.*;
 
 public enum SoundEffect {
-	EXPLODE("explode.wav");
+	HIT("hit.wav");
 
 	// Nested class for specifying volume
 	public static enum Volume {
