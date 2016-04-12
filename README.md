@@ -5,10 +5,10 @@ RPG hvor du styrer en karakter i en 2-dimensjonal verden.
 Du vil ha mulighet til å gå rundt om i verden med WASD, og komme over forskjellige situasjoner hvor hver situasjon kan skille seg ut fra den forrige. Eksempel på dette vil være å svare på en tekstialog til turn-based kamp. Hvor mye forskjellig vi lager, vil være avhengig av tid vi får brukt på prosjektet.
 
 ### Javafx vs Java swing
-Java swing JPanel
+#### Java swing JPanel
 ![Java swing JPanel canvas](https://github.com/Shamzaa/OOP-spillprosjekt/blob/master/java-swing-JPanel.png "Java swing JPanel gir fin og klar grafikk")
 
-Javafx canvas
+#### Javafx canvas
 ![Javafx canvas](https://github.com/Shamzaa/OOP-spillprosjekt/blob/master/javafx-canvas.png "Javafx canvas gir uønsket grafiske artifacts")
 
 
