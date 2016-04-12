@@ -6,10 +6,10 @@ Du vil ha mulighet til å gå rundt om i verden med WASD, og komme over forskjel
 
 ### Javafx vs Java swing
 Java swing JPanel
-![Java swing JPanel canvas](https://github.com/Shamzaa/OOP-spillprosjekt/java-swing-JPanel.png "Java swing JPanel gir fin og klar grafikk")
+![Java swing JPanel canvas](https://github.com/Shamzaa/OOP-spillprosjekt/blob/master/java-swing-JPanel.png "Java swing JPanel gir fin og klar grafikk")
 
 Javafx canvas
-![Javafx canvas](https://github.com/Shamzaa/OOP-spillprosjekt/javafx-canvas.png "Javafx canvas gir uønsket grafiske artifacts")
+![Javafx canvas](https://github.com/Shamzaa/OOP-spillprosjekt/blob/master/javafx-canvas.png "Javafx canvas gir uønsket grafiske artifacts")
 
 
 ### krav
