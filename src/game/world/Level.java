@@ -54,7 +54,6 @@ public class Level implements KeyListener, MouseListener{
 		String elem = null;
 		for(Iterator<String> s = imageMeta.keys(); s.hasNext();){
 			elem = s.next();
-			System.out.println(elem);
 			valueMap.put(Integer.parseInt(elem), imageMeta.getJSONObject(elem));
 		}
 		for(int i=0; i<width*height;i++){
