@@ -56,7 +56,6 @@ public class ClassUtils {
 	}
 	public static Object newInstance(String className,Object[] data){
 		try {
-			System.out.println(className + " " + getParams(data) + " " + data);
 			return getConstructor(className, getParams(data)).newInstance(data);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
