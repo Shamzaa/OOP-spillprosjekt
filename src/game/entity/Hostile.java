@@ -25,4 +25,11 @@ public class Hostile extends Fighter{
 	public void destory() {
 	}
 
+	@Override
+	public void touch(Entity ent) {
+		if(ent instanceof Player){
+			//Start fight
+		}
+	}
+
 }

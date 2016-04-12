@@ -11,7 +11,7 @@ import game.graphics.*;
 
 public class Player extends Fighter implements KeyListener{
 
-
+	private boolean controlsEnabled = true;
 
 	@SuppressWarnings("serial")
 	private HashMap<Integer,Boolean> keyMap = new HashMap<Integer,Boolean>(){
@@ -25,17 +25,26 @@ public class Player extends Fighter implements KeyListener{
 	};
 	
 	// other information sugested for init: HP, *MP*, inventory from json, 
-
+	public void disableControls(){
+		controlsEnabled = false;
+	}
+	public void enableControls(){
+		controlsEnabled = true;
+	}
 	public Player(Vector3f position, Sprite[] sprites) {
 		super(position, sprites);
 	}
 	@Override
 	public void update(long dtime){
-		walkDir = new Vector3f(
-				(keyMap.get(KeyEvent.VK_D) ? 1 : 0)+
-				(keyMap.get(KeyEvent.VK_A) ? -1 : 0),
-				(keyMap.get(KeyEvent.VK_W) ? -1 : 0)+
-				(keyMap.get(KeyEvent.VK_S) ? 1 : 0),0);
+		if(controlsEnabled){
+			walkDir = new Vector3f(
+					(keyMap.get(KeyEvent.VK_D) ? 1 : 0)+
+					(keyMap.get(KeyEvent.VK_A) ? -1 : 0),
+					(keyMap.get(KeyEvent.VK_W) ? -1 : 0)+
+					(keyMap.get(KeyEvent.VK_S) ? 1 : 0),0);
+		}else{
+			walkDir = new Vector3f(0,0,0);
+		}
 		super.update(dtime);
 	}
 	
@@ -71,5 +80,10 @@ public class Player extends Fighter implements KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		
+	}
+	@Override
+	public void touch(Entity ent) {
+		
 	}
 }

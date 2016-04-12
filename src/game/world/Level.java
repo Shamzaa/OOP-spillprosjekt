@@ -4,7 +4,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import org.json.JSONObject;
 
@@ -12,6 +18,8 @@ import game.Game;
 import game.entity.Entity;
 import game.graphics.Camera;
 import game.math.Vector3f;
+import game.misc.ClassUtils;
+import game.resource.ResourceManager;
 import game.tile.Tile;
 
 public class Level implements KeyListener, MouseListener{
@@ -24,8 +32,11 @@ public class Level implements KeyListener, MouseListener{
 	private int width, height;
 	private ArrayList<KeyListener> keyListeners = new ArrayList<KeyListener>(5);
 	
-	@SuppressWarnings("unchecked")
 	public Level(int width,int height){
+		init(width,height);
+	}
+	@SuppressWarnings("unchecked")
+	private void init(int width, int height){
 		tiles = new Tile[width*height*MAX_Z];
 		entityMap = (ArrayList<Entity>[]) new ArrayList[(int)Math.ceil((width * height)/entityMapRes)];
 		for(int i=0; i< entityMap.length;i++){
@@ -35,6 +46,30 @@ public class Level implements KeyListener, MouseListener{
 		this.height = height;
 	}
 	public Level(JSONObject levelMeta) {
+		String imageName = levelMeta.getString("image");
+		BufferedImage img = ResourceManager.getImage(imageName);
+		init(img.getWidth(),img.getHeight());
+		JSONObject imageMeta = levelMeta.getJSONObject("imageMeta");
+		HashMap<Integer,JSONObject> valueMap = new HashMap<Integer,JSONObject>();
+		String elem = null;
+		for(Iterator<String> s = imageMeta.keys(); s.hasNext();){
+			elem = s.next();
+			valueMap.put(Integer.parseInt(elem), imageMeta.getJSONObject(elem));
+		}
+		for(int i=0; i<width*height;i++){
+			int color = img.getRGB(i%width,Math.floorDiv(i,width));
+			for(int x=0; x<3; x++){
+				int k = (color >> 8*x)&0xFF;
+				if(valueMap.containsKey(k)){
+					String className = valueMap.get(k).getString("class");
+					setTileAt((Tile)ClassUtils.newInstance(className, new Object[]{valueMap.get(k)}),i + x*width*height);
+				}
+			}
+			
+		}
+		
+		
+		
 	}
 	public Camera getCamera(){
 		return camera;
@@ -63,8 +98,13 @@ public class Level implements KeyListener, MouseListener{
 				}
 			}
 		}
+		ArrayList<Entity> removeList = new ArrayList<Entity>(entities.size()/4);
 		for(Entity i: entities){
-			i.update(dtime);
+			if(i.isAlive()){
+				i.update(dtime);
+			}else{
+				removeList.add(i);
+			}
 		}
 		for(Tile t : tiles){
 			if(t != null){
@@ -74,6 +114,9 @@ public class Level implements KeyListener, MouseListener{
 		}
 		for(ArrayList<Entity> m: entityMap){
 			m.clear();
+		}
+		for(Entity i : removeList){
+			destroyEntity(i);
 		}
 	}
 	public int getWidth(){
@@ -140,12 +183,18 @@ public class Level implements KeyListener, MouseListener{
 	}
 	public void addEntity(Entity ent){
 		entities.add(ent);
+		ent.enter(this);
 	}
 	public void removeEntity(Entity ent){
-		entities.remove(ent);	
+		removeEntity(entities.indexOf(ent));
 	}
 	public void removeEntity(int index){
 		entities.remove(index);
+		entities.get(index).leave(this);
+	}
+	public void moveEntityTo(Entity ent, Level lvl){
+		removeEntity(ent);
+		lvl.addEntity(ent);	
 	}
 	public void enter(){
 		Game.getCanvas().setCamera(camera);

@@ -7,6 +7,9 @@ public class Stack {
 		this.item = item;
 		this.qty = qty;
 	}
+	public Stack(Stack s){
+		this(s.getItem(),s.getQty());
+	}
 	public boolean merge(Stack stack){
 		if(item == stack.item && item.isStackable()){
 			if(!isValid()){

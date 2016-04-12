@@ -3,7 +3,10 @@ package game.tile;
 
 
 
+import org.json.JSONObject;
+
 import game.Game;
+import game.entity.Entity;
 import game.graphics.Sprite;
 import game.math.Rectangle;
 import game.math.Shape;
@@ -22,6 +25,9 @@ public abstract class Tile {
 	public Tile(Tile t){
 		this.sprite = new Sprite(t.sprite);
 	}
+	public Tile(JSONObject data){
+		this.sprite = new Sprite(data.getJSONObject("sprite"));
+	}
 	public boolean isSolid(){
 		return solid;
 	}
@@ -33,7 +39,7 @@ public abstract class Tile {
 	}
 	public void render(){
 		sprite.setPosition(position);
-		sprite.setDepth(-(position.getY()/Tile.SIZE+Tile.SIZE+position.getZ()));
+		sprite.setDepth(-(position.getY()+Tile.SIZE+position.getZ()));
 		shape.setPosition(position);
 		shape.setDepth(sprite.getDepth()-1);
 	/*
@@ -49,6 +55,9 @@ public abstract class Tile {
 		Game.getCanvas().addToQueue(shape);
 		Game.getCanvas().addToQueue(sprite);
 	}
+	public abstract void enter(Entity ent);
+	public abstract void leave(Entity ent);
+	
 	public Shape getShape(){
 		return shape;
 	}

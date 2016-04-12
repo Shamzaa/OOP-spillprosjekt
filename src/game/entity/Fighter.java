@@ -7,6 +7,7 @@ import game.graphics.ColorRect;
 import game.graphics.Sprite;
 import game.math.Vector3f;
 import game.mechanics.Inventory;
+import game.mechanics.Wearable;
 
 public abstract class Fighter extends Entity{
 	
@@ -18,10 +19,10 @@ public abstract class Fighter extends Entity{
 	private int baseMaxHealth = 1000;
 	private int healthPoints = 500;
 	private double resistance = 0.35;
-	private Inventory inventory;
 	private boolean fighting = false;
 	private ColorRect healthBarBG;
 	private ColorRect healthBar;
+	private Wearable[] itemSlots = new Wearable[Wearable.slotCount];
 	public Fighter(Vector3f position, Sprite[] sprites) {
 		super(position, sprites);
 		Vector3f hpDim = new Vector3f(sprites[0].getDimension().getX()+6,3,0);

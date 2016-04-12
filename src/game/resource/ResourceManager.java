@@ -45,6 +45,10 @@ public class ResourceManager {
 		}
 		return buffer;
 	}
+	public static String getFileContent(String filename){
+		return new String(getFileBuffer(filename));
+		
+	}
 	public static BufferedImage getImage(String filename){
 		if(imageMap.containsKey(filename)){
 			return imageMap.get(filename);

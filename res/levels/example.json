@@ -1,39 +1,35 @@
 {
-    "image" = "res/levels/example.png",
-    "imageMeta" = {
-        10 = {
-                "sprite" = {
-                    "image" = "res/tiles/standard.png",
-                    "index" = [0,0,1]
-                },
-                "class" = "game.tile.Wall"
-            }
+  "image":  "res/levels/example.png",
+  "imageMeta":  {
+    "100": {
+        "sprite":  {
+          "image":  "res/testImage.png",
+          "index":  [1,0,1]
         },
-        20 = {
-                "sprite" = {
-                    "image" = "res/tiles/standard.png",
-                    "index" = [1,0,1]
-                },
-                "class" = "game.tile.Ground"
-            }
-            
-        }
+        "class":  "game.tile.Wall"
     },
-    "tileMeta" = [
-        {
-            "position" = [25,5,0],
-            "data" = {}
-        }
-    ]
-    ,
-    "entities" = [
-        {
-            class = "game.entity.Player",
-            
-        }
-    ]
-
-
-
+    "50": {
+        "sprite":  {
+          "image":  "res/testImage.png",
+          "index":  [0,0,1]
+        },
+        "class":  "game.tile.Ground"
+      }
+      
+    }
+  },
+  "tileMeta":  [
+    {
+      "position":  [25,5,0],
+      "data":  {}
+    }
+  ]
+  ,
+  "entities":  [
+    {
+      class:  "game.entity.Player",
+      
+    }
+  ]
 
 }

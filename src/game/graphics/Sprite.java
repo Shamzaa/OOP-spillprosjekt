@@ -4,7 +4,11 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import game.math.Vector3f;
+import game.resource.ResourceManager;
 
 public class Sprite implements Drawable{
 	private float depth;
@@ -32,6 +36,11 @@ public class Sprite implements Drawable{
 		//Copy sprite
 		this(spr.image,spr.position,spr.srcPos,spr.center,spr.dimension);
 		this.fps = spr.fps;
+	}
+	public Sprite(JSONObject obj){
+		this.image = ResourceManager.getImage(obj.getString("image"));
+		JSONArray pos = obj.getJSONArray("index");
+		this.srcPos = pos != null ? new Vector3f(pos.getInt(0),pos.getInt(1),pos.getInt(2)) : srcPos;
 	}
 	public void setFPS(int fps){
 		this.fps = fps;

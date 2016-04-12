@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Currency;
 
 import javax.swing.Timer;
 
@@ -66,25 +67,29 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 		init(cfg);
 	}
 	public static void init(JSONObject gameMeta){
-		game.currentLevel = new Level(32,32);
 		game.gameScreen = new Screen();
 		game.gameScreen.addKeyListener(game);
 		game.gameScreen.addMouseListener(game);
 		//game.gameScreen.getCanvas().setRequestFocusEnabled(true);
 	}
 	public static void run(){
+		JSONObject obj = new JSONObject(ResourceManager.getFileContent("res/levels/example.json"));
+		Level testLoadFromJson = new Level(obj);
+		game.currentLevel = testLoadFromJson;
 		game.ltime = System.currentTimeMillis();
-		game.spriteTest.setFPS(2);
-		Tile testTile = new Ground(game.spriteTest);
+		//game.spriteTest.setFPS(2);
+		/*Tile testTile = new Ground(game.spriteTest);
 		Tile testTile2 = new Wall(game.spriteTest2);
 		for(int i=0; i<32*32;i++){
 			game.currentLevel.setTileAt(new Ground(testTile), i);
 		}
 		for(int i=0; i<32;i++){
 			game.currentLevel.setTileAt(new Wall(testTile2), new Vector3f(i,0,1));
-		}
+		}*/
 		game.currentLevel.addEntity(game.playerTest);
 		game.playerTest.enter(game.currentLevel);
+	
+		
 		Timer upTimer = new Timer(10,game);
 		upTimer.start();
 

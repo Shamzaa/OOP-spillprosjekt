@@ -16,13 +16,26 @@ public class Inventory {
 			}
 		}
 		if(!merged){
-			inventoryList.add(stack);
+			inventoryList.add(new Stack(stack));
+			stack.setQty(0);
 		}
 	}
 	public Stack getStack(int index){
 		return inventoryList.get(index);
 	}
-	
+	public void moveStack(int index,int qty,Inventory other){
+		Stack s = getStack(index);
+		if(qty > 0 && qty <= s.getQty()){
+			other.addStack(new Stack(s.getItem(),qty));
+			s.setQty(s.getQty() - qty);
+			if(s.getQty() <= 0){
+				removeStack(s);
+			}
+		}
+	}
+	public void moveStack(int index,Inventory other){
+		moveStack(index,getStack(index).getQty(),other);
+	}
 	public void removeStack(Stack stack){
 		if(inventoryList.contains(stack)){
 			inventoryList.remove(stack);
@@ -32,6 +45,6 @@ public class Inventory {
 	}
 	private void sort(){
 		// sorterer Inventory alfabetist bastert på Item sitt navn
-		//Collections.sort(inventoryList, new ComparatorItem());
+		Collections.sort(inventoryList, new ComparatorStack());
 	}
 }

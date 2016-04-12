@@ -3,6 +3,7 @@ package game.entity;
 import game.math.Rectangle;
 import game.math.Shape;
 import game.math.Vector3f;
+import game.mechanics.Inventory;
 import game.tile.Tile;
 import game.world.Level;
 
@@ -15,6 +16,7 @@ public abstract class Entity {
 	protected Vector3f facing = new Vector3f(0,0,0);
 	protected double walkSpeed = 256;
 	protected Sprite[] sprites;
+	protected Inventory inventory = new Inventory();
 	protected Sprite currentSprite;
 	protected Shape shape;
 	private boolean dead = false;
@@ -85,6 +87,8 @@ public abstract class Entity {
 	}
 	public abstract void enter(Level lvl);
 	public abstract void leave(Level lvl);
+	public abstract void touch(Entity ent);
+	
 	//Called when the entity is destroyed
 	public abstract void destory();
 	

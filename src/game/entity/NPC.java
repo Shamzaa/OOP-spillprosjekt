@@ -21,6 +21,11 @@ public class NPC extends Entity{
 	@Override
 	public void destory() {
 	}
+
+	@Override
+	public void touch(Entity ent) {
+		
+	}
 	
 	// TODO: patrol method?, trigger dialogue object(observatør-observert-teknikken?)
 }
