@@ -3,18 +3,26 @@ package game.world;
 
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 
 import game.Game;
 import game.graphics.Sprite;
 import game.graphics.ColorRect;
 import game.entity.Fighter;
 import game.math.Vector3f;
+import game.resource.ResourceManager;
+import game.graphics.gui.*;
 
 public class BattleScene{
+	
+	
 	private Sprite background;
 	
 	private Fighter player;
 	private Fighter hostile;
+	
+	private Button attack;
+	private Button fireball;
 	
 	// positions where the sprites will be placed on a battle-scene
 	/*private Vector3f playerPos = new Vector3f(60, super.getHeight()/2, 4);
@@ -32,6 +40,11 @@ public class BattleScene{
 		this.hostile = hostile;
 		
 		background.setDepth(100000);
+		
+		BufferedImage img = ResourceManager.getImage("res/gui/buttonTest.png");
+		attack = new Button("Attack",new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,0,2),new Vector3f(0,0,0),new Vector3f(128,32,0)));
+		fireball = new Button("Explosion",new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,0,2),new Vector3f(0,0,0),new Vector3f(128,32,0)));
+	
 	}
 	
 	public void update(long dtime){
