@@ -53,4 +53,7 @@ Iterativ:
 
 ### Requirements
  - [Java json library](http://mvnrepository.com/artifact/org.json/json)
+ 
+### Resources
+ - https://facepunch.com/showthread.php?t=1213795 (teksturer)
 
