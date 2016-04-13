@@ -51,6 +51,9 @@ public class Sprite implements Drawable{
 	public void setCurrentFrame(int frame){
 		this.cFrame = frame%(int)srcPos.getZ();
 	}
+	public int getCurrentFrame(){
+		return this.cFrame;
+	}
 	public void draw(Graphics2D g){
 		int xx = (int)(image.getWidth()/dimension.getX());
 		
