@@ -14,12 +14,16 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.sun.media.jfxmedia.events.PlayerTimeListener;
 
 import game.entity.Player;
 import game.graphics.Camera;
 import game.graphics.Sprite;
 import game.graphics.gui.Button;
+import game.graphics.gui.HoverArea;
 import game.graphics.gui.Panel;
 import game.math.Vector3f;
 import game.resource.ResourceManager;
@@ -32,40 +36,23 @@ import game.world.Level;
 
 public class Game implements KeyListener, MouseListener, ActionListener{
 	private int worldWidth;
-	//Level location in the world
-	private Level[] levelMap;
-	private ArrayList<Level> levels;
+	private ArrayList<Level> levels = new ArrayList<Level>();
 	private Level currentLevel;
 	private Screen gameScreen;
-	private Vector3f camDir = new Vector3f(0,0,0);
-	private boolean VK_A,VK_S,VK_D,VK_W,VK_Q,VK_E,VK_pluss,VK_minus;
-	private int rot = 0;
 	private static Game game = null;
-	private BufferedImage imageTest = ResourceManager.getImage("res/testImage.png");
-	private BufferedImage imageTest2 = ResourceManager.getImage("res/maintest.png");
-	private Sprite spriteTest = new Sprite(imageTest,new Vector3f(0,0,0),new Vector3f(0,0,1),new Vector3f(0,0,0),new Vector3f(32,32,0));
-	private Sprite spriteTest2 = new Sprite(imageTest,new Vector3f(0,0,0),new Vector3f(1,0,1),new Vector3f(0,0,0),new Vector3f(32,32,0));
 	private Button testButton;
 	private Button testButton2;
 	private Panel testPanel;
-	private Sprite spritePlayer0 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,0,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
-	private Sprite spritePlayer1 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,1,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
-	private Sprite spritePlayer2 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,2,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
-	private Sprite spritePlayer3 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,3,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
-	private Player playerTest = new Player(new Vector3f(64,32,1),new Sprite[]{
-			spritePlayer0,
-			spritePlayer1,
-			spritePlayer2,
-			spritePlayer3
-	});
-	
+	private Player playerTest;
+	private HoverArea testHover;
 	
 	private long ctime,dtime,ltime,timeAcc,frames;
 	
-	public Game(JSONObject obj){
+	public Game(String configFile){
 		Game.game = this;
-		init(obj);
+		init(configFile);
 		run();
+		
 	}
 	public static void init(String configFile){
 		byte[] buffer = ResourceManager.getFileBuffer(configFile);
@@ -77,25 +64,43 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 		game.gameScreen.addKeyListener(game);
 		game.gameScreen.addMouseListener(game);
 		game.gameScreen.getCanvas().setRequestFocusEnabled(true);
+		
+		JSONObject playerMeta = gameMeta.getJSONObject("player");
+		game.playerTest = new Player(new Vector3f(64,32,1),playerMeta);
+		
+		JSONArray levelRefs = gameMeta.getJSONArray("levels");
+		for(Object i : levelRefs){
+			String levelName = (String)(i);
+			JSONObject data = new JSONObject(ResourceManager.getFileContent(levelName));
+			game.levels.add(new Level(data));
+		}
+		game.currentLevel = game.levels.get(0);
+		game.currentLevel.addEntity(game.playerTest);
+		
+		
 	}
 	public static void run(){
-		JSONObject obj = new JSONObject(ResourceManager.getFileContent("res/levels/example.json"));
-		Level testLoadFromJson = new Level(obj);
-		game.currentLevel = testLoadFromJson;
+		//JSONObject obj = new JSONObject(ResourceManager.getFileContent("res/levels/example.json"));
+		//Level testLoadFromJson = new Level(obj);
+		//game.currentLevel = testLoadFromJson;
 		game.ltime = System.currentTimeMillis();
 		BufferedImage img = ResourceManager.getImage("res/gui/buttonTest.png");
 		game.testButton = new Button("This is a test",new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,0,2),new Vector3f(0,0,0),new Vector3f(128,32,0)),true);
-		game.testButton.setPosition(new Vector3f(640,0,0));
+		//game.testButton.setPosition(new Vector3f(640,0,0));
 		game.testButton.setCenter(new Vector3f(1,0,0));
 		game.testButton2 = new Button("Another one!",new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,0,2),new Vector3f(0,0,0),new Vector3f(128,32,0)));
-		game.testButton2.setPosition(new Vector3f(640,33,0));
+		game.testButton2.setPosition(new Vector3f(640,32,0));
 		game.testButton2.setCenter(new Vector3f(1,0,0));
 		game.testButton2.hide();
-		game.testPanel = new Panel(new Vector3f(0,0,0),new Vector3f(640,480,0));
+		game.testPanel = new Panel(new Vector3f(0,0,0),new Vector3f(640,480,0),ResourceManager.getImage("res/gui/guibg_1.png"));
+		game.testHover = new HoverArea(new Vector3f(640,0,0),new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,1,2),new Vector3f(0,0,0),new Vector3f(32,32,0)));
+		game.testHover.setCenter(new Vector3f(1,0,0));
+		
 		game.testPanel.add(game.testButton2);
 		game.testPanel.add(game.testButton);
-		game.getCanvas().addMouseListener(game.testPanel);
-		game.getCanvas().addMouseMotionListener(game.testPanel);
+		game.testPanel.add(game.testHover);
+		Game.getCanvas().addMouseListener(game.testPanel);
+		Game.getCanvas().addMouseMotionListener(game.testPanel);
 		
 		game.testButton.addListener(new ActionListener(){
 
@@ -110,6 +115,37 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 			}
 			
 		});
+		game.testHover.addListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if(!game.testButton2.mouseHover()){
+					game.testButton2.hide();	
+				}
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				game.testButton2.show();
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});;
 		game.testButton2.addListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -117,20 +153,42 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 				
 			}
 		});
-		//game.spriteTest.setFPS(2);
-		/*Tile testTile = new Ground(game.spriteTest);
-		Tile testTile2 = new Wall(game.spriteTest2);
-		for(int i=0; i<32*32;i++){
-			game.currentLevel.setTileAt(new Ground(testTile), i);
-		}
-		for(int i=0; i<32;i++){
-			game.currentLevel.setTileAt(new Wall(testTile2), new Vector3f(i,0,1));
-		}*/
-		game.currentLevel.addEntity(game.playerTest);
-		game.playerTest.enter(game.currentLevel);
+		game.testButton2.addListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				game.testButton2.hide();
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				game.testButton2.show();
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		//game.currentLevel.addEntity(game.playerTest);
+		//game.playerTest.enter(game.currentLevel);
 	
 		
-		Timer upTimer = new Timer(0,game);
+		Timer upTimer = new Timer(10,game);
 		upTimer.start();
 
 	}
@@ -152,7 +210,7 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 	
 	public static void main(String[] args){
 		System.setProperty("sun.java2d.opengl", "true");
-		new Game(new JSONObject());
+		new Game("res/game.json");
 		
 	}
 	@Override

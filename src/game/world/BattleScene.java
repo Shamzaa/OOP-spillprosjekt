@@ -31,7 +31,6 @@ public class BattleScene{
 		this.player = player;
 		this.hostile = hostile;
 		
-		background.setDepth(100000);
 	}
 	
 	public void update(long dtime){

@@ -1,6 +1,7 @@
 package game.screen;
 
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionListener;
@@ -20,11 +21,12 @@ public class GameCanvas extends JPanel{
 	private ArrayList<Drawable> directDrawQueue = new ArrayList<Drawable>(255); 
 	private Camera camera = new Camera(new Vector3f(getWidth()/2,getHeight()/2,0));
 	private AffineTransform original;
-	private boolean ready = true;
 
-	public boolean isReady(){
-		return ready;
+	public GameCanvas(){
+		super();
+		setBackground(new Color(0,0,0));
 	}
+
 	public void setCamera(Camera cam){
 		camera = cam;
 	}

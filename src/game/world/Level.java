@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import game.Game;
 import game.entity.Entity;
+import game.entity.Player;
 import game.graphics.Camera;
 import game.math.Vector3f;
 import game.misc.ClassUtils;
@@ -31,7 +32,7 @@ public class Level implements KeyListener, MouseListener{
 	private Camera camera = new Camera(new Vector3f(0,0,0));
 	private int width, height;
 	private ArrayList<KeyListener> keyListeners = new ArrayList<KeyListener>(5);
-	
+	private Player player = null;
 	public Level(int width,int height){
 		init(width,height);
 	}
@@ -183,6 +184,9 @@ public class Level implements KeyListener, MouseListener{
 	}
 	public void addEntity(Entity ent){
 		entities.add(ent);
+		if(ent instanceof Player){
+			this.player = (Player)ent;
+		}
 		ent.enter(this);
 	}
 	public void removeEntity(Entity ent){
@@ -190,7 +194,11 @@ public class Level implements KeyListener, MouseListener{
 	}
 	public void removeEntity(int index){
 		entities.remove(index);
+		if(entities.get(index) instanceof Player){
+			player = null;
+		}
 		entities.get(index).leave(this);
+		
 	}
 	public void moveEntityTo(Entity ent, Level lvl){
 		removeEntity(ent);

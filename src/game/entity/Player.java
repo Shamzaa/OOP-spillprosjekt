@@ -6,6 +6,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
 
+import org.json.JSONObject;
+
 import game.Game;
 import game.graphics.*;
 
@@ -25,15 +27,20 @@ public class Player extends Fighter implements KeyListener{
 	};
 	
 	// other information sugested for init: HP, *MP*, inventory from json, 
+	public Player(Vector3f position, Sprite[] sprites) {
+		super(position, sprites);
+	}
+	public Player(Vector3f position, JSONObject data){
+		super(position,data);
+	}
+	
 	public void disableControls(){
 		controlsEnabled = false;
 	}
 	public void enableControls(){
 		controlsEnabled = true;
 	}
-	public Player(Vector3f position, Sprite[] sprites) {
-		super(position, sprites);
-	}
+
 	@Override
 	public void update(long dtime){
 		if(controlsEnabled){

@@ -4,8 +4,12 @@ import game.math.Rectangle;
 import game.math.Shape;
 import game.math.Vector3f;
 import game.mechanics.Inventory;
+import game.resource.ResourceManager;
 import game.tile.Tile;
 import game.world.Level;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import game.Game;
 import game.graphics.*;
@@ -34,6 +38,25 @@ public abstract class Entity {
 		this.sprites = sprites;
 		currentSprite = sprites[0];
 		shape = new Rectangle(position,currentSprite.getDimension().mul(new Vector3f(1,0.25f,0)));
+	}
+	public Entity(Vector3f pos,JSONObject data){
+		this.position = pos;
+		JSONObject spritesMeta = data.getJSONObject("sprites");
+		JSONArray start = spritesMeta.getJSONArray("start");
+		JSONArray dimArray = spritesMeta.getJSONArray("dim");
+		Vector3f sIndex = new Vector3f(start.getInt(0),start.getInt(1),start.getInt(2));
+		Vector3f dim = new Vector3f(dimArray.getInt(0),dimArray.getInt(1),0);
+		this.sprites = new Sprite[4];
+		for(int i=0; i< sprites.length;i++){
+			this.sprites[i] = new Sprite(
+					ResourceManager.getImage(spritesMeta.getString("image")),pos,sIndex.add(new Vector3f(0,i,0)),new Vector3f(0.5f,0.5f,0),dim);
+		}
+		currentSprite = sprites[0];
+		shape = new Rectangle(position,currentSprite.getDimension().mul(new Vector3f(1,0.25f,0)));
+		
+		
+		
+		
 	}
 	
 	public void update(long dtime){

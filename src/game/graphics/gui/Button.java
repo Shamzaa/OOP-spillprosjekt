@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import game.graphics.Sprite;
 import game.math.Vector3f;
@@ -45,6 +46,7 @@ public class Button extends GuiComponent{
 		for(ActionListener i : actionListeners){
 			i.actionPerformed(actionEvent);
 		}
+		super.mouseClicked(event);
 	}
 
 	@Override
@@ -61,6 +63,18 @@ public class Button extends GuiComponent{
 			down = on;
 		}
 		sprite.setCurrentFrame(0);
+	}
+	@Override
+	public void mouseEntered(MouseEvent evt){
+		for(MouseListener l : mouseListeners){
+			l.mouseEntered(evt);
+		}
+	}
+	@Override
+	public void mouseExited(MouseEvent evt){
+		for(MouseListener l : mouseListeners){
+			l.mouseExited(evt);
+		}
 	}
 
 }

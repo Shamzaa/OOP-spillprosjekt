@@ -59,6 +59,7 @@ public class Sprite implements Drawable{
 		
 		Vector3f src = new Vector3f(((srcPos.getX() + cFrame%xx)*dimension.getX()),
 									((srcPos.getY() + (int)(cFrame/xx)*xx)*dimension.getY()),0);
+		
 		g.drawImage(image, 0, 0, 
 				(int)dimension.getX(),
 				(int)dimension.getY(),

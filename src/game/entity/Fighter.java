@@ -2,6 +2,8 @@ package game.entity;
 
 import java.awt.Color;
 
+import org.json.JSONObject;
+
 import game.Game;
 import game.graphics.ColorRect;
 import game.graphics.Sprite;
@@ -29,6 +31,13 @@ public abstract class Fighter extends Entity{
 		healthBar = new ColorRect(position,hpDim,new Color(255,0,0));
 		healthBarBG = new ColorRect(position,hpDim,new Color(100,100,100));
 		
+	}
+	public Fighter(Vector3f position, JSONObject obj){
+		super(position,obj);
+		Vector3f hpDim = new Vector3f(sprites[0].getDimension().getX()+6,3,0);
+		healthBar = new ColorRect(position,hpDim,new Color(255,0,0));
+		healthBarBG = new ColorRect(position,hpDim,new Color(100,100,100));
+	
 	}
 	public void hit(double damage){
 		healthPoints -= resistance * damage;

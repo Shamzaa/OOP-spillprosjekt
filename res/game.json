@@ -1,0 +1,13 @@
+{
+  "levels": [
+    "res/levels/example.json"
+  ],
+  "player": {
+    "sprites": {
+      "image":"res/maintest.png",
+      "dim": [26,34],
+      "start": [0,0,3]
+    }
+  }
+}
+

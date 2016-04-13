@@ -20,8 +20,8 @@ public abstract class GuiComponent implements Drawable, MouseListener, MouseMoti
 	
 	private ArrayList<GuiComponent> children = new ArrayList<GuiComponent>();
 	private MouseEvent prevMoveEvent = null;
-	private ArrayList<MouseListener> mouseListeners = new ArrayList<MouseListener>();
-	private ArrayList<MouseMotionListener> mouseMotionListeners = new ArrayList<MouseMotionListener>();
+	protected ArrayList<MouseListener> mouseListeners = new ArrayList<MouseListener>();
+	protected ArrayList<MouseMotionListener> mouseMotionListeners = new ArrayList<MouseMotionListener>();
 	private boolean show = true;
 	protected ArrayList<ActionListener> actionListeners = new ArrayList<ActionListener>();
 	protected GuiComponent parent;
@@ -29,7 +29,7 @@ public abstract class GuiComponent implements Drawable, MouseListener, MouseMoti
 	protected Vector3f center = new Vector3f(0,0,0);
 	protected Vector3f dimension = new Vector3f(0,0,0);
 	protected Vector3f scale = new Vector3f(1,1,0);
-	
+	private boolean hover = false;
 	
 	public void draw(Graphics2D g2){
 		//Copy pasta
@@ -49,6 +49,9 @@ public abstract class GuiComponent implements Drawable, MouseListener, MouseMoti
 	@Override
 	public float getDepth() {
 		return depth;
+	}
+	public boolean mouseHover(){
+		return hover;
 	}
 	public void add(GuiComponent component){
 		component.parent = this;
@@ -146,11 +149,11 @@ public abstract class GuiComponent implements Drawable, MouseListener, MouseMoti
 	}
 	@Override
 	public void mouseEntered(MouseEvent event) {
-		
+		hover = true;
 	}
 	@Override
 	public void mouseExited(MouseEvent event) {
-		
+		hover = false;
 	}
 	@Override
 	public void mousePressed(MouseEvent event) {
