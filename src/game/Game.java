@@ -10,6 +10,8 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Currency;
 
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import org.json.JSONObject;
@@ -17,6 +19,8 @@ import org.json.JSONObject;
 import game.entity.Player;
 import game.graphics.Camera;
 import game.graphics.Sprite;
+import game.graphics.gui.Button;
+import game.graphics.gui.Panel;
 import game.math.Vector3f;
 import game.resource.ResourceManager;
 import game.screen.GameCanvas;
@@ -41,7 +45,9 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 	private BufferedImage imageTest2 = ResourceManager.getImage("res/maintest.png");
 	private Sprite spriteTest = new Sprite(imageTest,new Vector3f(0,0,0),new Vector3f(0,0,1),new Vector3f(0,0,0),new Vector3f(32,32,0));
 	private Sprite spriteTest2 = new Sprite(imageTest,new Vector3f(0,0,0),new Vector3f(1,0,1),new Vector3f(0,0,0),new Vector3f(32,32,0));
-	
+	private Button testButton;
+	private Button testButton2;
+	private Panel testPanel;
 	private Sprite spritePlayer0 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,0,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
 	private Sprite spritePlayer1 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,1,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
 	private Sprite spritePlayer2 = new Sprite(imageTest2,new Vector3f(0,0,0),new Vector3f(0,2,3),new Vector3f(0.5f,0.5f,0),new Vector3f(26,34,0));
@@ -70,13 +76,47 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 		game.gameScreen = new Screen();
 		game.gameScreen.addKeyListener(game);
 		game.gameScreen.addMouseListener(game);
-		//game.gameScreen.getCanvas().setRequestFocusEnabled(true);
+		game.gameScreen.getCanvas().setRequestFocusEnabled(true);
 	}
 	public static void run(){
 		JSONObject obj = new JSONObject(ResourceManager.getFileContent("res/levels/example.json"));
 		Level testLoadFromJson = new Level(obj);
 		game.currentLevel = testLoadFromJson;
 		game.ltime = System.currentTimeMillis();
+		BufferedImage img = ResourceManager.getImage("res/gui/buttonTest.png");
+		game.testButton = new Button("This is a test",new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,0,2),new Vector3f(0,0,0),new Vector3f(128,32,0)),true);
+		game.testButton.setPosition(new Vector3f(640,0,0));
+		game.testButton.setCenter(new Vector3f(1,0,0));
+		game.testButton2 = new Button("Another one!",new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,0,2),new Vector3f(0,0,0),new Vector3f(128,32,0)));
+		game.testButton2.setPosition(new Vector3f(640,33,0));
+		game.testButton2.setCenter(new Vector3f(1,0,0));
+		game.testButton2.hide();
+		game.testPanel = new Panel(new Vector3f(0,0,0),new Vector3f(640,480,0));
+		game.testPanel.add(game.testButton2);
+		game.testPanel.add(game.testButton);
+		game.getCanvas().addMouseListener(game.testPanel);
+		game.getCanvas().addMouseMotionListener(game.testPanel);
+		
+		game.testButton.addListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("WOW : " + arg0.getActionCommand());
+				if(arg0.getActionCommand() == "DOWN"){
+					game.testButton2.show();
+				}else{
+					game.testButton2.hide();
+				}
+			}
+			
+		});
+		game.testButton2.addListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("WOW, dayum son!\nWhat have you done1!1!");
+				
+			}
+		});
 		//game.spriteTest.setFPS(2);
 		/*Tile testTile = new Ground(game.spriteTest);
 		Tile testTile2 = new Wall(game.spriteTest2);
@@ -90,7 +130,7 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 		game.playerTest.enter(game.currentLevel);
 	
 		
-		Timer upTimer = new Timer(10,game);
+		Timer upTimer = new Timer(0,game);
 		upTimer.start();
 
 	}
@@ -165,6 +205,7 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 		timeAcc += dtime;
 		frames++;
 		game.currentLevel.update(dtime);
+		game.getCanvas().addToDirectQueue(game.testPanel);
 		game.currentLevel.render();
 		game.gameScreen.getCanvas().render();
 		if(timeAcc > 1000){
