@@ -42,7 +42,7 @@ public class Explosion extends Entity{
 			float dy = (float) (particle.getSpeedY()*dtime/1000 + 0.5*gravity*Math.pow(dtime/1000, 2));
 			
 			particle.setPosition(particle.getPosition().add(new Vector3f(dx, dy, 0)));
-			particle.setSpeed(particle.getSpeedX(), particle.getSpeedY() + gravity*dtime); // direction is changed in .setSpeed
+			particle.setSpeed(particle.getSpeedX(), particle.getSpeedY() + gravity*dtime/1000); // direction is changed in .setSpeed
 			
 		}
 	}
