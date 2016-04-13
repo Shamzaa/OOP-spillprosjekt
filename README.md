@@ -55,7 +55,7 @@ Iterativ:
  - [Java json library](http://mvnrepository.com/artifact/org.json/json)
  
 ### Resources
- - Undertale, Toby Fox (musikk)
+ - [Undertale](http://store.steampowered.com/app/391540/), Toby Fox (musikk)
  - [Sprites](http://opengameart.org/content/antifareas-rpg-sprite-set-1-enlarged-w-transparent-background-fixed)
  - [Teksturer](https://facepunch.com/showthread.php?t=1213795)
 
