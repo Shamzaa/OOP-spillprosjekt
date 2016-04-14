@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Currency;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -38,6 +39,7 @@ import game.world.Level;
 public class Game implements KeyListener, MouseListener, ActionListener{
 	private int worldWidth;
 	private ArrayList<Level> levels = new ArrayList<Level>();
+	private HashMap<String,Level> levelMap = new HashMap<String,Level>();
 	private Level currentLevel;
 	private Screen gameScreen;
 	private static Game game = null;
@@ -199,6 +201,9 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 	}
 	public static Level getCurrentLevel(){
 		return game.currentLevel;
+	}
+	public static Level getLevel(String name){
+		return game.levelMap.get(name);
 	}
 	public static void setLevel(Level lvl){
 		game.currentLevel.leave();

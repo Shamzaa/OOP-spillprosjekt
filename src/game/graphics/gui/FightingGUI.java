@@ -18,7 +18,7 @@ public class FightingGUI extends Panel{
 	
 	public FightingGUI() {
 		super(new Vector3f(0,0,0), new Vector3f(640,480,0), ResourceManager.getImage("res/gui/guibg_1.png"));
-		add(optionDialog);
+		//add(optionDialog);
 		wrapper.addDrawable(hpBarBG);
 		wrapper.addDrawable(hpBar);
 		add(wrapper);

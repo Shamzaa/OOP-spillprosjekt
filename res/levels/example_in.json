@@ -70,19 +70,8 @@
     },
     "200": {
       "class": "game.tile.Wall"
-    },
-    "30": {
-      "des": "door left",
-      "dest": [1,1,1],
-      "level": "example_in.json",
-      "class": "game.tile.Warp"
-    },
-    "31": {
-      "des": "door right",
-      "dest": [1,2,1],
-      "level": "example_in.json",
-      "class": "game.tile.Warp"
     }
+    
   },
   "entities":  [
     {
@@ -90,5 +79,4 @@
       
     }
   ]
-
 }
