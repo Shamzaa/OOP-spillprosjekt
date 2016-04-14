@@ -40,7 +40,6 @@ public class GameCanvas extends JPanel{
 		directDrawQueue.add(d);
 	}
 	public void render(){
-		ready = false;
 		repaint();
 	}
 	public AffineTransform getDefault(){
@@ -76,6 +75,5 @@ public class GameCanvas extends JPanel{
 		}
 		drawQueue.clear();
 		directDrawQueue.clear();
-		ready = true;
 	}
 }

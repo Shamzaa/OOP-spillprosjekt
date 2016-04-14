@@ -19,12 +19,13 @@ public abstract class Fighter extends Entity{
 	private double baseResistance = 0.35;
 	
 	private int baseMaxHealth = 1000;
-	private int healthPoints = 500;
+	private int healthPoints = baseHealth;
 	private double resistance = 0.35;
 	private boolean fighting = false;
 	private ColorRect healthBarBG;
 	private ColorRect healthBar;
 	private Wearable[] itemSlots = new Wearable[Wearable.slotCount];
+	
 	public Fighter(Vector3f position, Sprite[] sprites) {
 		super(position, sprites);
 		Vector3f hpDim = new Vector3f(sprites[0].getDimension().getX()+6,3,0);
@@ -57,8 +58,6 @@ public abstract class Fighter extends Entity{
 			healthBarBG.setPosition(pos);
 			Game.getCanvas().addToQueue(healthBarBG);
 			Game.getCanvas().addToQueue(healthBar);
-			
-			
 		}
 	}
 	public int getHealth(){
@@ -69,6 +68,16 @@ public abstract class Fighter extends Entity{
 	}
 	public boolean isFighting(){
 		return fighting;
+	}
+	public float getHealthP(){
+		return getHealth()/getMaxHealth();
+	}
+	public void update(long dtime){
+		if(fighting){
+			//Fighting shit
+		}
+		super.update(dtime);
+		
 	}
 	public void attack(Fighter enemy){
 		// TODO: calculate damage done based on weapon

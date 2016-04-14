@@ -1,10 +1,18 @@
 {
   "image":  "res/levels/example.png",
   "imageMeta":  {
+    
     "110": {
       "sprite":  {
         "image":  "res/tile_atlas.png",
         "index":  [1,0,1]
+      },
+      "class":  "game.tile.Wall"
+    },
+    "115": {
+      "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [3,2,1]
       },
       "class":  "game.tile.Wall"
     },
@@ -13,8 +21,23 @@
         "image":  "res/tile_atlas.png",
         "index":  [0,1,1]
       },
-      "class":  "game.tile.Ground"
-  
+      "class":  "game.tile.Wall"  
+    },
+    "120": {
+      "des": "stairs",
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [4,0,1]
+      },
+      "class": "game.tile.Wall"
+    },
+    "130": {
+      "des": "arc",
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [1,1,1]
+      },
+      "class": "game.tile.Wall"
     },
     "50": {
       "sprite":  {
@@ -29,6 +52,20 @@
         "index":  [2,3,1]
       },
       "class":  "game.tile.Ground"
+    },
+    "25": {
+      "class": "game.tile.Ground"
+    },
+    "90":{
+      "direction": 1,
+      "class": "game.tile.Elevator"
+    },
+    "95": {
+      "direction": -1,
+      "class": "game.tile.Elevator"
+    },
+    "200": {
+      "class": "game.tile.Wall"
     }
   },
   "entities":  [

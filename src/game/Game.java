@@ -23,6 +23,7 @@ import game.entity.Player;
 import game.graphics.Camera;
 import game.graphics.Sprite;
 import game.graphics.gui.Button;
+import game.graphics.gui.FightingGUI;
 import game.graphics.gui.HoverArea;
 import game.graphics.gui.Panel;
 import game.math.Vector3f;
@@ -45,6 +46,7 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 	private Panel testPanel;
 	private Player playerTest;
 	private HoverArea testHover;
+	private Panel currentGUI = new FightingGUI();
 	
 	private long ctime,dtime,ltime,timeAcc,frames;
 	
@@ -84,25 +86,25 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 		//Level testLoadFromJson = new Level(obj);
 		//game.currentLevel = testLoadFromJson;
 		game.ltime = System.currentTimeMillis();
-		BufferedImage img = ResourceManager.getImage("res/gui/buttonTest.png");
-		game.testButton = new Button("This is a test",new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,0,2),new Vector3f(0,0,0),new Vector3f(128,32,0)),true);
+		//BufferedImage img = ResourceManager.getImage("res/gui/buttonTest.png");
+		//game.testButton = new Button("This is a test",new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,0,2),new Vector3f(0,0,0),new Vector3f(128,32,0)),true);
 		//game.testButton.setPosition(new Vector3f(640,0,0));
-		game.testButton.setCenter(new Vector3f(1,0,0));
-		game.testButton2 = new Button("Another one!",new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,0,2),new Vector3f(0,0,0),new Vector3f(128,32,0)));
-		game.testButton2.setPosition(new Vector3f(640,32,0));
-		game.testButton2.setCenter(new Vector3f(1,0,0));
-		game.testButton2.hide();
-		game.testPanel = new Panel(new Vector3f(0,0,0),new Vector3f(640,480,0),ResourceManager.getImage("res/gui/guibg_1.png"));
-		game.testHover = new HoverArea(new Vector3f(640,0,0),new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,1,2),new Vector3f(0,0,0),new Vector3f(32,32,0)));
-		game.testHover.setCenter(new Vector3f(1,0,0));
+		//game.testButton.setCenter(new Vector3f(1,0,0));
+		//game.testButton2 = new Button("Another one!",new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,0,2),new Vector3f(0,0,0),new Vector3f(128,32,0)));
+		//game.testButton2.setPosition(new Vector3f(640,32,0));
+		//game.testButton2.setCenter(new Vector3f(1,0,0));
+		//game.testButton2.hide();
+		//game.testPanel = new Panel(new Vector3f(0,0,0),new Vector3f(640,480,0),ResourceManager.getImage("res/gui/guibg_1.png"));
+		//game.testHover = new HoverArea(new Vector3f(640,0,0),new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,1,2),new Vector3f(0,0,0),new Vector3f(32,32,0)));
+		//game.testHover.setCenter(new Vector3f(1,0,0));
 		
-		game.testPanel.add(game.testButton2);
-		game.testPanel.add(game.testButton);
-		game.testPanel.add(game.testHover);
-		Game.getCanvas().addMouseListener(game.testPanel);
-		Game.getCanvas().addMouseMotionListener(game.testPanel);
+		//game.testPanel.add(game.testButton2);
+		//game.testPanel.add(game.testButton);
+		//game.testPanel.add(game.testHover);
+		//Game.getCanvas().addMouseListener(game.testPanel);
+		//Game.getCanvas().addMouseMotionListener(game.testPanel);
 		
-		game.testButton.addListener(new ActionListener(){
+		/*game.testButton.addListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -114,8 +116,8 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 				}
 			}
 			
-		});
-		game.testHover.addListener(new MouseListener() {
+		});*/
+		/*game.testHover.addListener(new MouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
@@ -145,7 +147,8 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 				// TODO Auto-generated method stub
 				
 			}
-		});;
+		});*/
+		/*
 		game.testButton2.addListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -153,6 +156,8 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 				
 			}
 		});
+		*/
+		/*
 		game.testButton2.addListener(new MouseListener() {
 			
 			@Override
@@ -183,7 +188,7 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 				
 			}
 		});
-		
+		*/
 		//game.currentLevel.addEntity(game.playerTest);
 		//game.playerTest.enter(game.currentLevel);
 	
@@ -263,8 +268,9 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 		timeAcc += dtime;
 		frames++;
 		game.currentLevel.update(dtime);
-		game.getCanvas().addToDirectQueue(game.testPanel);
+		Game.getCanvas().addToDirectQueue(game.currentGUI);
 		game.currentLevel.render();
+		((FightingGUI)(game.currentGUI)).setHpValue(game.currentLevel.getPlayer().getHealthP());
 		game.gameScreen.getCanvas().render();
 		if(timeAcc > 1000){
 			System.out.println("FPS: " + frames);

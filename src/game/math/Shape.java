@@ -25,7 +25,7 @@ public abstract class Shape implements Drawable{
 	public abstract float getRadius();
 	public abstract Vector3f getShapeCenter();
 	public abstract String toString();
-	
+	public abstract Vector3f getOverlapVector(Shape other);
 	@Override
 	public float getDepth() {
 		return depth;

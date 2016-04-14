@@ -55,7 +55,6 @@ public class Button extends GuiComponent{
 			down = true;
 		}
 		super.mousePressed(event);
-	
 	}
 	@Override
 	public void mouseReleased(MouseEvent event) {

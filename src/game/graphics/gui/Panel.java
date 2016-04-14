@@ -16,7 +16,9 @@ public class Panel extends GuiComponent{
 	}
 	public void draw(Graphics2D g){
 		if(bg!=null){
-			g.drawImage(bg,0,0, null);
+		//	Vector3f br = position.add(dimension);
+		//	g.drawImage(bg,0,0,(int)br.getX(),(int)br.getY(), null);
+			g.drawImage(bg, 0,0,null);
 		}
 		super.draw(g);
 	}
