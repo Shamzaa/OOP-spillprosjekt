@@ -43,8 +43,20 @@ public class Inventory {
 			throw new IllegalArgumentException("Prøver å 'remove' et 'Item' som ikke finnes");
 		}
 	}
+	
+	public ArrayList<Stack> getWeapons(){
+		ArrayList<Stack> weapons = new ArrayList<Stack>();
+		for(Stack x: inventoryList){
+			if(x.getItem() instanceof Weapon){
+				weapons.add(x);
+			}
+		}
+		return weapons;
+	}
+	
 	private void sort(){
 		// sorterer Inventory alfabetist bastert på Item sitt navn
 		Collections.sort(inventoryList, new ComparatorStack());
 	}
+	
 }
