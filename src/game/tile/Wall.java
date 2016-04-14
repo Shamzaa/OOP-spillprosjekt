@@ -13,9 +13,11 @@ public class Wall extends Tile{
 	}
 	public Wall(Tile tile){
 		super(tile);
+		solid = true;
 	}
 	public Wall(JSONObject obj){
 		super(obj);
+		solid = true;
 	}
 	@Override
 	public void enter(Entity ent) {

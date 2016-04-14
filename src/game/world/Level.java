@@ -72,6 +72,9 @@ public class Level implements KeyListener, MouseListener{
 		
 		
 	}
+	public Player getPlayer(){
+		return player;
+	}
 	public Camera getCamera(){
 		return camera;
 	}
@@ -109,7 +112,7 @@ public class Level implements KeyListener, MouseListener{
 		}
 		for(Tile t : tiles){
 			if(t != null){
-				t.getShape().setPosition(t.getSprite().getPosition());
+				t.getShape().setPosition(t.getPosition());
 				t.update(dtime);
 			}
 		}

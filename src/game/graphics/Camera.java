@@ -49,7 +49,7 @@ public class Camera {
 	public AffineTransform transform(AffineTransform transform){
 		AffineTransform t = (AffineTransform) transform.clone();
 		if(target != null){
-			setPosition(target.getPosition());
+			setPosition(target.getPosition().mul(scale));
 		}
 		float offsetX = center.getX()*screenSpace.getX();
 		float offsetY = center.getY()*screenSpace.getY();

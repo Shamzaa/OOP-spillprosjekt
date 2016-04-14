@@ -26,34 +26,34 @@ public abstract class Tile {
 		this.sprite = new Sprite(t.sprite);
 	}
 	public Tile(JSONObject data){
-		this.sprite = new Sprite(data.getJSONObject("sprite"));
+		if(data.has("sprite")){
+			this.sprite = new Sprite(data.getJSONObject("sprite"));
+		}
 	}
 	public boolean isSolid(){
 		return solid;
 	}
 	public void update(long dtime){
-		sprite.update(dtime);
+		if(sprite != null)
+			sprite.update(dtime);
 	}
 	public void setPosition(Vector3f position){
 		this.position = position;
 	}
+	public Vector3f getPosition(){
+		return this.position;
+	}
 	public void render(){
-		sprite.setPosition(position);
-		sprite.setDepth(-(position.getY()+Tile.SIZE+position.getZ()));
-		shape.setPosition(position);
-		shape.setDepth(sprite.getDepth()-1);
-	/*
-	 * int index = getIndex(position);
-	int layerSize = width*height;
-	int x = (index%width);
-	int y = Math.floorDiv(index, width)%getHeight();
-	int z = Math.floorDiv(index, layerSize);
-	t.setPosition(new Vector3f(x*Tile.SIZE,y*Tile.SIZE,z*Tile.SIZE));
-	*/
+		if(sprite != null){
+			sprite.setPosition(position);
+			sprite.setDepth(-(position.getY()+Tile.SIZE+position.getZ()));
+			shape.setPosition(position);
+			shape.setDepth(sprite.getDepth()-1);
+
 		
-		
-		Game.getCanvas().addToQueue(shape);
 		Game.getCanvas().addToQueue(sprite);
+		}
+		Game.getCanvas().addToQueue(shape);
 	}
 	public abstract void enter(Entity ent);
 	public abstract void leave(Entity ent);

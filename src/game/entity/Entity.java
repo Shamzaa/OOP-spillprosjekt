@@ -6,6 +6,7 @@ import game.math.Vector3f;
 import game.mechanics.Inventory;
 import game.resource.ResourceManager;
 import game.tile.Tile;
+import game.tile.Wall;
 import game.world.Level;
 
 import org.json.JSONArray;
@@ -49,7 +50,8 @@ public abstract class Entity {
 		this.sprites = new Sprite[4];
 		for(int i=0; i< sprites.length;i++){
 			this.sprites[i] = new Sprite(
-					ResourceManager.getImage(spritesMeta.getString("image")),pos,sIndex.add(new Vector3f(0,i,0)),new Vector3f(0.5f,0.5f,0),dim);
+				ResourceManager.getImage(spritesMeta.getString("image")),pos,sIndex.add(new Vector3f(0,i,0)),new Vector3f(0.5f,0.5f,0),dim
+			);
 		}
 		currentSprite = sprites[0];
 		shape = new Rectangle(position,currentSprite.getDimension().mul(new Vector3f(1,0.25f,0)));
@@ -64,12 +66,49 @@ public abstract class Entity {
 			Game.getCurrentLevel().destroyEntity(this);
 		}
 		if(walkDir.getLength() > 0){
-			
 			face(walkDir);
+			Tile[] tilesAround = new Tile[9];
+			for(int i=0; i<9;i++){
+				tilesAround[i] = Game.getCurrentLevel().getTileAt(new Vector3f((i%3)-1,Math.floorDiv(i,3)-1,0).scale(32).add(position),true);
+				//Game.getCurrentLevel().setTileAt(new Wall(wallTile),new Vector3f((i%3)-1,Math.floorDiv(i,3)-1,0).scale(32).add(position),true);
+			}
+			
+			
 			currentSprite.update(dtime);
 			Vector3f deltaPos = walkDir.normalize().scale((float) (walkSpeed*dtime/1000));
 			Vector3f newPos = position.add(deltaPos);
-			setPosition(newPos);
+			Tile oTile = Game.getCurrentLevel().getTileAt(position,true); 		
+			Tile nTile = Game.getCurrentLevel().getTileAt(newPos,true);
+			Tile bGround = Game.getCurrentLevel().getTileAt(newPos.sub(new Vector3f(0,0,1)),true);
+			
+			boolean col = bGround == null;
+			//shape.setPosition(newPos);
+			if(!col){
+				setShapePos(newPos);
+				for(Tile i : tilesAround){
+				//	System.out.println(i + " : " + (i!=null ? i.isSolid() : "<>"));	
+					if(i!=null && i.isSolid()){
+						if(shape.overlaps(i.getShape())){
+							col = true;
+							break;
+						}
+					}
+				}
+			}
+			if(col){
+				setPosition(position);
+			}else{
+				setPosition(newPos);
+				if(oTile!=nTile){
+					if(oTile != null){
+						oTile.leave(this);
+					}
+					if(nTile != null){
+						nTile.enter(this);
+					}
+				}
+			}
+			
 		}else{
 			currentSprite.setCurrentFrame(0);
 		}
@@ -96,13 +135,17 @@ public abstract class Entity {
 			Game.getCanvas().addToQueue(shape);
 		}
 	}
+	private void setShapePos(Vector3f pos){
+		Vector3f sPos = (pos).sub(sprites[0].getOffset());
+		sPos = sPos.add(sprites[0].getDimension().sub(shape.getDimension()).mul(new Vector3f(0,1,0)));
+		shape.setPosition(sPos);
+		
+	}
 	protected float calcDepth(){
 		return -position.getY() - (currentSprite.getDimension().getY() - currentSprite.getOffset().getY()) - position.getZ()*Tile.SIZE;
 	}
 	public void setPosition(Vector3f position){
-		Vector3f sPos = (position.sub(sprites[0].getOffset()));
-		sPos = sPos.add(sprites[0].getDimension().sub(shape.getDimension()).mul(new Vector3f(0,1,0)));
-		shape.setPosition(sPos);
+		setShapePos(position);
 		this.position = position;
 	}
 	public Vector3f getPosition(){

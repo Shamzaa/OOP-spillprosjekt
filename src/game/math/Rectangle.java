@@ -18,12 +18,10 @@ public class Rectangle extends Shape{
 
 	public boolean overlaps(Rectangle rect,boolean checkOther){
 		//if(withinRadius(rect)){
-			Vector3f p1 = getPosition();
-			Vector3f p2 = rect.getPosition();
+			Vector3f p1 = getPosition();//.sub(dimension.mul(getCenter()));
+			Vector3f p2 = rect.getPosition();//.sub(rect.getDimension().mul(rect.getCenter()));
 			Vector3f e1 = p1.add(dimension);
 			Vector3f e2 = p2.add(rect.dimension);
-			System.out.println((p1.getX() < e2.getX()) + " " + (e1.getX() > p2.getX())
-					+ " " + (p1.getY() < e2.getY()) + " " + (e1.getY() > p2.getY()));
 			
 			return (p1.getX() < e2.getX() && e1.getX() > p2.getX() &&
 					p1.getY() < e2.getY() && e1.getY() > p2.getY()) || (!checkOther ? false : rect.overlaps(this,false));
@@ -35,7 +33,12 @@ public class Rectangle extends Shape{
 		return overlaps(rect,true);
 		
 	}
-
+	public Vector3f getOverlapVector(Rectangle rect){
+		if(overlaps(rect)){
+		//	return getPosition().add(dimension).sub(rect.getPosition()).mul(new Vector3f(1,1,0));
+		}
+		return new Vector3f(0,0,0);
+	}
 	@Override
 	public float getRadius() {
 		return getCenter().getLength();
@@ -86,6 +89,14 @@ public class Rectangle extends Shape{
 	@Override
 	public Vector3f getDimension() {
 		return dimension;
+	}
+
+	@Override
+	public Vector3f getOverlapVector(Shape other) {
+		if(other instanceof Rectangle){
+			return getOverlapVector((Rectangle)other);
+		}
+		throw new IllegalArgumentException(String.format(Locale.ENGLISH,"%s does not supported overlap with %s",this,other));
 	}
 	
 }
