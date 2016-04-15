@@ -72,16 +72,40 @@
       "class": "game.tile.Wall"
     },
     "30": {
-      "des": "door left",
-      "dest": [1,1,1],
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [0,5,1]
+      },
+      "des": "door left bottom",
+      "dest": [15,31,2],
       "level": "example_in.json",
       "class": "game.tile.Warp"
     },
     "31": {
-      "des": "door right",
-      "dest": [1,2,1],
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [0,5,1]
+      },
+      "des": "door right bottom",
+      "dest": [16,31,2],
       "level": "example_in.json",
       "class": "game.tile.Warp"
+    },
+    "32": {
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [0,4,1]
+      },
+      "des": "door left top",
+      "class": "game.tile.Wall"
+    },
+    "33": {
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [0,4,1]
+      },
+      "des": "door right top",
+      "class": "game.tile.Wall"
     }
   },
   "entities":  [

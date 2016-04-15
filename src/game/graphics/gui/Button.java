@@ -32,7 +32,7 @@ public class Button extends GuiComponent{
 	public void draw(Graphics2D g){
 		sprite.setCurrentFrame(down ? 1 : 0);
 		sprite.draw(g);
-		label.center = new Vector3f(-0.25f,sprite.getCurrentFrame() == 0 ? -0.6f : -0.7f,0);
+		//label.center = new Vector3f(-0.25f,sprite.getCurrentFrame() == 0 ? -0.6f : -0.7f,0);
 		super.draw(g);
 	}
 	@Override

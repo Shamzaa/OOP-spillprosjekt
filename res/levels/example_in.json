@@ -1,5 +1,5 @@
 {
-  "image":  "res/levels/example.png",
+  "image":  "res/levels/example_in.png",
   "imageMeta":  {
     
     "110": {
@@ -70,8 +70,43 @@
     },
     "200": {
       "class": "game.tile.Wall"
+    },
+    "30": {
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [0,5,1]
+      },
+      "des": "door left bottom",
+      "dest": [1,1,1],
+      "level": "example_in.json",
+      "class": "game.tile.Warp"
+    },
+    "31": {
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [1,5,1]
+      },
+      "des": "door right bottom",
+      "dest": [1,2,1],
+      "level": "example_in.json",
+      "class": "game.tile.Warp"
+    },
+    "32": {
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [0,4,1]
+      },
+      "des": "door left top",
+      "class": "game.tile.Wall"
+    },
+    "33": {
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [1,4,1]
+      },
+      "des": "door right top",
+      "class": "game.tile.Wall"
     }
-    
   },
   "entities":  [
     {
@@ -79,4 +114,5 @@
       
     }
   ]
+
 }

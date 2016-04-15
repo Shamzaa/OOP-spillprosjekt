@@ -10,6 +10,7 @@ import game.graphics.Sprite;
 import game.math.Vector3f;
 import game.mechanics.Inventory;
 import game.mechanics.Wearable;
+import game.mechanics.Wearable.ItemSlot;
 
 public abstract class Fighter extends Entity{
 	
@@ -21,7 +22,13 @@ public abstract class Fighter extends Entity{
 	private int baseMaxHealth = 1000;
 	private int healthPoints = baseHealth;
 	private double resistance = 0.35;
-	private boolean fighting = false;
+	
+	private float baseDamage = 320;
+	protected boolean fighting = false;
+	private Fighter strikeTarget = null;
+	private Vector3f startPos = null;
+	
+	private float attackSpeed = 600;
 	private ColorRect healthBarBG;
 	private ColorRect healthBar;
 	private Wearable[] itemSlots = new Wearable[Wearable.slotCount];
@@ -33,6 +40,22 @@ public abstract class Fighter extends Entity{
 		healthBarBG = new ColorRect(position,hpDim,new Color(100,100,100));
 		
 	}
+	
+	public void equip(Wearable w){
+		ItemSlot[] pSlots = w.getPossibleSlots();
+		boolean anyFree = false;
+		for(ItemSlot i : pSlots){
+			if(itemSlots[i.slot()] == null){
+				itemSlots[i.slot()] = w;
+				anyFree = true;
+				break;
+			}
+		}
+		if(!anyFree){
+			itemSlots[pSlots[0].slot()] = w;
+		}
+	}
+	
 	public Fighter(Vector3f position, JSONObject obj){
 		super(position,obj);
 		Vector3f hpDim = new Vector3f(sprites[0].getDimension().getX()+6,3,0);
@@ -40,12 +63,15 @@ public abstract class Fighter extends Entity{
 		healthBarBG = new ColorRect(position,hpDim,new Color(100,100,100));
 	
 	}
+	
 	public void hit(double damage){
 		healthPoints -= resistance * damage;
+		System.out.println(healthPoints);
 		if(healthPoints <= 0){
 			kill();
 		}
 	}
+
 	@Override
 	public void render(){
 		super.render();
@@ -70,19 +96,45 @@ public abstract class Fighter extends Entity{
 		return fighting;
 	}
 	public float getHealthP(){
-		return getHealth()/getMaxHealth();
+		return (float)getHealth()/getMaxHealth();
+	}
+	public void setFighting(boolean fig){
+		this.fighting = fig;
 	}
 	public void update(long dtime){
-		if(fighting){
-			//Fighting shit
-		}
 		super.update(dtime);
+		if(fighting){
+			setSpeed(attackSpeed);
+			face(new Vector3f(this instanceof Player ? 1 : -1,0,0));
+			Vector3f diff = null;
+			if(strikeTarget != null){
+				diff = strikeTarget.position.sub(position);//position.sub(strikeTarget.position);
+				setDirection(diff);
+				if(diff.getLength2D() < 32){
+					strikeTarget.hit(baseDamage);
+					strikeTarget = null;
+				}
+			}else if(startPos != null){
+				diff = startPos.sub(position);//position.sub(startPos);
+				setDirection(diff);
+				if(diff.getLength2D() < 10){
+					this.position = startPos;
+					startPos = null;
+					setDirection(new Vector3f(0,0,0));
+				}
+			}
+		}else{
+			setSpeed((float)walkSpeed);
+		}
+		
 		
 	}
 	public void attack(Fighter enemy){
-		// TODO: calculate damage done based on weapon
-		int damage = 100;
-		enemy.hit(damage);
+		//int damage = 100;
+		//setSpeed(attackSpeed);
+		strikeTarget = enemy;
+		startPos = position;
+		//enemy.hit(damage);
 		
 	}
 

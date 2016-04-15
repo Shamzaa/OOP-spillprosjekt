@@ -1,5 +1,6 @@
 package game.entity;
 import game.math.Vector3f;
+import game.world.BattleScene;
 import game.world.Level;
 
 import java.awt.event.KeyEvent;
@@ -58,13 +59,17 @@ public class Player extends Fighter implements KeyListener{
 	@Override
 	public void enter(Level lvl) {
 		Game.setLevel(lvl);
-		lvl.getCamera().setTarget(this);
-		lvl.addListener(this);
+		if(!(lvl instanceof BattleScene)){
+			lvl.getCamera().setTarget(this);
+			lvl.addListener(this);
+		}
 	}
 
 	@Override
 	public void leave(Level lvl) {
-		lvl.removeListener(this);
+		if(!(lvl instanceof BattleScene)){
+			lvl.removeListener(this);
+		}
 	}
 
 	@Override

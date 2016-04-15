@@ -1,5 +1,8 @@
 package game.entity;
 
+import org.json.JSONObject;
+
+import game.Game;
 import game.graphics.Sprite;
 import game.math.Vector3f;
 import game.world.Level;
@@ -12,7 +15,9 @@ public class Hostile extends Fighter{
 	public Hostile(Vector3f position, Sprite[] sprites) {
 		super(position, sprites);
 	}
-
+	public Hostile(Vector3f position, JSONObject data){
+		super(position,data);
+	}
 	@Override
 	public void enter(Level lvl) {
 	}
@@ -28,7 +33,9 @@ public class Hostile extends Fighter{
 	@Override
 	public void touch(Entity ent) {
 		if(ent instanceof Player){
-			//Start fight
+			//((Fighter) ent).fighting = true;
+			//this.fighting = true;
+			Game.getCurrentLevel().startBattle((Fighter)ent, this);
 		}
 	}
 

@@ -1,6 +1,7 @@
 {
   "levels": [
-    "res/levels/example.json"
+    "res/levels/example.json",
+    "res/levels/example_in.json"
   ],
   "player": {
     "sprites": {

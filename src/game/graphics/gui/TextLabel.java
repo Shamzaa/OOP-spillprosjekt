@@ -1,6 +1,7 @@
 package game.graphics.gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
@@ -9,13 +10,17 @@ import game.math.Vector3f;
 public class TextLabel extends GuiComponent{
 	private String text;
 	private Color color;
+	private Font font;
 	public TextLabel(String text){
-		this(text,new Color(0,0,0));
+		this(text,new Color(0,0,0),14);
 	}
 	public TextLabel(String text, Color color){
+		this(text,color,14);
+	}
+	public TextLabel(String text, Color color, int size){
 		this.text = text;
 		this.color = color;
-		
+		this.font = new Font("Consolas",0,size);
 	}
 	public void setText(String text){
 		this.text = text;
@@ -23,9 +28,12 @@ public class TextLabel extends GuiComponent{
 	@Override 
 	public void draw(Graphics2D g){
 		Color old = g.getColor();
+		Font oldFont = g.getFont();
 		g.setColor(color);
+		g.setFont(font);
 		g.drawString(text, 0, 0);
 		g.setColor(old);
+		g.setFont(oldFont);
 		super.draw(g);
 	}
 	

@@ -53,7 +53,7 @@ public class Inventory {
 		}
 		return weapons;
 	}
-	
+
 	private void sort(){
 		// sorterer Inventory alfabetist bastert på Item sitt navn
 		Collections.sort(inventoryList, new ComparatorStack());

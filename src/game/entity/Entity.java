@@ -19,7 +19,8 @@ public abstract class Entity {
 	protected Vector3f position;
 	protected Vector3f walkDir = new Vector3f(0,0,0);
 	protected Vector3f facing = new Vector3f(0,0,0);
-	protected double walkSpeed = 256;
+	public final double walkSpeed = 256;
+	protected double currentSpeed = walkSpeed;
 	protected Sprite[] sprites;
 	protected Inventory inventory = new Inventory();
 	protected Sprite currentSprite;
@@ -50,7 +51,7 @@ public abstract class Entity {
 		this.sprites = new Sprite[4];
 		for(int i=0; i< sprites.length;i++){
 			this.sprites[i] = new Sprite(
-				ResourceManager.getImage(spritesMeta.getString("image")),pos,sIndex.add(new Vector3f(0,i,0)),new Vector3f(0.5f,0.5f,0),dim
+				ResourceManager.getImage(spritesMeta.getString("image")),pos,sIndex.add(new Vector3f(0,i,0)),new Vector3f(0.5f,0.7f,0),dim
 			);
 		}
 		currentSprite = sprites[0];
@@ -60,7 +61,15 @@ public abstract class Entity {
 		
 		
 	}
-	
+	public void setSpeed(float speed){
+		this.currentSpeed = speed;
+	}
+	public double getSpeed(){
+		return this.currentSpeed;
+	}
+	public void setDirection(Vector3f dir){
+		this.walkDir = dir.normalize();
+	}
 	public void update(long dtime){
 		if(dead){
 			Game.getCurrentLevel().destroyEntity(this);
@@ -73,15 +82,15 @@ public abstract class Entity {
 				//Game.getCurrentLevel().setTileAt(new Wall(wallTile),new Vector3f((i%3)-1,Math.floorDiv(i,3)-1,0).scale(32).add(position),true);
 			}
 			
-			
+			currentSprite.setFPS((int)(12/walkSpeed * currentSpeed));
 			currentSprite.update(dtime);
-			Vector3f deltaPos = walkDir.normalize().scale((float) (walkSpeed*dtime/1000));
+			Vector3f deltaPos = walkDir.normalize().scale((float) (currentSpeed*dtime/1000));
 			Vector3f newPos = position.add(deltaPos);
 			Tile oTile = Game.getCurrentLevel().getTileAt(position,true); 		
 			Tile nTile = Game.getCurrentLevel().getTileAt(newPos,true);
 			Tile bGround = Game.getCurrentLevel().getTileAt(newPos.sub(new Vector3f(0,0,1)),true);
 			
-			boolean col = bGround == null;
+			boolean col = false;//bGround == null;
 			//shape.setPosition(newPos);
 			if(!col){
 				setShapePos(newPos);

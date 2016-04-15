@@ -29,6 +29,11 @@ public class Sprite implements Drawable{
 		this.center = center;
 		this.dimension = dimension;
 	}
+	public Sprite(BufferedImage img, Vector3f pos){
+		image = img;
+		position = pos;	
+		this.dimension = new Vector3f(img.getWidth(),img.getHeight(),0);
+	}
 	public Sprite(BufferedImage img,Vector3f pos, int srcX,int srcY, int length, Vector3f center, Vector3f dimension){
 		this(img,pos,new Vector3f(srcX,srcY,length),center,dimension);
 	}

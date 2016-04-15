@@ -16,8 +16,10 @@ import org.json.JSONObject;
 
 import game.Game;
 import game.entity.Entity;
+import game.entity.Fighter;
 import game.entity.Player;
 import game.graphics.Camera;
+import game.graphics.Sprite;
 import game.math.Vector3f;
 import game.misc.ClassUtils;
 import game.resource.ResourceManager;
@@ -32,6 +34,7 @@ public class Level implements KeyListener, MouseListener{
 	private Camera camera = new Camera(new Vector3f(0,0,0));
 	private int width, height;
 	private ArrayList<KeyListener> keyListeners = new ArrayList<KeyListener>(5);
+	private ArrayList<Entity> graceRemoval = new ArrayList<Entity>();
 	private Player player = null;
 	public Level(int width,int height){
 		init(width,height);
@@ -71,6 +74,9 @@ public class Level implements KeyListener, MouseListener{
 		
 		
 		
+	}
+	public void startBattle(Fighter p, Fighter o){
+		Game.setLevel(new BattleScene(new Sprite(ResourceManager.getImage("res/battleBG_1.png"), new Vector3f(0,0,0)), p, o, this));
 	}
 	public Player getPlayer(){
 		return player;
@@ -122,6 +128,11 @@ public class Level implements KeyListener, MouseListener{
 		for(Entity i : removeList){
 			destroyEntity(i);
 		}
+		for(Entity i : graceRemoval){
+			entities.remove(i);
+		}
+		graceRemoval.clear();
+		
 	}
 	public int getWidth(){
 		return width;
@@ -196,11 +207,13 @@ public class Level implements KeyListener, MouseListener{
 		removeEntity(entities.indexOf(ent));
 	}
 	public void removeEntity(int index){
-		entities.remove(index);
-		if(entities.get(index) instanceof Player){
+		Entity ent = entities.get(index);
+		graceRemoval.add(ent);
+		//entities.remove(index);
+		if(ent instanceof Player){
 			player = null;
 		}
-		entities.get(index).leave(this);
+		ent.leave(this);
 		
 	}
 	public void moveEntityTo(Entity ent, Level lvl){

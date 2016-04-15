@@ -34,7 +34,7 @@ public class Warp extends Tile{
 	@Override
 	public void enter(Entity ent) {
 		Game.getCurrentLevel().moveEntityTo(ent, Game.getLevel(targetLevel));
-		ent.setPosition(targetPosition.scale(Tile.SIZE));
+		ent.setPosition(targetPosition.mul(new Vector3f(Tile.SIZE,Tile.SIZE,1)));
 	}
 
 	@Override

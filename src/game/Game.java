@@ -20,11 +20,13 @@ import org.json.JSONObject;
 
 import com.sun.media.jfxmedia.events.PlayerTimeListener;
 
+import game.entity.Fighter;
+import game.entity.Hostile;
 import game.entity.Player;
 import game.graphics.Camera;
 import game.graphics.Sprite;
 import game.graphics.gui.Button;
-import game.graphics.gui.FightingGUI;
+import game.graphics.gui.MainGUI;
 import game.graphics.gui.HoverArea;
 import game.graphics.gui.Panel;
 import game.math.Vector3f;
@@ -48,7 +50,7 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 	private Panel testPanel;
 	private Player playerTest;
 	private HoverArea testHover;
-	private Panel currentGUI = new FightingGUI();
+	private Panel currentGUI = new MainGUI();
 	
 	private long ctime,dtime,ltime,timeAcc,frames;
 	
@@ -76,12 +78,18 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 		for(Object i : levelRefs){
 			String levelName = (String)(i);
 			JSONObject data = new JSONObject(ResourceManager.getFileContent(levelName));
-			game.levels.add(new Level(data));
+			Level lvl = new Level(data); 
+			game.levels.add(lvl);
+			String[] nameRef = levelName.split("/");
+			System.out.println(nameRef[nameRef.length-1]);
+			game.levelMap.put(nameRef[nameRef.length-1],lvl);
 		}
 		game.currentLevel = game.levels.get(0);
 		game.currentLevel.addEntity(game.playerTest);
-		
-		
+		Fighter testFigher = new Hostile(new Vector3f(0,0,0),playerMeta);
+		game.currentLevel.addEntity(testFigher);
+		game.currentLevel.startBattle(game.playerTest, testFigher);
+		testFigher.attack(game.playerTest);
 	}
 	public static void run(){
 		//JSONObject obj = new JSONObject(ResourceManager.getFileContent("res/levels/example.json"));
@@ -275,7 +283,7 @@ public class Game implements KeyListener, MouseListener, ActionListener{
 		game.currentLevel.update(dtime);
 		Game.getCanvas().addToDirectQueue(game.currentGUI);
 		game.currentLevel.render();
-		((FightingGUI)(game.currentGUI)).setHpValue(game.currentLevel.getPlayer().getHealthP());
+		((MainGUI)(game.currentGUI)).setHpValue(game.currentLevel.getPlayer().getHealthP());
 		game.gameScreen.getCanvas().render();
 		if(timeAcc > 1000){
 			System.out.println("FPS: " + frames);
