@@ -6,6 +6,8 @@ public abstract class Shape implements Drawable{
 	private Vector3f position;
 	private float depth = 0;
 	protected final boolean DO_DRAW = false;
+	protected Vector3f dimension;
+	
 	public Shape(Vector3f position){
 		this.position = position;
 	}
@@ -21,6 +23,14 @@ public abstract class Shape implements Drawable{
 		Vector3f p2 = shape.getPosition();
 		Vector3f AB = p1.add(getCenter()).sub(p2.add(shape.getCenter()));
 		return AB.getLength() < shape.getRadius() + getRadius();
+	}
+	public void setDimension(Vector3f dim){
+		this.dimension = dim;
+	}
+
+	@Override
+	public Vector3f getDimension() {
+		return dimension;
 	}
 	public abstract float getRadius();
 	public abstract Vector3f getShapeCenter();

@@ -9,7 +9,6 @@ import com.sun.glass.ui.Pixels.Format;
 public class Rectangle extends Shape{
 	
 
-	private Vector3f dimension;
 	
 	public Rectangle(Vector3f position,Vector3f dimension) {
 		super(position);
@@ -86,10 +85,6 @@ public class Rectangle extends Shape{
 		return new Vector3f(1,1,1);
 	}
 
-	@Override
-	public Vector3f getDimension() {
-		return dimension;
-	}
 
 	@Override
 	public Vector3f getOverlapVector(Shape other) {

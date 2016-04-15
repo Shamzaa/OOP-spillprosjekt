@@ -1,5 +1,5 @@
 {
-  "image":  "res/levels/example_in.png",
+  "images":  ["res/levels/example_in.png"],
   "imageMeta":  {
     
     "110": {

@@ -24,6 +24,7 @@ public class Elevator extends Tile{
 	}
 	@Override
 	public void enter(Entity ent) {
+		System.out.println("Pusing: " + modDir);
 		ent.setPosition(ent.getPosition().add(modDir));
 	}
 	@Override

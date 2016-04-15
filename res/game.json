@@ -1,5 +1,6 @@
 {
   "levels": [
+    "res/levels/example.json",
     "res/levels/town1.json"
   ],
   "player": {

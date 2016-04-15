@@ -89,7 +89,7 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 		
 		
 		game.gameScreen.addFocusListener(game);
-		game.currentLevel.startBattle(game.player, testFigher);
+	//	game.currentLevel.startBattle(game.player, testFigher);
 	//	testFigher.attack(game.playerTest);
 	}
 	public static Player getPlayer(){

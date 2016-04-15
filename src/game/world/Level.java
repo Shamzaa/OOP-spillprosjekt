@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import game.Game;
@@ -40,7 +41,7 @@ public class Level implements KeyListener, MouseListener{
 		init(width,height);
 	}
 	@SuppressWarnings("unchecked")
-	private void init(int width, int height){
+	private void init(int width, int height,int MAX_Z){
 		tiles = new Tile[width*height*MAX_Z];
 		entityMap = (ArrayList<Entity>[]) new ArrayList[(int)Math.ceil((width * height)/entityMapRes)];
 		for(int i=0; i< entityMap.length;i++){
@@ -49,10 +50,31 @@ public class Level implements KeyListener, MouseListener{
 		this.width = width;
 		this.height = height;
 	}
+	private void init(int width, int height){
+		this.init(width, height, MAX_Z);
+	}
+	private void initImage(BufferedImage img,HashMap<Integer,JSONObject> valueMap, int zoffset){
+		System.out.println(this + " " + img + " " + valueMap + " " + zoffset);
+		for(int i=0; i<width*height;i++){
+			int color = img.getRGB(i%width,Math.floorDiv(i,width));
+			for(int x=0; x<3; x++){
+				int k = (color >> 8*x)&0xFF;
+				if(valueMap.containsKey(k)){
+					String className = valueMap.get(k).getString("class");
+					setTileAt((Tile)ClassUtils.newInstance(className, new Object[]{valueMap.get(k)}),i + (x+zoffset)*width*height);
+				}
+			}
+		}
+	}
 	public Level(JSONObject levelMeta) {
-		String imageName = levelMeta.getString("image");
-		BufferedImage img = ResourceManager.getImage(imageName);
-		init(img.getWidth(),img.getHeight());
+		//String imageName = levelMeta.getString("image");
+		JSONArray images = levelMeta.getJSONArray("images");
+		ArrayList<BufferedImage> imgLayers = new ArrayList<BufferedImage>(images.length());
+		for(Object s : images){
+			imgLayers.add(ResourceManager.getImage((String)s));
+		}
+		//BufferedImage img = ResourceManager.getImage(imageName);
+		init(imgLayers.get(0).getWidth(),imgLayers.get(0).getHeight(),imgLayers.size()*3);
 		JSONObject imageMeta = levelMeta.getJSONObject("imageMeta");
 		HashMap<Integer,JSONObject> valueMap = new HashMap<Integer,JSONObject>();
 		String elem = null;
@@ -60,18 +82,11 @@ public class Level implements KeyListener, MouseListener{
 			elem = s.next();
 			valueMap.put(Integer.parseInt(elem), imageMeta.getJSONObject(elem));
 		}
-		for(int i=0; i<width*height;i++){
-			int color = img.getRGB(i%width,Math.floorDiv(i,width));
-			for(int x=0; x<3; x++){
-				int k = (color >> 8*x)&0xFF;
-				if(valueMap.containsKey(k)){
-					String className = valueMap.get(k).getString("class");
-					setTileAt((Tile)ClassUtils.newInstance(className, new Object[]{valueMap.get(k)}),i + x*width*height);
-				}
-			}
-			
+		int zoffset = 0;
+		for(BufferedImage i : imgLayers){
+			initImage(i, valueMap, zoffset);
+			zoffset += 3;
 		}
-		
 		
 		
 	}

@@ -1,28 +1,207 @@
 {
-  "image":  "res/levels/town1.png",
+  "images":  [
+    "res/levels/town1.png",
+    "res/levels/town1_3_6.png"
+  ],
   "imageMeta":  {
+    "255": {
+      "des": "invisible wall",
+      "class": "game.tile.Wall"
+    },
     "100":  {
+      "des": "pillar bottom",
       "sprite":  {
-          "image":  "res/tile_atlas.png",
-          "index":  [0,1,1]
-        },
+        "image":  "res/misc_outdoor.png",
+        "index":  [2,2,1]
+      },
+      "class":  "game.tile.Wall"
+    },
+    "101": {
+     "des": "pillar mid",
+      "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [2,1,1]
+      },
+      "class":  "game.tile.Wall"
+    },
+    "102": {
+     "des": "pillar top",
+      "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [2,0,1]
+      },
       "class":  "game.tile.Wall"
     },
     "130":  {
       "des": "arc",
       "sprite":  {
-          "image":  "res/tile_atlas.png",
-          "index":  [0,1,1]
-        },
+        "image":  "res/tile_atlas.png",
+        "index":  [0,1,1]
+      },
       "class":  "game.tile.Wall"
     },
-    
     "50":  {
+      "des": "grass mid",
       "sprite":  {
-          "image":  "res/tile_atlas.png",
-          "index":  [0,0,1]
-        },
+        "image":  "res/ground_outdoor.png",
+        "index":  [1,1,1]
+      },
       "class":  "game.tile.Ground"
+    },
+    "51":  {
+      "des": "grass top left",
+      "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [0,0,1]
+      },
+      "class":  "game.tile.Ground"
+    },
+    "52":  {
+      "des": "grass top",
+      "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [1,0,1]
+      },
+      "class":  "game.tile.Ground"
+    },
+    "53": {
+      "des": "grass top right",
+      "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [2,0,1]
+      },
+      "class":  "game.tile.Ground"
+    },
+    "54": {
+      "des": "grass left",
+      "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [0,1,1]
+      },
+      "class":  "game.tile.Ground"
+    },
+    "55": {
+      "des": "grass right",
+      "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [2,1,1]
+      },
+      "class":  "game.tile.Ground"
+    },
+    "56": {
+      "des": "grass bottom left",
+      "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [0,2,1]
+      },
+      "class":  "game.tile.Ground"
+    },    
+    "57": {
+      "des": "grass bottom",
+      "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [1,2,1]
+      },
+      "class":  "game.tile.Ground"
+    },    
+    "58": {
+      "des": "grass bottom right",
+      "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [2,2,1]
+      },
+      "class":  "game.tile.Ground"
+    },
+    "60": {
+      "des": "dirt middle",
+      "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [4,1,1]
+      },
+      "class":  "game.tile.Ground"
+    },
+    "90": {
+      "des": "elevator up",
+      "direction": 1,
+      "class": "game.tile.Elevator"
+    },
+    "95": {
+      "des": "elevator down",
+      "direction": -1,
+      "class": "game.tile.Elevator"
+    },
+    "150": {
+      "des": "statue top left",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [0,0,1]
+      },
+      "class": "game.tile.Ground"
+    }, 
+    "151": {
+      "des": "statue top right",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [1,0,1]
+      },
+      "class": "game.tile.Ground"
+    }, 
+    "152": {
+      "des": "statue middle left",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [0,1,1]
+      },
+      "class": "game.tile.Wall"
+    }, 
+    "153": {
+      "des": "statue middle right",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [1,1,1]
+      },
+      "class": "game.tile.Wall"
+    }, 
+    "154": {
+      "des": "statue bottom left",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [0,2,1]
+      },
+      "class": "game.tile.Wall"
+    }, 
+    "155": {
+      "des": "statue bottom right",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [1,2,1]
+      },
+      "class": "game.tile.Wall"
+    }, 
+    "156": {
+      "des": "stone",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [3,0,1]
+      },
+      "height":0.25,
+      "class": "game.tile.Wall"
+    },
+    "157": {
+      "des": "stairs",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [6,0,1]
+      },
+      "class": "game.tile.Wall"
+    },
+    "158": {
+      "des": "stairs top end",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [6,1,1]
+      },
+      "class": "game.tile.Wall"
     }
     
 

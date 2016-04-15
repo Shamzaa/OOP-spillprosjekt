@@ -1,5 +1,5 @@
 {
-  "image":  "res/levels/example.png",
+  "images":  ["res/levels/example.png","res/levels/example_3_6.png"],
   "imageMeta":  {
     
     "110": {
@@ -77,8 +77,8 @@
         "index": [0,5,1]
       },
       "des": "door left bottom",
-      "dest": [15,31,2],
-      "level": "example_in.json",
+      "dest": [15,31,1],
+      "level": "town1.json",
       "class": "game.tile.Warp"
     },
     "31": {
@@ -87,8 +87,8 @@
         "index": [0,5,1]
       },
       "des": "door right bottom",
-      "dest": [16,31,2],
-      "level": "example_in.json",
+      "dest": [16,31,1],
+      "level": "town1.json",
       "class": "game.tile.Warp"
     },
     "32": {

@@ -17,6 +17,7 @@ public abstract class Tile {
 	private Sprite sprite;
 	private Vector3f position;
 	private Shape shape = new Rectangle(new Vector3f(0,0,0),new Vector3f(SIZE,SIZE,0));
+	private float depthOffset = 0;
 	protected boolean solid = false;
 	
 	public Tile(Sprite sprite){
@@ -28,6 +29,12 @@ public abstract class Tile {
 	public Tile(JSONObject data){
 		if(data.has("sprite")){
 			this.sprite = new Sprite(data.getJSONObject("sprite"));
+		}
+		if(data.has("height")){
+			this.shape.setDimension(new Vector3f(SIZE,(float)(SIZE*data.getDouble("height")),0));
+		}
+		if(data.has("depthOffset")){
+			this.depthOffset = (float)data.getDouble("depthOffset");
 		}
 	}
 	public boolean isSolid(){
@@ -46,8 +53,8 @@ public abstract class Tile {
 	public void render(){
 		if(sprite != null){
 			sprite.setPosition(position);
-			sprite.setDepth(-(position.getY()+Tile.SIZE+position.getZ()));
-			shape.setPosition(position);
+			sprite.setDepth(-(position.getY()+Tile.SIZE+position.getZ()) + depthOffset*Tile.SIZE);
+			shape.setPosition(position.add(new Vector3f(0,Tile.SIZE-shape.getDimension().getY(),0)));
 			shape.setDepth(sprite.getDepth()-1);
 
 		
