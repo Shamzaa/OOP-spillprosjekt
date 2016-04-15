@@ -11,6 +11,7 @@ import game.math.Vector3f;
 import game.mechanics.Inventory;
 import game.mechanics.Wearable;
 import game.mechanics.Wearable.ItemSlot;
+import game.world.BattleScene;
 
 public abstract class Fighter extends Entity{
 	
@@ -37,7 +38,7 @@ public abstract class Fighter extends Entity{
 		super(position, sprites);
 		Vector3f hpDim = new Vector3f(sprites[0].getDimension().getX()+6,3,0);
 		healthBar = new ColorRect(position,hpDim,new Color(255,0,0));
-		healthBarBG = new ColorRect(position,hpDim,new Color(100,100,100));
+		healthBarBG = new ColorRect(position,hpDim,new Color(50,50,50));
 		
 	}
 	
@@ -60,7 +61,7 @@ public abstract class Fighter extends Entity{
 		super(position,obj);
 		Vector3f hpDim = new Vector3f(sprites[0].getDimension().getX()+6,3,0);
 		healthBar = new ColorRect(position,hpDim,new Color(255,0,0));
-		healthBarBG = new ColorRect(position,hpDim,new Color(100,100,100));
+		healthBarBG = new ColorRect(position,hpDim,new Color(50,50,50));
 	
 	}
 	
@@ -101,6 +102,9 @@ public abstract class Fighter extends Entity{
 	public void setFighting(boolean fig){
 		this.fighting = fig;
 	}
+	public void setHealth(int h){
+		this.healthPoints = Math.max(h,getMaxHealth());
+	}
 	public void update(long dtime){
 		super.update(dtime);
 		if(fighting){
@@ -121,11 +125,14 @@ public abstract class Fighter extends Entity{
 					this.position = startPos;
 					startPos = null;
 					setDirection(new Vector3f(0,0,0));
+					((BattleScene)Game.getCurrentLevel()).nextTurn();
+					
 				}
 			}
 		}else{
 			setSpeed((float)walkSpeed);
 		}
+		
 		
 		
 	}
@@ -136,6 +143,11 @@ public abstract class Fighter extends Entity{
 		startPos = position;
 		//enemy.hit(damage);
 		
+	}
+	public void battleAction(){
+		if(isFighting()){
+			attack(((BattleScene)Game.getCurrentLevel()).getOponent(this));
+		}
 	}
 
 	

@@ -81,7 +81,6 @@ public abstract class Entity {
 				tilesAround[i] = Game.getCurrentLevel().getTileAt(new Vector3f((i%3)-1,Math.floorDiv(i,3)-1,0).scale(32).add(position),true);
 				//Game.getCurrentLevel().setTileAt(new Wall(wallTile),new Vector3f((i%3)-1,Math.floorDiv(i,3)-1,0).scale(32).add(position),true);
 			}
-			
 			currentSprite.setFPS((int)(12/walkSpeed * currentSpeed));
 			currentSprite.update(dtime);
 			Vector3f deltaPos = walkDir.normalize().scale((float) (currentSpeed*dtime/1000));
@@ -123,6 +122,7 @@ public abstract class Entity {
 		}
 	}
 	public void face(Vector3f dir){
+		Sprite old = currentSprite;
 		facing = dir;
 		if(facing.getY() < 0){
 			currentSprite = sprites[3];
@@ -133,6 +133,7 @@ public abstract class Entity {
 		}else if(facing.getX() < 0){
 			currentSprite = sprites[1];
 		}
+		currentSprite.setCurrentFrame(old.getCurrentFrame());
 	}
 	public void render(){
 		if(currentSprite != null){

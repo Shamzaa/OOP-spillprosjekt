@@ -1,5 +1,6 @@
 package game.graphics.gui;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +12,7 @@ import game.math.Vector3f;
 
 public class Button extends GuiComponent{
 	private Sprite sprite;
-	private TextLabel label = new TextLabel("");
+	private TextLabel label = new TextLabel("",new Color(0,0,0),16);
 	private boolean toggle = false;
 	private boolean down = false;
 	private boolean on = false;
@@ -23,7 +24,10 @@ public class Button extends GuiComponent{
 		dimension = new Vector3f(sprite.getDimension());
 		//label.position = new Vector3f(dimension.scale(0.5f));
 		label.dimension = dimension;
-		label.center = new Vector3f(-0.25f,-0.6f,0);
+		label.center = new Vector3f(-0.28f,-0.62f,0);
+	}
+	public TextLabel getLabel(){
+		return label;
 	}
 	public Button(String text, Sprite sprite, boolean toggle){
 		this(text,sprite);

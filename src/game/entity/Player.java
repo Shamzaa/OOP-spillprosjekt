@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import game.Game;
 import game.graphics.*;
+import game.graphics.gui.FightGUI;
 
 public class Player extends Fighter implements KeyListener{
 
@@ -51,11 +52,14 @@ public class Player extends Fighter implements KeyListener{
 					(keyMap.get(KeyEvent.VK_W) ? -1 : 0)+
 					(keyMap.get(KeyEvent.VK_S) ? 1 : 0),0);
 		}else{
-			walkDir = new Vector3f(0,0,0);
+		//	walkDir = new Vector3f(0,0,0);
 		}
 		super.update(dtime);
 	}
-	
+	@Override
+	public void attack(Fighter f){
+		super.attack(f);
+	}
 	@Override
 	public void enter(Level lvl) {
 		Game.setLevel(lvl);
@@ -97,5 +101,10 @@ public class Player extends Fighter implements KeyListener{
 	@Override
 	public void touch(Entity ent) {
 		
+	}
+	@Override
+	public void battleAction(){
+		FightGUI gui = (FightGUI)Game.getCurrentGUI();
+		gui.showOptions();
 	}
 }
