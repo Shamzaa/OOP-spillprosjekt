@@ -54,7 +54,7 @@ public class AudioChannel {
 		
 	}
 	*/
-	private void loadAudio(String soundURL){
+	public void loadAudio(String soundURL){
 		clip.close();
 		try{
 			this.soundURL = AudioChannel.class.getResource(soundURL);
