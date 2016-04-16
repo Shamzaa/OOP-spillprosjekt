@@ -1,0 +1,29 @@
+{
+  "images":  [
+    "res/levels/maze.png"
+  ],
+  "imageMeta":  {
+    "110":  {
+      "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [3,2,1]
+       },
+       "class":  "game.tile.Wall"
+    },
+    "100":  {
+	  "des": "arc",
+      "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index": [3,2,1]
+      },
+      "class":  "game.tile.Wall"
+    },
+    "50":  {
+      "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index": [0,6,1]
+      },
+      "class":  "game.tile.Ground"
+    }
+  }
+}
