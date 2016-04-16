@@ -13,7 +13,6 @@ public class AudioMixer {
 		mixer = AudioSystem.getMixer(mixInfos[0]);
 		
 		clips.put("BackgroundMusic", new AudioChannel(mixer));
-		clips.put("SoundEffect", new AudioChannel(mixer));
 	}
 	
 	public void addChannel(String name, String fileURL){
