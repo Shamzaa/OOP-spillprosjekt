@@ -18,12 +18,15 @@ public class NPC extends Entity{
 	public void leave(Level lvl) {
 	}
 
-	@Override
-	public void destory() {
-	}
 
 	@Override
 	public void touch(Entity ent) {
+		
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
 		
 	}
 	

@@ -86,7 +86,7 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 		game.currentLevel.addEntity(game.player);
 		Fighter testFigher = new Hostile(new Vector3f(0,0,0),playerMeta);
 		game.currentLevel.addEntity(testFigher);
-		
+		testFigher.setPosition(new Vector3f(64,256,1));
 		
 		game.gameScreen.addFocusListener(game);
 	//	game.currentLevel.startBattle(game.player, testFigher);

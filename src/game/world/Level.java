@@ -21,6 +21,7 @@ import game.entity.Fighter;
 import game.entity.Player;
 import game.graphics.Camera;
 import game.graphics.Sprite;
+import game.graphics.effects.Updatable;
 import game.math.Vector3f;
 import game.misc.ClassUtils;
 import game.resource.ResourceManager;
@@ -36,6 +37,13 @@ public class Level implements KeyListener, MouseListener{
 	private int width, height;
 	private ArrayList<KeyListener> keyListeners = new ArrayList<KeyListener>(5);
 	private ArrayList<Entity> graceRemoval = new ArrayList<Entity>();
+	private ArrayList<Entity> graceInsertion = new ArrayList<Entity>();
+	
+	private ArrayList<Updatable> effects = new ArrayList<Updatable>();
+	//private ArrayList<Updatable> graceERemoval = new ArrayList<Updatable>();
+	private ArrayList<Updatable> graceEInsertion = new ArrayList<Updatable>();
+	
+	
 	private Player player = null;
 	public Level(int width,int height){
 		init(width,height);
@@ -113,8 +121,23 @@ public class Level implements KeyListener, MouseListener{
 		for(Entity i : entities){
 			i.render();
 		}
+		for(Updatable i : effects){
+			i.render();
+		}
 	}
 	public void update(long dtime){
+		ArrayList<Updatable> removeEList = new ArrayList<Updatable>(effects.size()/4);
+		
+		for(Entity i : graceInsertion){
+			this.entities.add(i);
+		}
+		graceInsertion.clear();
+
+		for(Updatable i : graceEInsertion){
+			this.effects.add(i);
+		}
+		graceEInsertion.clear();
+		
 		for(Entity i : entities){
 			if(i.getPosition().getX() > 0 && i.getPosition().getX() < width*Tile.SIZE){
 				int index = getEntityMapIndex(i.getPosition());
@@ -131,6 +154,13 @@ public class Level implements KeyListener, MouseListener{
 				removeList.add(i);
 			}
 		}
+		for(Updatable i : effects){
+			if(i.isAlive()){
+				i.update(dtime);
+			}else{
+				removeEList.add(i);
+			}
+		}
 		for(Tile t : tiles){
 			if(t != null){
 				t.getShape().setPosition(t.getPosition());
@@ -143,17 +173,32 @@ public class Level implements KeyListener, MouseListener{
 		for(Entity i : removeList){
 			destroyEntity(i);
 		}
+		for(Updatable i : removeEList){
+			effects.remove(i);
+			i.destroy();
+		}
 		for(Entity i : graceRemoval){
 			entities.remove(i);
 		}
 		graceRemoval.clear();
 		
+		
+	}
+	public void addUpdatable(Updatable i){
+		effects.add(i);
 	}
 	public int getWidth(){
 		return width;
 	}
+	//Dosen't work atm
 	public Entity[] getEntitiesCloseTo(Vector3f position){
-		return (Entity[]) entityMap[getEntityMapIndex(position)].toArray();
+		Entity[] ret  = new Entity[entityMap[getEntityMapIndex(position)].size()];
+		return entityMap[getEntityMapIndex(position)].toArray(ret);
+	}
+	public Entity[] getAllEntities(){
+		Entity[] ret  = new Entity[entities.size()];
+		return entities.toArray(ret);
+		
 	}
 	private int getEntityMapIndex(Vector3f position){
 		return (int)((position.getX()/Tile.SIZE)/entityMapRes) + (int)((position.getY()/Tile.SIZE)/entityMapRes) * width;
@@ -208,11 +253,13 @@ public class Level implements KeyListener, MouseListener{
 	}
 	
 	public void destroyEntity(Entity ent){
-		removeEntity(ent);
-		ent.destory();
+		//removeEntity(ent);
+		entities.remove(ent);
+		ent.destroy();
 	}
 	public void addEntity(Entity ent){
-		entities.add(ent);
+		//entities.add(ent);
+		graceInsertion.add(ent);
 		if(ent instanceof Player){
 			this.player = (Player)ent;
 		}

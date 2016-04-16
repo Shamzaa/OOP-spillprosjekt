@@ -27,7 +27,7 @@ public class Hostile extends Fighter{
 	}
 
 	@Override
-	public void destory() {
+	public void destroy() {
 	}
 
 	@Override

@@ -7,6 +7,8 @@ import org.json.JSONObject;
 import game.Game;
 import game.graphics.ColorRect;
 import game.graphics.Sprite;
+import game.graphics.effects.DamageEffect;
+import game.graphics.effects.Explosion;
 import game.math.Vector3f;
 import game.mechanics.Inventory;
 import game.mechanics.Wearable;
@@ -16,15 +18,15 @@ import game.world.BattleScene;
 public abstract class Fighter extends Entity{
 	
 	// % base health
-	private int baseHealth = 1000;
+	protected int baseHealth = 1000;
 	// % based damage reduction from hits
-	private double baseResistance = 0.35;
+	protected double baseResistance = 0.35;
 	
-	private int baseMaxHealth = 1000;
-	private int healthPoints = baseHealth;
-	private double resistance = 0.35;
+	protected int baseMaxHealth = 1000;
+	protected int healthPoints = baseHealth;
+	protected double resistance = 0.35;
 	
-	private float baseDamage = 320;
+	protected float baseDamage = 320;
 	protected boolean fighting = false;
 	private Fighter strikeTarget = null;
 	private Vector3f startPos = null;
@@ -66,8 +68,11 @@ public abstract class Fighter extends Entity{
 	}
 	
 	public void hit(double damage){
-		healthPoints -= resistance * damage;
-		System.out.println(healthPoints);
+		double randomBlock = Math.random()*(1-resistance);
+		int hpDraw = (int) ((resistance+randomBlock) * damage);
+		healthPoints -= hpDraw;
+		Game.getCurrentLevel().addUpdatable(new DamageEffect(position.sub(new Vector3f(0,currentSprite.getDimension().getY(),0)),(int)Math.ceil((float)hpDraw/10.0f)));
+		Game.getCurrentLevel().addUpdatable(new Explosion(position.add(currentSprite.getDimension().sub(currentSprite.getOffset()))));
 		if(healthPoints <= 0){
 			kill();
 		}

@@ -91,6 +91,9 @@ public abstract class GuiComponent implements Drawable, MouseListener, MouseMoti
 	public void setPosition(Vector3f pos){
 		position = pos;
 	}
+	public void setDimension(Vector3f dimension){
+		this.dimension = dimension;
+	}
 	public void setDepth(float depth){
 		this.depth = depth;
 	}

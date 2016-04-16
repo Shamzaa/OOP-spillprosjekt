@@ -5,6 +5,7 @@ import game.world.Level;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.KeyPair;
 import java.util.HashMap;
 
 import org.json.JSONObject;
@@ -31,16 +32,23 @@ public class Player extends Fighter implements KeyListener{
 	// other information sugested for init: HP, *MP*, inventory from json, 
 	public Player(Vector3f position, Sprite[] sprites) {
 		super(position, sprites);
+		init();
 	}
 	public Player(Vector3f position, JSONObject data){
 		super(position,data);
+		init();
 	}
-	
+	private void init(){
+		baseDamage = 640;
+	}
 	public void disableControls(){
 		controlsEnabled = false;
 	}
 	public void enableControls(){
 		controlsEnabled = true;
+		for(Integer key : keyMap.keySet()){
+			keyMap.put(key, false);
+		}
 	}
 
 	@Override
@@ -77,8 +85,8 @@ public class Player extends Fighter implements KeyListener{
 	}
 
 	@Override
-	public void destory() {
-	
+	public void destroy() {
+		//Game over
 	}
 
 	@Override

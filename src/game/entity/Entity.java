@@ -70,6 +70,9 @@ public abstract class Entity {
 	public void setDirection(Vector3f dir){
 		this.walkDir = dir.normalize();
 	}
+	public Shape getShape(){
+		return shape;
+	}
 	public void update(long dtime){
 		if(dead){
 			Game.getCurrentLevel().destroyEntity(this);
@@ -88,18 +91,26 @@ public abstract class Entity {
 			Tile oTile = Game.getCurrentLevel().getTileAt(position,true); 		
 			Tile nTile = Game.getCurrentLevel().getTileAt(newPos,true);
 			Tile bGround = Game.getCurrentLevel().getTileAt(newPos.sub(new Vector3f(0,0,1)),true);
+			Entity[] closeBy = Game.getCurrentLevel().getAllEntities();
+			boolean entCol = false;
+			
+			
 			
 			boolean col = false;//bGround == null;
 			//shape.setPosition(newPos);
-			if(!col){
-				setShapePos(newPos);
-				for(Tile i : tilesAround){
-				//	System.out.println(i + " : " + (i!=null ? i.isSolid() : "<>"));	
-					if(i!=null && i.isSolid()){
-						if(shape.overlaps(i.getShape())){
-							col = true;
-							break;
-						}
+			setShapePos(newPos);
+			for(Entity i : closeBy){
+				if(shape.overlaps(i.getShape())){
+					entCol = true;
+					i.touch(this);
+				}
+			}
+			for(Tile i : tilesAround){
+			//	System.out.println(i + " : " + (i!=null ? i.isSolid() : "<>"));	
+				if(i!=null && i.isSolid()){
+					if(shape.overlaps(i.getShape())){
+						col = true;
+						break;
 					}
 				}
 			}
@@ -166,7 +177,7 @@ public abstract class Entity {
 	public abstract void touch(Entity ent);
 	
 	//Called when the entity is destroyed
-	public abstract void destory();
+	public abstract void destroy();
 	
 	public boolean isAlive(){
 		return !dead;

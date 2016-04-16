@@ -60,8 +60,6 @@ public class BattleScene extends Level{
 	public void update(long dtime){
 		super.update(dtime);
 		if(!hostile.isAlive()){
-			player.setHealth(player.getMaxHealth());
-			System.out.println(this.prev);
 			moveEntityTo(player, this.prev);
 		}
 		if(!player.isAlive()){
@@ -90,30 +88,44 @@ public class BattleScene extends Level{
 		hostile.setFighting(true);
 		hLPos = player.getPosition();
 		pLPos = player.getPosition();
+		
+		player.setDirection(new Vector3f(0,0,0));
+		hostile.setDirection(new Vector3f(0,0,0));
 		player.setPosition(playerPos);
 		hostile.setPosition(hostilePos);
 		
 		//Set gui to FightingGUI
 		((Player) player).disableControls();
 	}
+	@Override
+	public void startBattle(Fighter p, Fighter h){
+		//We don't want battle inception
+		return;
+		
+	}
 	public void leave(){
 		//Set gui to normal
 		super.leave();
+		player.setHealth(player.getMaxHealth());
 		Game.setCurrentGUI(new MainGUI());
 		player.setFighting(false);
+		player.setPosition(pLPos);
+		player.setDirection(new Vector3f(0,0,0));
+		hostile.setPosition(hLPos);
 		((Player) player).enableControls();
 	}
 	public void render(){
+		super.render();
 		background.setDepth(1000);
 		Game.getCanvas().addToQueue(background);
 		//getCamera().setTarget(null);
 		//getCamera().setPosition(new Vector3f(0,0,0));
-		for(Entity i : entities){
+		/*for(Entity i : entities){
 			i.render();
 		}
 		player.render();
 		hostile.render();
-		
+		*/
 	}
 	
 
