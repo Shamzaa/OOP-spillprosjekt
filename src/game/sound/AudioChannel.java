@@ -40,10 +40,26 @@ public class AudioChannel {
 		}
 		// restarts the audioclip if you play the same audio again. relevant for spam of soundFX
 		if(clip.isRunning()){
-			clip.stop();
-			clip.close();
-			loadAudio(fileURL);
+			restart();
 		}
+		clip.start();
+		// clip.loop(Clip.LOOP_CONTINUOUSLY);
+	}
+	
+	public void stop(){
+		clip.stop();
+		clip.close();
+		loadAudio(fileURL);
+	}
+	
+	public void pause(){
+		clip.stop();
+	}
+	
+	public void restart(){
+		clip.stop();
+		clip.close();
+		loadAudio(fileURL);
 		clip.start();
 	}
 	/*

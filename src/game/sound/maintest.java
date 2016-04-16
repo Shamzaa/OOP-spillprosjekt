@@ -14,7 +14,7 @@ public class maintest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ayy.getChannel("ayylmao2").play();
+			ayy.getChannel("ayylmao2").stop();
 		}
 		
 		
