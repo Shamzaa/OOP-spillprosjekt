@@ -25,7 +25,6 @@ public class AudioChannel {
 	public AudioChannel(String soundURL, Mixer mixer){
 		this(mixer);
 		loadAudio(soundURL);
-		play();
 		
 	}
 	
