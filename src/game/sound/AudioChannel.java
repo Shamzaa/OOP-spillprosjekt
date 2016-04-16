@@ -12,6 +12,7 @@ public class AudioChannel {
 	private static Clip clip;
 	private Mixer mixer;
 	private URL soundURL;
+	private String fileURL;
 	
 	public AudioChannel(Mixer mixer){
 		this.mixer = mixer;
@@ -37,6 +38,12 @@ public class AudioChannel {
 		if(soundURL == null){
 			throw new IllegalArgumentException("WTF man");
 		}
+		// restarts the audioclip if you play the same audio again. relevant for spam of soundFX
+		if(clip.isRunning()){
+			clip.stop();
+			clip.close();
+			loadAudio(fileURL);
+		}
 		clip.start();
 	}
 	/*
@@ -54,10 +61,11 @@ public class AudioChannel {
 		
 	}
 	*/
-	public void loadAudio(String soundURL){
+	public void loadAudio(String fileURL){
+		this.fileURL = fileURL;
 		clip.close();
 		try{
-			this.soundURL = AudioChannel.class.getResource(soundURL);
+			this.soundURL = AudioChannel.class.getResource(fileURL);
 			AudioInputStream audioStream = AudioSystem.getAudioInputStream(this.soundURL);
 			clip.open(audioStream);
 		}catch(LineUnavailableException lue){
