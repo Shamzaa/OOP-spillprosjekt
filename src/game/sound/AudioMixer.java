@@ -7,7 +7,7 @@ import javax.sound.sampled.*;
 public class AudioMixer {
 	private Mixer mixer;
 	// TODO: make clips hashmap, play clip based on string name
-	private HashMap<String, AudioChannel> clips = new HashMap<String, AudioChannel>();
+	protected HashMap<String, AudioChannel> clips = new HashMap<String, AudioChannel>();
 	AudioMixer(){
 		Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
 		mixer = AudioSystem.getMixer(mixInfos[0]);
@@ -45,14 +45,6 @@ public class AudioMixer {
 			throw new IllegalArgumentException("Trying to play from a channel that doesn't excist, you rat?");
 		}
 	}
-	
-	public void play(String name){
-		// relevant for soundFX mixer
-		if(clips.containsKey(name)){
-			clips.get(name).play();
-		}else{
-			throw new IllegalArgumentException("Trying to play from a channel that doesn't excist, you rat?");
-		}
-	}
+
 
 }
