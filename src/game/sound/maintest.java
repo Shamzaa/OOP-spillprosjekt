@@ -3,13 +3,11 @@ package game.sound;
 public class maintest {
 	public static void main(String[] args){
 		AudioMixer ayy = new AudioMixer();
-		ayy.addChannel("ayylmao", "/game/sound/gameover.wav");
-		ayy.addChannel("ayylmao2", "/game/sound/fight2.wav");
-
-		ayy.getChannel("ayylmao2").play();
+		
+		ayy.getChannel("ayylmao3").play();
 		while(true){
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(100000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
