@@ -32,6 +32,8 @@ import game.math.Vector3f;
 import game.resource.ResourceManager;
 import game.screen.GameCanvas;
 import game.screen.Screen;
+import game.sound.AudioChannel;
+import game.sound.AudioMixer;
 import game.tile.Ground;
 import game.tile.Tile;
 import game.tile.Wall;
@@ -41,6 +43,7 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 	private int worldWidth;
 	private ArrayList<Level> levels = new ArrayList<Level>();
 	private HashMap<String,Level> levelMap = new HashMap<String,Level>();
+	private HashMap<String,JSONObject> entityProtoMap = new HashMap<String,JSONObject>();
 	private Level currentLevel;
 	private Screen gameScreen;
 	private static Game game = null;
@@ -52,12 +55,14 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 	private Panel currentGUI = new MainGUI();
 	private Timer upTimer;
 	private long ctime,dtime,ltime,timeAcc,frames;
+
+	
 	public Game(String configFile){
 		Game.game = this;
 		init(configFile);
 		run();
-		
 	}
+
 	public static void init(String configFile){
 		byte[] buffer = ResourceManager.getFileBuffer(configFile);
 		JSONObject cfg = new JSONObject(new String(buffer));
@@ -70,7 +75,8 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 		game.gameScreen.getCanvas().setRequestFocusEnabled(true);
 		
 		JSONObject playerMeta = gameMeta.getJSONObject("player");
-		game.player = new Player(new Vector3f(64,32,1),playerMeta);
+		JSONArray a = playerMeta.getJSONArray("position");
+		game.player = new Player(new Vector3f(a.getInt(0)*32,a.getInt(1)*32,a.getInt(2)),playerMeta);
 		
 		JSONArray levelRefs = gameMeta.getJSONArray("levels");
 		for(Object i : levelRefs){
@@ -84,128 +90,18 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 		}
 		game.currentLevel = game.levels.get(0);
 		game.currentLevel.addEntity(game.player);
-		Fighter testFigher = new Hostile(new Vector3f(0,0,0),playerMeta);
-		game.currentLevel.addEntity(testFigher);
-		testFigher.setPosition(new Vector3f(64,256,1));
-		
+		Fighter f = new Hostile(new Vector3f(256,256,1),playerMeta);
+		game.currentLevel.addEntity(f);
 		game.gameScreen.addFocusListener(game);
-	//	game.currentLevel.startBattle(game.player, testFigher);
-	//	testFigher.attack(game.playerTest);
+
 	}
 	public static Player getPlayer(){
 		return game.player;
 	}
 	public static void run(){
-		//JSONObject obj = new JSONObject(ResourceManager.getFileContent("res/levels/example.json"));
-		//Level testLoadFromJson = new Level(obj);
-		//game.currentLevel = testLoadFromJson;
-		game.ltime = System.currentTimeMillis();
-		//BufferedImage img = ResourceManager.getImage("res/gui/buttonTest.png");
-		//game.testButton = new Button("This is a test",new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,0,2),new Vector3f(0,0,0),new Vector3f(128,32,0)),true);
-		//game.testButton.setPosition(new Vector3f(640,0,0));
-		//game.testButton.setCenter(new Vector3f(1,0,0));
-		//game.testButton2 = new Button("Another one!",new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,0,2),new Vector3f(0,0,0),new Vector3f(128,32,0)));
-		//game.testButton2.setPosition(new Vector3f(640,32,0));
-		//game.testButton2.setCenter(new Vector3f(1,0,0));
-		//game.testButton2.hide();
-		//game.testPanel = new Panel(new Vector3f(0,0,0),new Vector3f(640,480,0),ResourceManager.getImage("res/gui/guibg_1.png"));
-		//game.testHover = new HoverArea(new Vector3f(640,0,0),new Sprite(img,new Vector3f(0,0,0),new Vector3f(0,1,2),new Vector3f(0,0,0),new Vector3f(32,32,0)));
-		//game.testHover.setCenter(new Vector3f(1,0,0));
-		
-		//game.testPanel.add(game.testButton2);
-		//game.testPanel.add(game.testButton);
-		//game.testPanel.add(game.testHover);
-		//Game.getCanvas().addMouseListener(game.testPanel);
-		//Game.getCanvas().addMouseMotionListener(game.testPanel);
-		
-		/*game.testButton.addListener(new ActionListener(){
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("WOW : " + arg0.getActionCommand());
-				if(arg0.getActionCommand() == "DOWN"){
-					game.testButton2.show();
-				}else{
-					game.testButton2.hide();
-				}
-			}
-			
-		});*/
-		/*game.testHover.addListener(new MouseListener() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				if(!game.testButton2.mouseHover()){
-					game.testButton2.hide();	
-				}
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				game.testButton2.show();
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});*/
-		/*
-		game.testButton2.addListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("WOW, dayum son!\nWhat have you done1!1!");
-				
-			}
-		});
-		*/
-		/*
-		game.testButton2.addListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				game.testButton2.hide();
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				game.testButton2.show();
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		*/
-		//game.currentLevel.addEntity(game.playerTest);
-		//game.playerTest.enter(game.currentLevel);
-	
+		game.ltime = System.currentTimeMillis();
+		
 		game.upTimer = new Timer(10,game);
 		game.upTimer.start();
 
@@ -293,15 +189,18 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 		ltime = ctime;
 		timeAcc += dtime;
 		frames++;
+		
 		game.currentLevel.update(dtime);
 		Game.getCanvas().addToDirectQueue(game.currentGUI);
 		game.currentLevel.render();
 		//Use interface, or keep ugly code?
 		//That is the question!
-		if(game.currentGUI instanceof MainGUI){
-			((MainGUI)(game.currentGUI)).setHpValue(game.currentLevel.getPlayer().getHealthP());	
-		}else if(game.currentGUI instanceof FightGUI){
-			((FightGUI)(game.currentGUI)).setHpValue(game.currentLevel.getPlayer().getHealthP());		
+		if(game.currentLevel.getPlayer() != null){
+			if(game.currentGUI instanceof MainGUI){
+				((MainGUI)(game.currentGUI)).setHpValue(game.currentLevel.getPlayer().getHealthP());	
+			}else if(game.currentGUI instanceof FightGUI){
+				((FightGUI)(game.currentGUI)).setHpValue(game.currentLevel.getPlayer().getHealthP());		
+			}
 		}
 		game.gameScreen.getCanvas().render();
 		if(timeAcc > 1000){

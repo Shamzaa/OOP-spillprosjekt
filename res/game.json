@@ -1,9 +1,12 @@
 {
   "levels": [
+    "res/levels/maze.json",
     "res/levels/example.json",
-    "res/levels/town1.json"
+    "res/levels/town1.json",
+    "res/levels/cave1.json"
   ],
   "player": {
+    "position": [3,3,1],
     "sprites": {
       "image":"res/maintest.png",
       "dim": [26,34],

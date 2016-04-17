@@ -5,6 +5,8 @@ import game.math.Shape;
 import game.math.Vector3f;
 import game.mechanics.Inventory;
 import game.resource.ResourceManager;
+import game.sound.AudioChannel;
+import game.sound.AudioManager;
 import game.tile.Tile;
 import game.tile.Wall;
 import game.world.Level;
@@ -26,7 +28,7 @@ public abstract class Entity {
 	protected Sprite currentSprite;
 	protected Shape shape;
 	private boolean dead = false;
-	
+	//private AudioChannel walkSound = AudioManager.getMixer().addChannel("entity_walk", "res/sound_fx/hit.wav");
 	/* vars needed:
 	 * sprite
 	 * size?
@@ -56,9 +58,7 @@ public abstract class Entity {
 		}
 		currentSprite = sprites[0];
 		shape = new Rectangle(position,currentSprite.getDimension().mul(new Vector3f(1,0.25f,0)));
-		
-		
-		
+
 		
 	}
 	public void setSpeed(float speed){
@@ -78,6 +78,7 @@ public abstract class Entity {
 			Game.getCurrentLevel().destroyEntity(this);
 		}
 		if(walkDir.getLength() > 0){
+			//walkSound.play();
 			face(walkDir);
 			Tile[] tilesAround = new Tile[9];
 			for(int i=0; i<9;i++){
@@ -93,9 +94,7 @@ public abstract class Entity {
 			Tile bGround = Game.getCurrentLevel().getTileAt(newPos.sub(new Vector3f(0,0,1)),true);
 			Entity[] closeBy = Game.getCurrentLevel().getAllEntities();
 			boolean entCol = false;
-			
-			
-			
+
 			boolean col = false;//bGround == null;
 			//shape.setPosition(newPos);
 			setShapePos(newPos);
@@ -127,7 +126,6 @@ public abstract class Entity {
 					}
 				}
 			}
-			
 		}else{
 			currentSprite.setCurrentFrame(0);
 		}

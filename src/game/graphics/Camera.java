@@ -13,7 +13,7 @@ public class Camera {
 	private double rotation = 0;
 	private Vector3f position = new Vector3f(0,0,0);
 	private Vector3f scale = new Vector3f(1f,1f,0);
-	private Vector3f center = new Vector3f(0.5f,0.5f,0f);
+	private Vector3f center = new Vector3f(0.5f,0.45f,0f);
 	private Vector3f screenSpace = new Vector3f(0,0,0);
 	private Entity target = null;
 	public Camera(final Vector3f position){

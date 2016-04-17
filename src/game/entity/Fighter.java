@@ -13,6 +13,8 @@ import game.math.Vector3f;
 import game.mechanics.Inventory;
 import game.mechanics.Wearable;
 import game.mechanics.Wearable.ItemSlot;
+import game.sound.AudioChannel;
+import game.sound.AudioManager;
 import game.world.BattleScene;
 
 public abstract class Fighter extends Entity{
@@ -35,6 +37,7 @@ public abstract class Fighter extends Entity{
 	private ColorRect healthBarBG;
 	private ColorRect healthBar;
 	private Wearable[] itemSlots = new Wearable[Wearable.slotCount];
+	private AudioChannel hitSound = AudioManager.getMixer().addChannel("hit", "res/sound_fx/hit.wav");
 	
 	public Fighter(Vector3f position, Sprite[] sprites) {
 		super(position, sprites);
@@ -73,6 +76,7 @@ public abstract class Fighter extends Entity{
 		healthPoints -= hpDraw;
 		Game.getCurrentLevel().addUpdatable(new DamageEffect(position.sub(new Vector3f(0,currentSprite.getDimension().getY(),0)),(int)Math.ceil((float)hpDraw/10.0f)));
 		Game.getCurrentLevel().addUpdatable(new Explosion(position.add(currentSprite.getDimension().sub(currentSprite.getOffset()))));
+		hitSound.play();
 		if(healthPoints <= 0){
 			kill();
 		}

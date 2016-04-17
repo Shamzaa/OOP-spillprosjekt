@@ -59,6 +59,7 @@ public class BattleScene extends Level{
 	
 	public void update(long dtime){
 		super.update(dtime);
+		//player.setPosition(playerPos);
 		if(!hostile.isAlive()){
 			moveEntityTo(player, this.prev);
 		}
@@ -91,11 +92,11 @@ public class BattleScene extends Level{
 		
 		player.setDirection(new Vector3f(0,0,0));
 		hostile.setDirection(new Vector3f(0,0,0));
+		//Set gui to FightingGUI
+		((Player) player).disableControls();
 		player.setPosition(playerPos);
 		hostile.setPosition(hostilePos);
 		
-		//Set gui to FightingGUI
-		((Player) player).disableControls();
 	}
 	@Override
 	public void startBattle(Fighter p, Fighter h){

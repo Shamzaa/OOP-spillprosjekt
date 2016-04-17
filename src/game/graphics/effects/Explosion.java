@@ -8,6 +8,8 @@ import game.entity.Entity;
 import game.graphics.Sprite;
 import game.math.Vector3f;
 import game.resource.ResourceManager;
+import game.sound.AudioChannel;
+import game.sound.AudioManager;
 import game.world.Level;
 
 public class Explosion implements Updatable{
@@ -18,6 +20,7 @@ public class Explosion implements Updatable{
 	private boolean dead = false;
 	private final long lifeTime = 2000;
 	private long accTime = 0;
+	private AudioChannel explosionSound = AudioManager.getMixer().addChannel("explosion", "res/sound_fx/explosion.wav");
 	private ArrayList<Particle> particleContainer = new ArrayList<Particle>(particles);
 	
 	public Explosion(Vector3f position) {
@@ -25,7 +28,6 @@ public class Explosion implements Updatable{
 	}
 	public Explosion(Vector3f position,Vector3f distrebution) {
 		this(position,distrebution,-100);
-	
 	}
 	public Explosion(Vector3f position,Vector3f distrebution,float initSpeed) {
 		
@@ -37,6 +39,7 @@ public class Explosion implements Updatable{
 		for(int x = 0; x < particles; x++){
 			particleContainer.add(new Particle(img, position,distrebution,initSpeed, particle1Pos, centerParticles, particleDimension));
 		}
+		explosionSound.play();
 	
 	}
 

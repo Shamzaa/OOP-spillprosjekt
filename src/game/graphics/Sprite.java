@@ -61,7 +61,6 @@ public class Sprite implements Drawable{
 	}
 	public void draw(Graphics2D g){
 		int xx = (int)(image.getWidth()/dimension.getX());
-		
 		Vector3f src = new Vector3f(((srcPos.getX() + cFrame%xx)*dimension.getX()),
 									((srcPos.getY() + (int)(cFrame/xx)*xx)*dimension.getY()),0);
 		

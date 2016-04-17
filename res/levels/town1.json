@@ -3,6 +3,7 @@
     "res/levels/town1.png",
     "res/levels/town1_3_6.png"
   ],
+  "ambient": "res/music/town3.wav",
   "imageMeta":  {
     "255": {
       "des": "invisible wall",

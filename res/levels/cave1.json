@@ -1,5 +1,8 @@
 {
-  "image":  "res/levels/cave1.png",
+  "images":  ["res/levels/cave1.png"],
+  "filter": "res/light.png",
+  "battleBG": "res/battleBG_cave.png",
+  "ambient": "res/music/cave_ambient.wav",
   "imageMeta":  {
     "110":  {
       "sprite":  {

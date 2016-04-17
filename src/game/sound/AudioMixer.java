@@ -21,7 +21,6 @@ public class AudioMixer {
 	
 	public AudioChannel addChannel(String name, String fileURL){
 		if(!clips.containsKey(name)){
-			System.out.println("Putting: " + name);
 			clips.put(name, new AudioChannel(fileURL, mixer));
 		}
 		return clips.get(name);
@@ -44,10 +43,10 @@ public class AudioMixer {
 		}
 	}
 	
-	public void play(String name, String fileURL){
+	public void play(String name){
 		// play fileURL on channel name, relevant for background music
 		if(clips.containsKey(name)){
-			clips.get(name).play(fileURL);
+			clips.get(name).play();
 		}else{
 			throw new IllegalArgumentException("Trying to play from a channel that doesn't exist, you rat?");
 		}

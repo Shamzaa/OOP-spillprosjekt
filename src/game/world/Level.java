@@ -20,11 +20,14 @@ import game.entity.Entity;
 import game.entity.Fighter;
 import game.entity.Player;
 import game.graphics.Camera;
+import game.graphics.OverlayMulFilter;
 import game.graphics.Sprite;
 import game.graphics.effects.Updatable;
 import game.math.Vector3f;
 import game.misc.ClassUtils;
 import game.resource.ResourceManager;
+import game.sound.AudioChannel;
+import game.sound.AudioManager;
 import game.tile.Tile;
 
 public class Level implements KeyListener, MouseListener{
@@ -38,12 +41,13 @@ public class Level implements KeyListener, MouseListener{
 	private ArrayList<KeyListener> keyListeners = new ArrayList<KeyListener>(5);
 	private ArrayList<Entity> graceRemoval = new ArrayList<Entity>();
 	private ArrayList<Entity> graceInsertion = new ArrayList<Entity>();
-	
+	private OverlayMulFilter overlayFilter; //= new OverlayMulFilter(ResourceManager.getImage("res/lightTest.png"));
+	private Sprite battleBG = new Sprite(ResourceManager.getImage("res/battleBG_1.png"), new Vector3f(0,0,0));
 	private ArrayList<Updatable> effects = new ArrayList<Updatable>();
 	//private ArrayList<Updatable> graceERemoval = new ArrayList<Updatable>();
 	private ArrayList<Updatable> graceEInsertion = new ArrayList<Updatable>();
-	
-	
+	private AudioChannel ambientMusic;
+	private String ambientName;
 	private Player player = null;
 	public Level(int width,int height){
 		init(width,height);
@@ -62,7 +66,6 @@ public class Level implements KeyListener, MouseListener{
 		this.init(width, height, MAX_Z);
 	}
 	private void initImage(BufferedImage img,HashMap<Integer,JSONObject> valueMap, int zoffset){
-		System.out.println(this + " " + img + " " + valueMap + " " + zoffset);
 		for(int i=0; i<width*height;i++){
 			int color = img.getRGB(i%width,Math.floorDiv(i,width));
 			for(int x=0; x<3; x++){
@@ -77,6 +80,16 @@ public class Level implements KeyListener, MouseListener{
 	public Level(JSONObject levelMeta) {
 		//String imageName = levelMeta.getString("image");
 		JSONArray images = levelMeta.getJSONArray("images");
+		if(levelMeta.has("filter")){
+			overlayFilter = new OverlayMulFilter(ResourceManager.getImage(levelMeta.getString("filter")));
+		}
+		if(levelMeta.has("battleBG")){
+			battleBG = new Sprite(ResourceManager.getImage(levelMeta.getString("battleBG")), new Vector3f(0,0,0));
+		}
+		if(levelMeta.has("ambient")){
+			ambientMusic = AudioManager.getMixer().addChannel(levelMeta.getString("ambient"), levelMeta.getString("ambient"));
+		//	ambientName = levelMeta.getString("ambient");
+		}
 		ArrayList<BufferedImage> imgLayers = new ArrayList<BufferedImage>(images.length());
 		for(Object s : images){
 			imgLayers.add(ResourceManager.getImage((String)s));
@@ -99,7 +112,7 @@ public class Level implements KeyListener, MouseListener{
 		
 	}
 	public void startBattle(Fighter p, Fighter o){
-		Game.setLevel(new BattleScene(new Sprite(ResourceManager.getImage("res/battleBG_1.png"), new Vector3f(0,0,0)), p, o, this));
+		Game.setLevel(new BattleScene(battleBG, p, o, this));
 	}
 	public Player getPlayer(){
 		return player;
@@ -124,12 +137,17 @@ public class Level implements KeyListener, MouseListener{
 		for(Updatable i : effects){
 			i.render();
 		}
+		if(overlayFilter != null){
+			Game.getCanvas().addToQueue(overlayFilter);
+		}
+		//Game.getCanvas().addToQueue(light);
 	}
 	public void update(long dtime){
 		ArrayList<Updatable> removeEList = new ArrayList<Updatable>(effects.size()/4);
 		
 		for(Entity i : graceInsertion){
 			this.entities.add(i);
+			i.enter(this);
 		}
 		graceInsertion.clear();
 
@@ -179,6 +197,7 @@ public class Level implements KeyListener, MouseListener{
 		}
 		for(Entity i : graceRemoval){
 			entities.remove(i);
+			i.leave(this);
 		}
 		graceRemoval.clear();
 		
@@ -284,6 +303,7 @@ public class Level implements KeyListener, MouseListener{
 	}
 	public void enter(){
 		Game.getCanvas().setCamera(camera);
+		AudioManager.playBG(ambientMusic);
 	}
 	public void leave(){
 		

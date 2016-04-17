@@ -30,14 +30,8 @@ public class AudioChannel {
 		
 	}
 	
-	public void play(String soundURL){
-		loadAudio(soundURL);
-		clip.start();
-	}
 	public void play(boolean loop){
-		if(clip.isRunning()){
-			restart();
-		}
+		stop();
 		clip.start();
 		if(loop){
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -52,8 +46,7 @@ public class AudioChannel {
 	
 	public void stop(){
 		clip.stop();
-		clip.close();
-		loadAudio(fileURL);
+		clip.setFramePosition(0);
 	}
 	
 	public void pause(){
@@ -61,10 +54,9 @@ public class AudioChannel {
 	}
 	
 	public void restart(){
-		clip.stop();
-		clip.close();
-		loadAudio(fileURL);
-		clip.start();
+		stop();
+		play();
+		//clip.start();
 	}
 	
 	public void loadAudio(String fileURL){

@@ -1,0 +1,13 @@
+{
+    "hostile_1": {
+        "sprites": {
+          "image":"res/maintest.png",
+          "dim": [26,34],
+          "start": [0,0,3]
+        },
+        "baseDamage": 400,
+        "baseMaxHealth": 2000,
+        "class": "game.entity.Hostile"
+    }
+
+}

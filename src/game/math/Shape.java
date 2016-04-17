@@ -5,7 +5,7 @@ import game.graphics.Drawable;
 public abstract class Shape implements Drawable{
 	private Vector3f position;
 	private float depth = 0;
-	protected final boolean DO_DRAW = true;
+	protected final boolean DO_DRAW = false;
 	protected Vector3f dimension;
 	
 	public Shape(Vector3f position){

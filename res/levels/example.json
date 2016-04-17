@@ -1,5 +1,6 @@
 {
   "images":  ["res/levels/example.png","res/levels/example_3_6.png"],
+  "ambient": "res/music/town3.wav",
   "imageMeta":  {
     
     "110": {
