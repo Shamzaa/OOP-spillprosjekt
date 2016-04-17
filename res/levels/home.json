@@ -1,0 +1,38 @@
+{
+  "images":  ["res/levels/start.png"],
+  "ambient": "res/music/town1.wav",
+  "imageMeta":  {
+    "50":  {
+	  "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [1,1,1]
+       },
+       "class":  "game.tile.Ground"
+	},
+	"200":  {
+	  "des": "invisible wall",
+      "class": "game.tile.Wall"
+	},
+	"150":  {
+	  "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [0,1,1]
+       },
+      "class": "game.tile.Wall"
+	},
+	"80":  {
+	  "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [4,1,1]
+      },
+      "class": "game.tile.Warp"
+	},
+	"90":  {
+	  "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [4,1,1]
+      },
+      "level": "start.json",
+      "class": "game.tile.Warp"
+  }
+}
