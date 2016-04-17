@@ -25,6 +25,8 @@
         "image": "res/tile_atlas.png",
         "index": [4,1,1]
       },
+      "dest": [42,88,1],
+      "level": "town_intro.json",
       "class": "game.tile.Warp"
 	},
 	"90":  {
@@ -32,7 +34,9 @@
         "image": "res/tile_atlas.png",
         "index": [4,1,1]
       },
+      "dest": [8,2,1],
       "level": "start.json",
       "class": "game.tile.Warp"
+	}
   }
 }
