@@ -79,8 +79,8 @@
         "image": "res/tile_atlas.png",
         "index": [1,6,1]
       },
-      "dest": [0,0,1],
-      "level": "forest1.json",
+      "dest": [12,23,1],
+      "level": "forest.json",
       "class": "game.tile.Warp"
 	},
 	"150":  {

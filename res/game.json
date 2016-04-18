@@ -7,7 +7,8 @@
     "res/levels/maze.json",
     "res/levels/example.json",
     "res/levels/town1.json",
-    "res/levels/cave1.json"
+    "res/levels/cave1.json",
+	"res/levels/forest.json"
     
     
   ],
