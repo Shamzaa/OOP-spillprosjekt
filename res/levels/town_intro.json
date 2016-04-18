@@ -4,8 +4,15 @@
   "imageMeta":  {
     "50":  {
 	  "sprite":  {
-        "image":  "res/tile_atlas.png",
-        "index":  [0,0,1]
+        "image":  "res/ground_outdoor.png",
+        "index":  [1,1,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"51":  {
+	  "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [0,3,1]
       },
       "class":  "game.tile.Ground"
 	},
@@ -75,6 +82,97 @@
       "dest": [0,0,1],
       "level": "forest1.json",
       "class": "game.tile.Warp"
+	},
+	"150":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [3,1,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"180":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [2,1,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"181":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [4,1,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"182":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [2,0,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"183":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [2,2,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"184":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [4,2,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"185":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [3,2,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"186":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [3,0,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"187":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [1,1,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"188":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [4,0,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"189":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [1,0,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"190":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [0,0,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"191":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [0,1,1]
+      },
+      "class":  "game.tile.Wall"
 	}
   }
 }
