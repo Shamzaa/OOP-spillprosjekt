@@ -1,62 +1,73 @@
 {
-  "images":  ["res/levels/start.png"],
+  "images":  ["res/levels/town_intro.png"],
   "ambient": "res/music/town3.wav",
   "imageMeta":  {
     "50":  {
 	  "sprite":  {
         "image":  "res/tile_atlas.png",
         "index":  [0,0,1]
-       },
-       "class":  "game.tile.Ground"
+      },
+      "class":  "game.tile.Ground"
 	},
 	
 	"255":  {
 	  "sprite":  {
         "image":  "res/tile_atlas.png",
         "index":  [3,3,1]
-       },
-       "class":  "game.tile.Ground"
+      },
+      "class":  "game.tile.Ground"
 	},
 	"100":  {
 	  "sprite":  {
         "image":  "res/tile_atlas.png",
         "index":  [0,1,1]
-       },
-       "class":  "game.tile.Wall"
+      },
+      "class":  "game.tile.Wall"
 	},
 	"110":  {
 	  "sprite":  {
         "image":  "res/tile_atlas.png",
         "index":  [1,0,1]
-       },
-       "class":  "game.tile.Wall"
+      },
+      "class":  "game.tile.Wall"
+	},
+    "101":  {
+      "des":  "stone",
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [3,0,1]
+      },
+      "class":  "game.tile.Wall"
 	},
 	"80":  {
+      "des":  "warp to home",
 	  "sprite": {
         "image": "res/tile_atlas.png",
-        "index": [0,3,1]
+        "index": [1,6,1]
       },
-      "dest": [10,18,1],
-      "level": "start.json",
+      "dest": [18,10,1],
+      "level": "home.json",
       "class": "game.tile.Warp"
 	},
 	"70":  {
+      "des":  "warp to inn",
 	  "sprite": {
         "image": "res/tile_atlas.png",
-        "index": [0,3,1]
+        "index": [1,6,1]
       },
-      "dest": [10,18,1],
-      "level": "inn.json",
+      "dest": [10,8,1],
+      "level": "town_intro_inn.json",
       "class": "game.tile.Warp"
 	},
 	"60":  {
+      "des":  "warp to forest1",
 	  "sprite": {
         "image": "res/tile_atlas.png",
-        "index": [2,3,1]
+        "index": [1,6,1]
       },
-      "dest": [10,18,1],
+      "dest": [0,0,1],
       "level": "forest1.json",
       "class": "game.tile.Warp"
-	},
+	}
   }
 }

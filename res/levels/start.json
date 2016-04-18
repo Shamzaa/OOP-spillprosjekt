@@ -29,6 +29,38 @@
       "dest": [10,18,1],
       "level": "home.json",
       "class": "game.tile.Warp"
+	},
+    "101":  {
+      "des:"  "bed top",
+	  "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [7,1,1]
+       },
+      "class": "game.tile.Wall"
+	},
+    "100":  {
+      "des":  "bed bottom",
+	  "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [7,2,1]
+       },
+      "class": "game.tile.Wall"
+	},
+    "102":  {
+      "des:"  "table bottom",
+	  "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [6,2,1]
+       },
+      "class": "game.tile.Wall"
+	},
+    "103":  {
+      "des:"  "table top",
+	  "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [6,1,1]
+       },
+      "class": "game.tile.Wall"
 	}
   }
 }

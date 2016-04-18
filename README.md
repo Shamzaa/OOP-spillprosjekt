@@ -57,6 +57,7 @@ Iterativ:
 ### Resources
  - [Undertale](http://store.steampowered.com/app/391540/), Toby Fox (musikk)
  - [Sprites](http://opengameart.org/content/antifareas-rpg-sprite-set-1-enlarged-w-transparent-background-fixed)
+ - [Sprites](http://rpgmaker.net/forums/topics/9810/)
  - [Teksturer](https://facepunch.com/showthread.php?t=1213795)
 
 
