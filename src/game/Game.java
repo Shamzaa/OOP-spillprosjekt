@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,6 +26,7 @@ import game.graphics.Sprite;
 import game.graphics.gui.Button;
 import game.graphics.gui.FightGUI;
 import game.graphics.gui.MainGUI;
+import game.graphics.gui.MainMenu;
 import game.graphics.gui.HoverArea;
 import game.graphics.gui.Panel;
 import game.math.Vector3f;
@@ -55,21 +56,21 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 	private Panel currentGUI = new MainGUI();
 	private Timer upTimer;
 	private long ctime,dtime,ltime,timeAcc,frames;
-
 	
-	public Game(String configFile){
+	
+	public Game(String configFile, Screen screen){
 		Game.game = this;
-		init(configFile);
+		init(configFile,screen);
 		run();
 	}
 
-	public static void init(String configFile){
+	public static void init(String configFile, Screen screen){
 		byte[] buffer = ResourceManager.getFileBuffer(configFile);
 		JSONObject cfg = new JSONObject(new String(buffer));
-		init(cfg);
+		init(cfg,screen);
 	}
-	public static void init(JSONObject gameMeta){
-		game.gameScreen = new Screen();
+	public static void init(JSONObject gameMeta, Screen screen){
+		game.gameScreen = screen;
 		game.gameScreen.addKeyListener(game);
 		game.gameScreen.addMouseListener(game);
 		game.gameScreen.getCanvas().setRequestFocusEnabled(true);
@@ -88,20 +89,44 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 			System.out.println(nameRef[nameRef.length-1]);
 			game.levelMap.put(nameRef[nameRef.length-1],lvl);
 		}
+		game.gameScreen.addFocusListener(game);
+		setCurrentGUI(new MainMenu());
+	}
+	public static void startGame(){
 		game.currentLevel = game.levels.get(0);
 		game.currentLevel.addEntity(game.player);
-		Fighter f = new Hostile(new Vector3f(256,256,1),playerMeta);
-		game.currentLevel.addEntity(f);
-		game.gameScreen.addFocusListener(game);
-
+		setCurrentGUI(new MainGUI());
+		//game.currentGUI = new MainGUI();
+		//Fighter f = new Hostile(new Vector3f(256,256,1),playerMeta);
+		
+	}
+	public static void endGame(){
+		//Show credits
+	}
+	public static void cleanUp(){
+		game.gameScreen.removeKeyListener(game);
+		game.gameScreen.removeMouseListener(game);
+		game.gameScreen.removeFocusListener(game);
+		//game.gameScreen.remove(game.upTimer);
+		game.upTimer.stop();
+		game.upTimer.setRepeats(false);
+		game.upTimer.removeActionListener(game);
+	}
+	public static void restartGame(){
+		cleanUp();
+		new Game("res/game.json",game.gameScreen);
 	}
 	public static Player getPlayer(){
 		return game.player;
 	}
+	public static void exitGame(){
+		game.gameScreen.dispatchEvent(new WindowEvent(game.gameScreen, WindowEvent.WINDOW_CLOSING));
+	}
 	public static void run(){
-
 		game.ltime = System.currentTimeMillis();
-		
+		if(game.upTimer != null){
+			game.upTimer.stop();
+		}
 		game.upTimer = new Timer(10,game);
 		game.upTimer.start();
 
@@ -137,7 +162,7 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 	
 	public static void main(String[] args){
 		System.setProperty("sun.java2d.opengl", "true");
-		new Game("res/game.json");
+		new Game("res/game.json",new Screen());
 		
 	}
 	@Override
@@ -189,19 +214,21 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 		ltime = ctime;
 		timeAcc += dtime;
 		frames++;
-		
-		game.currentLevel.update(dtime);
 		Game.getCanvas().addToDirectQueue(game.currentGUI);
-		game.currentLevel.render();
-		//Use interface, or keep ugly code?
-		//That is the question!
-		if(game.currentLevel.getPlayer() != null){
-			if(game.currentGUI instanceof MainGUI){
-				((MainGUI)(game.currentGUI)).setHpValue(game.currentLevel.getPlayer().getHealthP());	
-			}else if(game.currentGUI instanceof FightGUI){
-				((FightGUI)(game.currentGUI)).setHpValue(game.currentLevel.getPlayer().getHealthP());		
+		if(game.currentLevel != null){
+			game.currentLevel.update(dtime);
+			game.currentLevel.render();
+			if(game.currentLevel.getPlayer() != null){
+				if(game.currentGUI instanceof MainGUI){
+					((MainGUI)(game.currentGUI)).setHpValue(game.currentLevel.getPlayer().getHealthP());	
+				}else if(game.currentGUI instanceof FightGUI){
+					((FightGUI)(game.currentGUI)).setHpValue(game.currentLevel.getPlayer().getHealthP());		
+				}
 			}
 		}
+		//Use interface, or keep ugly code?
+		//That is the question!
+		
 		game.gameScreen.getCanvas().render();
 		if(timeAcc > 1000){
 			System.out.println("FPS: " + frames);

@@ -58,13 +58,21 @@ public class AudioChannel {
 		play();
 		//clip.start();
 	}
-	
+	public void setRVolume(float db){
+		FloatControl gainControl = 
+			    (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+
+		gainControl.setValue(db); 
+	}
 	public void loadAudio(String fileURL){
 		this.fileURL = fileURL;
 		clip.close();
 		try{
 			InputStream byteStream = new ByteArrayInputStream(ResourceManager.getFileBuffer(fileURL));
+
+
 			clip.open(AudioSystem.getAudioInputStream(byteStream));
+			setRVolume(-20.0f);
 		}catch(LineUnavailableException lue){
 			lue.printStackTrace();
 		}catch(UnsupportedAudioFileException uafe){

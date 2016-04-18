@@ -108,8 +108,6 @@ public class Level implements KeyListener, MouseListener{
 			initImage(i, valueMap, zoffset);
 			zoffset += 3;
 		}
-		
-		
 	}
 	public void startBattle(Fighter p, Fighter o){
 		Game.setLevel(new BattleScene(battleBG, p, o, this));

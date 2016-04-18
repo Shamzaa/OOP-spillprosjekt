@@ -1,0 +1,160 @@
+{
+  "images":  [
+    "res/levels/tl_cave_base.png",
+    "res/levels/tl_cave.png"
+  ],
+  "filter": "res/light.png",
+  "battleBG": "res/battleBG_cave.png",
+  "ambient": "res/music/cave_ambient.wav",
+  "imageMeta":  {
+    "255": {
+      "des": "invisible wall",
+      "class": game.tile.Wall
+    },
+    "90": {
+      "des": "elevator down",
+      "direction": -3,
+      "class": "game.tile.Elevator"
+    
+    },
+    "95": {
+      "des": "elevator up",
+      "direction": 3,
+      "class": "game.tile.Elevator"
+    },
+    "60": {
+      "des": "stone",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [3,0,1]
+       },
+       "class": "game.tile.Wall",
+       "height": 0.25
+    },
+    "50": {
+      "des": "cave ground texture",
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [2,1,1]
+      },
+      "class": "game.tile.Ground"
+    },
+    "51": {
+      "des": "cave ground texture basement",
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [3,3,1]
+      },
+      "class": "game.tile.Ground"
+    },
+    "52": {
+      "des": "brigde floor",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [8,0,1]
+      },
+      "class": "game.tile.Ground"
+    },
+    "55": {
+      "des": "stairs",
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [4,0,1]
+      },
+      "class": "game.tile.Ground"
+    },
+    "100": {
+      "des": "cave wall full",
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [2,2,1]
+      },
+      "class": "game.tile.Wall"
+    },
+    "101": {
+      "des": "cave wall full v2",
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [3,1,1]
+      },
+      "class": "game.tile.Wall"
+    },
+    "102":{
+      "des": "bridge start full wall",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [8,1,1]
+      },
+      "class": "game.tile.Wall",
+    },
+    "105":{
+      "des": "cave wall half",
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [2,2,1]
+      },
+      "class": "game.tile.Wall",
+      "height": 0.5
+    },
+    "106":{
+      "des": "cave wall half",
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [3,1,1]
+      },
+      "class": "game.tile.Wall",
+      "height": 0.5
+    },
+    "107":{
+      "des": "bridge start wall half",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [8,1,1]
+      },
+      "class": "game.tile.Wall",
+      "height": 0.1
+    },
+    "108":{
+      "des": "bridge mid wall half",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [9,1,1]
+      },
+      "class": "game.tile.Wall",
+      "height": 0.1
+    },
+    "109":{
+      "des": "bridge end wall half",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [10,1,1]
+      },
+      "class": "game.tile.Wall",
+      "height": 0.1
+    },
+    "110":{
+      "des": "pillar base",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [7,2,1]
+      },
+      "class": "game.tile.Wall"
+    },
+    "111":{
+      "des": "pillar mid",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [7,1,1]
+      },
+      "class": "game.tile.Wall"
+    },
+    "112":{
+      "des": "pillar top",
+      "sprite": {
+        "image": "res/misc_outdoor.png",
+        "index": [7,0,1]
+      },
+      "class": "game.tile.Wall"
+    }
+  }
+}

@@ -12,7 +12,8 @@ public class AudioMixer {
 	protected HashMap<String, AudioChannel> clips = new HashMap<String, AudioChannel>();
 	public AudioMixer(){
 		Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
-		mixer = AudioSystem.getMixer(mixInfos[1]);
+		mixer = AudioSystem.getMixer(mixInfos[0]);
+		
 		for(Mixer.Info i : mixInfos){
 			System.out.println(i.getName());
 		}
