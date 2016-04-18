@@ -173,6 +173,30 @@
         "index":  [0,1,1]
       },
       "class":  "game.tile.Wall"
+	},
+	"199":  {
+	  "des":  "shadows",
+	  "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [2,4,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"200":  {
+	  "des":  "shadows",
+	  "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [2,6,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"201":  {
+	  "des":  "shadows",
+	  "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [2,5,1]
+      },
+      "class":  "game.tile.Wall"
 	}
   }
 }
