@@ -1,5 +1,5 @@
 {
-  "images":  ["res/levels/inn.png"],
+  "images":  ["res/levels/town_intro_inn.png"],
   "ambient": "res/music/town2.wav",
   "imageMeta":  {
     "50":  {
@@ -10,7 +10,7 @@
       "class":  "game.tile.Ground"
 	},
     "255":  {
-      "des:"  "invincible wall",
+      "des":  "invincible wall",
       "class":  "game.tile.Wall"
 	},
     "230":  {
@@ -30,7 +30,7 @@
       "class": "game.tile.Warp"
 	},
     "100":  {
-      "des:":  "table bottom",
+      "des":  "table bottom",
       "sprite":  {
         "image":  "res/furniture.png",
         "index":  [6,2,1]
@@ -38,12 +38,13 @@
       "class":  "game.tile.Wall"
 	},
     "101":  {
-      "des:"  "table top",
+      "des":  "table top",
       "sprite":  {
         "image":  "res/furniture.png",
         "index":  [6,1,1]
       },
-      "class":  "game.tile.Wall"
+      "class":  "game.tile.Wall",
+      "height": 0.5
 	},
   }
 }

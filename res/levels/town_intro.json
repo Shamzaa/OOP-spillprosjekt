@@ -45,7 +45,7 @@
         "image": "res/tile_atlas.png",
         "index": [1,6,1]
       },
-      "dest": [18,10,1],
+      "dest": [10,5,1],
       "level": "home.json",
       "class": "game.tile.Warp"
 	},

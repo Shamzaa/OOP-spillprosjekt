@@ -1,9 +1,15 @@
 {
   "levels": [
+    "res/levels/start.json",
+    "res/levels/home.json",
+    "res/levels/town_intro.json",
+    "res/levels/town_intro_inn.json",
     "res/levels/maze.json",
     "res/levels/example.json",
     "res/levels/town1.json",
     "res/levels/cave1.json"
+    
+    
   ],
   "player": {
     "position": [3,3,1],
