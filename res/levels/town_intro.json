@@ -40,8 +40,96 @@
 	},
 	"110":  {
 	  "sprite":  {
+        "image":  "res/house_tile.png",
+        "index":  [6,11,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"111":  {
+	  "sprite":  {
+        "image":  "res/house_tile.png",
+        "index":  [7,11,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"112":  {
+	  "sprite":  {
+        "image":  "res/house_tile.png",
+        "index":  [5,11,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"113":  {
+	  "sprite":  {
+        "image":  "res/house_tile.png",
+        "index":  [5,10,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"114":  {
+	  "sprite":  {
+        "image":  "res/house_tile.png",
+        "index":  [5,9,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"115":  {
+	  "sprite":  {
+        "image":  "res/house_tile.png",
+        "index":  [6,9,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"116":  {
+	  "sprite":  {
+        "image":  "res/house_tile.png",
+        "index":  [7,9,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"117":  {
+	  "sprite":  {
+        "image":  "res/house_tile.png",
+        "index":  [7,10,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"118":  {
+	  "sprite":  {
+        "image":  "res/house_tile.png",
+        "index":  [6,10,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"130":  {
+	  "des": "door bottom left",
+	  "sprite":  {
         "image":  "res/tile_atlas.png",
-        "index":  [1,0,1]
+        "index":  [0,5,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"131":  {
+	  "des": "door bottom left",
+	  "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [0,4,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"132":  {
+	  "des": "door bottom left",
+	  "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [1,5,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"133":  {
+	  "des": "door bottom left",
+	  "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [1,4,1]
       },
       "class":  "game.tile.Wall"
 	},
