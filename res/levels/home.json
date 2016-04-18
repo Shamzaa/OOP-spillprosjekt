@@ -108,15 +108,72 @@
         "image":  "res/furniture.png",
         "index":  [8,1,1]
        },
-      "class": "game.tile.Wall"
+      "class": "game.tile.Wall",
+      "depthOffset": 1
 	},
     "110":  {
-	  "des": "window over wall left part",
+	  "des": "window over wall right part",
       "sprite":  {
         "image":  "res/furniture.png",
         "index":  [9,1,1]
        },
+      "class": "game.tile.Wall",
+      "depthOffset": 1
+	},
+    "111":  {
+	  "des": "table bottom",
+      "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [6,2,1]
+       },
       "class": "game.tile.Wall"
+	},
+    "112":  {
+	  "des": "table top",
+      "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [6,1,1]
+       },
+      "class": "game.tile.Wall",
+      "height": 0.75
+	},
+    "113":  {
+	  "des": "top left shit",
+      "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [4,3,1]
+       },
+      "class": "game.tile.Wall",
+      "height": 0.75,
+      "depthOffset": 1
+	},
+    "114":  {
+	  "des": "top right shit",
+      "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [5,3,1]
+       },
+      "class": "game.tile.Wall",
+      "height": 0.75,
+      "depthOffset": 1
+	},
+    "115":  {
+	  "des": "bottom left shit",
+      "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [4,4,1]
+       },
+      "class": "game.tile.Wall",
+      "depthOffset": 1
+	},
+    "116":  {
+	  "des": "bottom right shit",
+      "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [5,4,1]
+       },
+      "class": "game.tile.Wall",
+      "depthOffset": 1
 	}
   }
 }

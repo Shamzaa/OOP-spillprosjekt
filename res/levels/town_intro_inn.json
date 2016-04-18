@@ -44,7 +44,15 @@
         "index":  [6,1,1]
       },
       "class":  "game.tile.Wall",
-      "height": 0.5
+      "height": 0.75
+	},
+    "111":  {
+      "des":  "bar middle",
+      "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [6,3,1]
+      },
+      "class":  "game.tile.Wall"
 	},
     "102":  {
       "des":  "window right",
@@ -53,6 +61,7 @@
         "index":  [8,1,1]
       },
       "class":  "game.tile.Wall",
+      "depthOffset": 1
 	},
     "103":  {
       "des":  "window right",
@@ -61,6 +70,7 @@
         "index":  [9,1,1]
       },
       "class":  "game.tile.Wall",
+      "depthOffset": 1
 	}
   }
 }
