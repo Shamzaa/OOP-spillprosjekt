@@ -28,7 +28,17 @@
         "index": [3,3,1]
       },
       "class":  "game.tile.Ground"
-    }
+    },
+    "1":  {
+      "des":  "warp to boss",
+	  "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [1,6,1]
+      },
+      "dest": [1,13,1],
+      "level": "boss_room.json",
+      "class": "game.tile.Warp"
+	},
   },
   "entities":  [
     {

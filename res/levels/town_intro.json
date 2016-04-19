@@ -171,6 +171,16 @@
       "level": "forest.json",
       "class": "game.tile.Warp"
 	},
+    "61":  {
+      "des":  "warp to cave entrance",
+	  "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [1,6,1]
+      },
+      "dest": [2,16,2],
+      "level": "outside_cave.json",
+      "class": "game.tile.Warp"
+	},
 	"150":  {
 	  "sprite":  {
         "image":  "res/water_outdoor.png",
