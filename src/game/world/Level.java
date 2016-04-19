@@ -110,6 +110,7 @@ public class Level implements KeyListener, MouseListener{
 		}
 		//Init entities
 		if(levelMeta.has("entities")){
+			System.out.println("Has entities");
 			JSONArray ents = levelMeta.getJSONArray("entities");
 			for(Object i : ents){
 				JSONObject j = (JSONObject) i;
@@ -118,6 +119,7 @@ public class Level implements KeyListener, MouseListener{
 					new Vector3f((float)pos.getDouble(0),(float)pos.getDouble(1),(float)pos.getDouble(2))
 				,j});
 				addEntity(ent);
+				System.out.println(ent);
 			}
 		}
 	}
