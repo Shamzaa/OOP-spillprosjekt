@@ -53,6 +53,7 @@ public class Player extends Fighter implements KeyListener{
 
 	@Override
 	public void update(long dtime){
+		//healthPoints = 0;
 		if(controlsEnabled){
 			walkDir = new Vector3f(
 					(keyMap.get(KeyEvent.VK_D) ? 1 : 0)+
@@ -62,6 +63,7 @@ public class Player extends Fighter implements KeyListener{
 		}else{
 		//	walkDir = new Vector3f(0,0,0);
 		}
+		//kill();
 		super.update(dtime);
 	}
 	@Override
@@ -87,6 +89,7 @@ public class Player extends Fighter implements KeyListener{
 	@Override
 	public void destroy() {
 		//Game over
+		Game.endGame();
 	}
 
 	@Override

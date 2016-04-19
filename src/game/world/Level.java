@@ -115,7 +115,7 @@ public class Level implements KeyListener, MouseListener{
 				JSONObject j = (JSONObject) i;
 				JSONArray pos = j.getJSONArray("position");
 				ClassUtils.newInstance(j.getString("class"), new Object[]{
-					new Vector3f(pos.getInt(0),pos.getInt(1),pos.getInt(2))
+					new Vector3f((float)pos.getDouble(0),(float)pos.getDouble(1),(float)pos.getDouble(2))
 				,j});
 				
 				
@@ -285,8 +285,8 @@ public class Level implements KeyListener, MouseListener{
 	}
 	
 	public void destroyEntity(Entity ent){
-		//removeEntity(ent);
-		entities.remove(ent);
+		removeEntity(ent);
+		//entities.remove(ent);
 		ent.destroy();
 	}
 	public void addEntity(Entity ent){

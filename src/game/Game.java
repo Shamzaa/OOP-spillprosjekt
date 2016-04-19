@@ -24,6 +24,7 @@ import game.entity.Player;
 import game.graphics.Camera;
 import game.graphics.Sprite;
 import game.graphics.gui.Button;
+import game.graphics.gui.EndGameMenu;
 import game.graphics.gui.FightGUI;
 import game.graphics.gui.MainGUI;
 import game.graphics.gui.MainMenu;
@@ -56,7 +57,7 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 	private Panel currentGUI = new MainGUI();
 	private Timer upTimer;
 	private long ctime,dtime,ltime,timeAcc,frames;
-	
+	private boolean doendgame = false;
 	
 	public Game(String configFile, Screen screen){
 		Game.game = this;
@@ -102,8 +103,11 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 	}
 	public static void endGame(){
 		//Show credits
+		//cleanUp();
+		game.doendgame = true;
 	}
 	public static void cleanUp(){
+		game.doendgame = false;
 		game.gameScreen.removeKeyListener(game);
 		game.gameScreen.removeMouseListener(game);
 		game.gameScreen.removeFocusListener(game);
@@ -138,8 +142,12 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 		return game.levelMap.get(name);
 	}
 	public static void setLevel(Level lvl){
-		game.currentLevel.leave();
-		lvl.enter();
+		if(game.currentLevel != null){
+			game.currentLevel.leave();
+		}
+		if(lvl != null){
+			lvl.enter();
+		}
 		game.currentLevel = lvl;
 		
 	}
@@ -224,6 +232,11 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 					((FightGUI)(game.currentGUI)).setHpValue(game.currentLevel.getPlayer().getHealthP());		
 				}
 			}
+		}
+		if(game.doendgame){
+			setLevel(null);
+			setCurrentGUI(new EndGameMenu());
+		
 		}
 		//Use interface, or keep ugly code?
 		//That is the question!

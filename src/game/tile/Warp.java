@@ -28,7 +28,7 @@ public class Warp extends Tile{
 		super(data);
 		targetLevel = data.getString("level");
 		JSONArray tPos = data.getJSONArray("dest");
-		targetPosition = new Vector3f(tPos.getInt(0),tPos.getInt(1),tPos.getInt(2));
+		targetPosition = new Vector3f((float)tPos.getDouble(0),(float)tPos.getDouble(1),(float)tPos.getDouble(2));
 		
 	}
 	@Override
