@@ -71,6 +71,24 @@
       },
       "class":  "game.tile.Wall",
       "depthOffset": 1
+	},
+    "200":  {
+      "des":  "window right",
+      "sprite":  {
+        "image":  "res/NPC_sprites.png",
+        "index":  [5,0,1]
+      },
+      "class":  "game.tile.Wall",
+      "height": 0
+	},
+    "201":  {
+      "des":  "window right",
+      "sprite":  {
+        "image":  "res/NPC_sprites.png",
+        "index":  [5,1,1]
+      },
+      "class":  "game.tile.Wall",
+      "height": 0.5
 	}
   }
 }

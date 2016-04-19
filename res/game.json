@@ -1,5 +1,6 @@
 {
   "levels": [
+    
     "res/levels/start.json",
     "res/levels/home.json",
     "res/levels/town_intro.json",
@@ -8,12 +9,13 @@
     "res/levels/example.json",
     "res/levels/town1.json",
     "res/levels/cave1.json",
-	"res/levels/forest.json"
+	"res/levels/forest.json",
+    "res/levels/boss_room.json"
     
     
   ],
   "player": {
-    "position": [3,3,1],
+    "position": [2,3,1],
     "sprites": {
       "image":"res/maintest.png",
       "dim": [26,34],

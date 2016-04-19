@@ -1,0 +1,108 @@
+{
+  "images":  ["res/levels/boss_room.png"],
+  "battleBG": "res/battleBG_cave.png",
+  "ambient": "res/music/battlefield_ambient.wav",
+  "fightMusic":  "res/music/fight_final.wav",
+  "imageMeta":  {
+    "50":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [1,4,1]
+       },
+      "class":  "game.tile.Wall",
+      "depthOffset": 1000
+	},
+    "60":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [4,4,1]
+       },
+      "class":  "game.tile.Ground"
+	},
+    "61":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [3,3,1]
+       },
+      "class":  "game.tile.Wall"
+	},
+    "62":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [3,5,1]
+       },
+      "class":  "game.tile.Wall"
+	},
+    "63":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [5,5,1]
+       },
+      "class":  "game.tile.Wall"
+	},
+    "64":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [5,3,1]
+       },
+      "class":  "game.tile.Wall"
+	},
+    "65":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [0,7,1]
+       },
+      "class":  "game.tile.Wall"
+	},
+    "66":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [1,7,1]
+       },
+      "class":  "game.tile.Wall"
+	},
+    "67":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [1,6,1]
+       },
+      "class":  "game.tile.Wall"
+	},
+    "68":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [0,6,1]
+       },
+      "class":  "game.tile.Wall"
+	},
+    "69":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [5,4,1]
+       },
+      "class":  "game.tile.Wall"
+	},
+    "70":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [3,4,1]
+       },
+      "class":  "game.tile.Wall"
+	},
+    "71":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [4,5,1]
+       },
+      "class":  "game.tile.Wall"
+	},
+    "72":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [4,3,1]
+       },
+      "class":  "game.tile.Wall"
+	},
+    
+  }
+}
