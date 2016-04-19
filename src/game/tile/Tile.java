@@ -15,7 +15,7 @@ import game.math.Vector3f;
 public abstract class Tile {
 	public static final int SIZE = 32;
 	private Sprite sprite;
-	private Vector3f position;
+	private Vector3f position; 
 	private Shape shape = new Rectangle(new Vector3f(0,0,0),new Vector3f(SIZE,SIZE,0));
 	private float depthOffset = 0;
 	protected boolean solid = false;

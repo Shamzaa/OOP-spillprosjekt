@@ -17,7 +17,7 @@ import javax.swing.Timer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
+import game.entity.Entity;
 import game.entity.Fighter;
 import game.entity.Hostile;
 import game.entity.Player;
@@ -74,7 +74,7 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 		game.gameScreen.addKeyListener(game);
 		game.gameScreen.addMouseListener(game);
 		game.gameScreen.getCanvas().setRequestFocusEnabled(true);
-		
+		Entity.loadMap(new JSONObject(ResourceManager.getFileContent("res/entities.json")));
 		JSONObject playerMeta = gameMeta.getJSONObject("player");
 		JSONArray a = playerMeta.getJSONArray("position");
 		game.player = new Player(new Vector3f(a.getInt(0)*32,a.getInt(1)*32,a.getInt(2)),playerMeta);
@@ -162,8 +162,7 @@ public class Game implements KeyListener, MouseListener, ActionListener, FocusLi
 	
 	public static void main(String[] args){
 		System.setProperty("sun.java2d.opengl", "true");
-		new Game("res/game.json",new Screen());
-		
+		new Game("res/game.json",new Screen());	
 	}
 	@Override
 	public void mouseClicked(MouseEvent arg0) {

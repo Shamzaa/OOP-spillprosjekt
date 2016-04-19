@@ -1,9 +1,9 @@
 {
   "levels": [
-    "res/levels/tr_cave.json"
+    "res/levels/outside_cave.json"
   ],
   "player": {
-    "position": [3,17,5],
+    "position": [3,17,2],
     "sprites": {
       "image":"res/maintest.png",
       "dim": [26,34],

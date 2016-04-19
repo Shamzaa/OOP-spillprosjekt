@@ -11,16 +11,19 @@ import game.graphics.ColorRect;
 import game.graphics.Sprite;
 import game.math.Vector3f;
 import game.resource.ResourceManager;
+import game.sound.AudioChannel;
+import game.sound.AudioManager;
 
 public class MainMenu extends Panel{
 	
 	private TextLabel gameTitle = new TextLabel("Best Game Ever!",new Color(0,0,0),32);
 	private Button playButton = new Button("Play",new Sprite(ResourceManager.getImage("res/gui/guibutton.png"),new Vector3f(0,0,0),new Vector3f(0,0,2),new Vector3f(0,0,0),new Vector3f(128,32,0) ));
 	private Button exitButton = new Button("Exit",new Sprite(ResourceManager.getImage("res/gui/guibutton.png"),new Vector3f(0,0,0),new Vector3f(0,0,2),new Vector3f(0,0,0),new Vector3f(128,32,0) ));
-	
+	private AudioChannel mainMenuMusic = AudioManager.getMixer().addChannel("res/music/town1.wav", "res/music/town1.wav");
 	public MainMenu() {
 		super(new Vector3f(0,0,0), new Vector3f(640,480,0), ResourceManager.getImage("res/gui/MainMenuTemp.png"));
-		
+		mainMenuMusic.setRVolume(0);
+		AudioManager.playBG(mainMenuMusic);
 		playButton.setPosition(new Vector3f(640,280,0).scale(0.5f).add(new Vector3f(0,64,0)).sub(playButton.getDimension().scale(0.5f)));
 		exitButton.setPosition(new Vector3f(640,280,0).scale(0.5f).add(new Vector3f(0,128,0)).sub(playButton.getDimension().scale(0.5f)));
 		

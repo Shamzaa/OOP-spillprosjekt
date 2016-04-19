@@ -11,6 +11,8 @@ import game.tile.Tile;
 import game.tile.Wall;
 import game.world.Level;
 
+import java.util.HashMap;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -27,6 +29,7 @@ public abstract class Entity {
 	protected Inventory inventory = new Inventory();
 	protected Sprite currentSprite;
 	protected Shape shape;
+	private static HashMap<String, JSONObject> metaMap = new HashMap<String, JSONObject>();
 	private boolean dead = false;
 	//private AudioChannel walkSound = AudioManager.getMixer().addChannel("entity_walk", "res/sound_fx/hit.wav");
 	/* vars needed:
@@ -44,6 +47,10 @@ public abstract class Entity {
 		shape = new Rectangle(position,currentSprite.getDimension().mul(new Vector3f(1,0.25f,0)));
 	}
 	public Entity(Vector3f pos,JSONObject data){
+		if(data.has("baseId")){
+			data = Entity.spliceObjects(data.getString("id"), data);
+		}
+		
 		this.position = pos;
 		JSONObject spritesMeta = data.getJSONObject("sprites");
 		JSONArray start = spritesMeta.getJSONArray("start");
@@ -59,7 +66,18 @@ public abstract class Entity {
 		currentSprite = sprites[0];
 		shape = new Rectangle(position,currentSprite.getDimension().mul(new Vector3f(1,0.25f,0)));
 
-		
+	}
+	public static void loadMap(JSONObject obj){
+		for(String i : obj.keySet()){
+			metaMap.put(i, obj.getJSONObject(i));
+		}
+	}
+	public static JSONObject spliceObjects(String dID, JSONObject primary){
+		JSONObject cpy = new JSONObject(metaMap.get(dID));
+		for(String i : primary.keySet()){
+			cpy.put(i, primary.get(i));
+		}
+		return cpy;
 	}
 	public void setSpeed(float speed){
 		this.currentSpeed = speed;
