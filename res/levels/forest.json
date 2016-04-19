@@ -1,6 +1,7 @@
 {
   "images":  ["res/levels/forest.png"],
   "ambient": "res/music/forest1.wav",
+  "fightMusic":  "res/music/fight1.wav",
   "imageMeta":  {
     "50":  {
 	  "sprite":  {

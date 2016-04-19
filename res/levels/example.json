@@ -1,0 +1,119 @@
+{
+  "images":  ["res/levels/example.png","res/levels/example_3_6.png"],
+  "ambient": "res/music/town3.wav",
+  "imageMeta":  {
+    
+    "110": {
+      "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [1,0,1]
+      },
+      "class":  "game.tile.Wall"
+    },
+    "115": {
+      "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [3,2,1]
+      },
+      "class":  "game.tile.Wall"
+    },
+    "100": {
+     "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [0,1,1]
+      },
+      "class":  "game.tile.Wall"  
+    },
+    "120": {
+      "des": "stairs",
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [4,0,1]
+      },
+      "class": "game.tile.Wall"
+    },
+    "130": {
+      "des": "arc",
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [1,1,1]
+      },
+      "class": "game.tile.Wall"
+    },
+    "50": {
+      "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [0,0,1]
+      },
+      "class":  "game.tile.Ground"
+    },
+    "80": {
+      "sprite":  {
+        "image":  "res/tile_atlas.png",
+        "index":  [2,3,1]
+      },
+      "class":  "game.tile.Ground"
+    },
+    "25": {
+      "class": "game.tile.Ground"
+    },
+    "90":{
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [4,0,1]
+      },
+      "direction": 1,
+      "class": "game.tile.Elevator"
+    },
+    "95": {
+      "direction": -1,
+      "class": "game.tile.Elevator"
+    },
+    "200": {
+      "class": "game.tile.Wall"
+    },
+    "30": {
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [0,5,1]
+      },
+      "des": "door left bottom",
+      "dest": [15,31,1],
+      "level": "town1.json",
+      "class": "game.tile.Warp"
+    },
+    "31": {
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [0,5,1]
+      },
+      "des": "door right bottom",
+      "dest": [16,31,1],
+      "level": "town1.json",
+      "class": "game.tile.Warp"
+    },
+    "32": {
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [0,4,1]
+      },
+      "des": "door left top",
+      "class": "game.tile.Wall"
+    },
+    "33": {
+      "sprite": {
+        "image": "res/tile_atlas.png",
+        "index": [0,4,1]
+      },
+      "des": "door right top",
+      "class": "game.tile.Wall"
+    }
+  },
+  "entities":  [
+    {
+      class:  "game.entity.Player",
+      
+    }
+  ]
+
+}

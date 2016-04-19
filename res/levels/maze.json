@@ -4,7 +4,8 @@
   ],
   "filter": "res/light.png",
   "battleBG": "res/battleBG_cave.png",
-  "ambient": "res/music/cave_ambient.wav",
+  "ambient": "res/music/battlefield_ambient.wav",
+  "fightMusic":  "res/music/fight2.wav",
   "imageMeta":  {
     "100":  {
       "sprite":  {

@@ -1,12 +1,78 @@
 {
     "hostile_1": {
         "sprites": {
-          "image":"res/maintest.png",
-          "dim": [26,34],
+          "image":"res/NPCs/creature1.png",
+          "dim": [32,32],
           "start": [0,0,3]
         },
         "baseDamage": 400,
+<<<<<<< HEAD
+        "baseMaxHealth": 2000,
+        "class": "game.entity.Hostile"
+    },
+    "hostile_2": {
+        "sprites": {
+          "image":"res/NPCs/creature2.png",
+          "dim": [32,32],
+          "start": [0,0,3]
+        },
+        "baseDamage": 400,
+        "baseMaxHealth": 2000,
+        "class": "game.entity.Hostile"
+    },
+    "hostile_3": {
+        "sprites": {
+          "image":"res/NPCs/creature3.png",
+          "dim": [32,32],
+          "start": [0,0,3]
+        },
+        "baseDamage": 400,
+        "baseMaxHealth": 2000,
+        "class": "game.entity.Hostile"
+    },
+    "hostile_4": {
+        "sprites": {
+          "image":"res/NPCs/creature4.png",
+          "dim": [32,32],
+          "start": [0,0,3]
+        },
+        "baseDamage": 400,
+        "baseMaxHealth": 2000,
+        "class": "game.entity.Hostile"
+    },
+    "hostile_5": {
+        "sprites": {
+          "image":"res/NPCs/creature5.png",
+          "dim": [32,32],
+          "start": [0,0,3]
+        },
+        "baseDamage": 400,
+        "baseMaxHealth": 2000,
+        "class": "game.entity.Hostile"
+    },
+    "hostile_6": {
+        "sprites": {
+          "image":"res/NPCs/creature6.png",
+          "dim": [32,32],
+          "start": [0,0,3]
+        },
+        "baseDamage": 400,
+        "baseMaxHealth": 2000,
+        "class": "game.entity.Hostile"
+    },
+    "final_boss": {
+        "sprites": {
+          "image":"res/NPCs/boss.png",
+          "dim": [96,48],
+          "start": [0,0,3]
+        },
+        "baseDamage": 400,
+        "baseMaxHealth": 10000,
+        "class": "game.entity.Hostile"
+    },
+=======
         "baseMaxHealth": 2000
     }
+>>>>>>> origin/master
 
 }
