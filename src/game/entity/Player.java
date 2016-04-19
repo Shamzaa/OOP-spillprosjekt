@@ -40,6 +40,8 @@ public class Player extends Fighter implements KeyListener{
 	}
 	private void init(){
 		baseDamage = 640;
+		baseHealth = 100;
+		healthPoints = 50;
 	}
 	public void disableControls(){
 		controlsEnabled = false;

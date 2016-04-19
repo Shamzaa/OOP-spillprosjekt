@@ -73,14 +73,12 @@ public abstract class Entity {
 		}
 	}
 	public static JSONObject spliceObjects(String dID, JSONObject primary){
-		JSONObject cpy = new JSONObject();
+		JSONObject cpy = primary;
 		for(String i : metaMap.get(dID).keySet()){
-			cpy.put(i, metaMap.get(dID).get(i));
+			if(!cpy.has(i)){
+				cpy.put(i, metaMap.get(dID).get(i));
+			}
 		}
-		for(String i : primary.keySet()){
-			cpy.put(i, primary.get(i));
-		}
-		System.out.println(cpy);
 		return cpy;
 	}
 	public void setSpeed(float speed){

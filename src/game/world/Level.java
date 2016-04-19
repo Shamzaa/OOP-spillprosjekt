@@ -46,8 +46,9 @@ public class Level implements KeyListener, MouseListener{
 	private ArrayList<Updatable> effects = new ArrayList<Updatable>();
 	//private ArrayList<Updatable> graceERemoval = new ArrayList<Updatable>();
 	private ArrayList<Updatable> graceEInsertion = new ArrayList<Updatable>();
-	private AudioChannel ambientMusic;
+	protected AudioChannel ambientMusic;
 	private String ambientName;
+	private AudioChannel battlemusic = AudioManager.getMixer().addChannel("res/music/fight1.wav", "res/music/fight1.wav");
 	private Player player = null;
 	public Level(int width,int height){
 		init(width,height);
@@ -122,9 +123,12 @@ public class Level implements KeyListener, MouseListener{
 				System.out.println(ent);
 			}
 		}
+		if(levelMeta.has("fightMusic")){
+			battlemusic = AudioManager.getMixer().addChannel(levelMeta.getString("fightMusic"), levelMeta.getString("fightMusic"));
+		}
 	}
 	public void startBattle(Fighter p, Fighter o){
-		Game.setLevel(new BattleScene(battleBG, p, o, this));
+		Game.setLevel(new BattleScene(battleBG, p, o, this,battlemusic));
 	}
 	public Player getPlayer(){
 		return player;

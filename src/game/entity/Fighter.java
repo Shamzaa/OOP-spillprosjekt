@@ -67,7 +67,16 @@ public abstract class Fighter extends Entity{
 		Vector3f hpDim = new Vector3f(sprites[0].getDimension().getX()+6,3,0);
 		healthBar = new ColorRect(position,hpDim,new Color(255,0,0));
 		healthBarBG = new ColorRect(position,hpDim,new Color(50,50,50));
-	
+		
+		if(obj.has("baseDamage")){
+		
+			baseDamage = obj.getInt("baseDamage");
+		}
+		if(obj.has("baseMaxHealth")){
+			baseMaxHealth = obj.getInt("baseMaxHealth");
+			baseHealth = baseMaxHealth;
+			healthPoints = baseHealth;
+		}
 	}
 	
 	public void hit(double damage){

@@ -14,6 +14,7 @@ import game.entity.Fighter;
 import game.entity.Player;
 import game.math.Vector3f;
 import game.resource.ResourceManager;
+import game.sound.AudioChannel;
 import game.tile.Ground;
 import game.tile.Tile;
 import game.tile.Wall;
@@ -40,8 +41,9 @@ public class BattleScene extends Level{
 	private ColorRect menuBorder = new ColorRect(new Vector3f(super.getWidth()/2, super.getHeight() - 40, 1), new Vector3f(super.getWidth()/2, 80, 1), new Color(255,255,255));
 */
 	
-	public BattleScene(Sprite background, Fighter player, Fighter hostile, Level prev) {
+	public BattleScene(Sprite background, Fighter player, Fighter hostile, Level prev, AudioChannel battlemusic) {
 		super(0, 0);
+		this.ambientMusic = battlemusic;
 		this.background = background;
 		this.player = player;
 		this.hostile = hostile;
