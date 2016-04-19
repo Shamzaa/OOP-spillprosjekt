@@ -233,5 +233,18 @@
       "class":  "game.tile.Ground",
 	  "depthOffset": -1
 	},
-  }
+  },
+  "entities":  [
+    {
+      "id": "hostile_2",
+      "class": "game.entity.Hostile",
+      "position": [8.5,14.5,1]
+    },
+    {
+      "id": "hostile_3",
+      "class": "game.entity.Hostile",
+      "position": [17.5,13.5,1]
+    }
+  ]
+  
 }
