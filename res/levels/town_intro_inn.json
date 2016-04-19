@@ -96,4 +96,6 @@
       "class": "game.entity.Hostile",
       "position": [9.5,5.5,1]
     }]
+
+  }
 }

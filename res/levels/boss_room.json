@@ -104,5 +104,12 @@
       "class":  "game.tile.Wall"
 	},
     
-  }
+  },
+  "entities":  [
+    {
+      "id": "final_boss",
+      "class": "game.entity.Hostile",
+      "position": [14.5,13.5,1]
+    }
+  ]
 }
