@@ -50,7 +50,7 @@ public abstract class Entity {
 		if(data.has("id")){
 			data = Entity.spliceObjects(data.getString("id"), data);
 		}
-		
+		System.out.println(data);
 		this.position = pos;
 		JSONObject spritesMeta = data.getJSONObject("sprites");
 		JSONArray start = spritesMeta.getJSONArray("start");
@@ -73,7 +73,10 @@ public abstract class Entity {
 		}
 	}
 	public static JSONObject spliceObjects(String dID, JSONObject primary){
-		JSONObject cpy = new JSONObject(metaMap.get(dID));
+		JSONObject cpy = new JSONObject();
+		for(String i : metaMap.get(dID).keySet()){
+			cpy.put(i, metaMap.get(dID).get(i));
+		}
 		for(String i : primary.keySet()){
 			cpy.put(i, primary.get(i));
 		}

@@ -90,5 +90,10 @@
       "class":  "game.tile.Wall",
       "height": 0.5
 	}
-  }
+  },
+  "entities": [{
+      "id": "hostile_1",
+      "class": "game.entity.Hostile",
+      "position": [9.5,5.5,1]
+    }]
 }

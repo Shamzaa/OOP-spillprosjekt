@@ -8,6 +8,7 @@
         "baseDamage": 400,
         "baseMaxHealth": 2000,
         "class": "game.entity.Hostile"
+
     },
     "hostile_2": {
         "sprites": {
@@ -16,8 +17,7 @@
           "start": [0,0,3]
         },
         "baseDamage": 400,
-        "baseMaxHealth": 2000,
-        "class": "game.entity.Hostile"
+        "baseMaxHealth": 2000
     },
     "hostile_3": {
         "sprites": {
@@ -26,8 +26,7 @@
           "start": [0,0,3]
         },
         "baseDamage": 400,
-        "baseMaxHealth": 2000,
-        "class": "game.entity.Hostile"
+        "baseMaxHealth": 2000
     },
     "hostile_4": {
         "sprites": {
@@ -36,8 +35,7 @@
           "start": [0,0,3]
         },
         "baseDamage": 400,
-        "baseMaxHealth": 2000,
-        "class": "game.entity.Hostile"
+        "baseMaxHealth": 2000
     },
     "hostile_5": {
         "sprites": {
@@ -46,8 +44,7 @@
           "start": [0,0,3]
         },
         "baseDamage": 400,
-        "baseMaxHealth": 2000,
-        "class": "game.entity.Hostile"
+        "baseMaxHealth": 2000
     },
     "hostile_6": {
         "sprites": {
@@ -56,8 +53,7 @@
           "start": [0,0,3]
         },
         "baseDamage": 400,
-        "baseMaxHealth": 2000,
-        "class": "game.entity.Hostile"
+        "baseMaxHealth": 2000
     },
     "final_boss": {
         "sprites": {
@@ -68,8 +64,5 @@
         "baseDamage": 400,
         "baseMaxHealth": 10000,
         "class": "game.entity.Hostile"
-    },
-
-
-
+    }
 }
