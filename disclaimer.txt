@@ -1,0 +1,3 @@
+Disclaimer:
+Alt av sprites og lyd er ikke laget av oss
+Se https://github.com/Shamzaa/OOP-spillprosjekt for credits.
