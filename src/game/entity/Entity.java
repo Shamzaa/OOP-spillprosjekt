@@ -80,6 +80,7 @@ public abstract class Entity {
 		for(String i : primary.keySet()){
 			cpy.put(i, primary.get(i));
 		}
+		System.out.println(cpy);
 		return cpy;
 	}
 	public void setSpeed(float speed){
