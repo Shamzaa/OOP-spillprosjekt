@@ -9,7 +9,6 @@ public class NPC extends Entity{
 	public NPC(Vector3f position, Sprite[] sprites){
 		super(position,sprites);
 	}
-
 	@Override
 	public void enter(Level lvl) {
 	}

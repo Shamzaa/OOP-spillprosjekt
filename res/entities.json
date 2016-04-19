@@ -6,6 +6,7 @@
           "start": [0,0,3]
         },
         "baseDamage": 400,
+<<<<<<< HEAD
         "baseMaxHealth": 2000,
         "class": "game.entity.Hostile"
     },
@@ -69,5 +70,9 @@
         "baseMaxHealth": 10000,
         "class": "game.entity.Hostile"
     },
+=======
+        "baseMaxHealth": 2000
+    }
+>>>>>>> origin/master
 
 }

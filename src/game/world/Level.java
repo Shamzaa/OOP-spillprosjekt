@@ -108,8 +108,21 @@ public class Level implements KeyListener, MouseListener{
 			initImage(i, valueMap, zoffset);
 			zoffset += 3;
 		}
-		
-		
+		//Init entities
+		if(levelMeta.has("entities")){
+			JSONArray ents = levelMeta.getJSONArray("entities");
+			for(Object i : ents){
+				JSONObject j = (JSONObject) i;
+				JSONArray pos = j.getJSONArray("position");
+				ClassUtils.newInstance(j.getString("class"), new Object[]{
+					new Vector3f(pos.getInt(0),pos.getInt(1),pos.getInt(2))
+				,j});
+				
+				
+				
+				//addEntity(ents.);
+			}
+		}
 	}
 	public void startBattle(Fighter p, Fighter o){
 		Game.setLevel(new BattleScene(battleBG, p, o, this));

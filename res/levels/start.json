@@ -20,7 +20,6 @@
 	  "des": "invisible wall",
       "class": "game.tile.Wall"
 	},
-	
 	"90":  {
 	  "sprite": {
         "image": "res/tile_atlas.png",

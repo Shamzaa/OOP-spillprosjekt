@@ -24,7 +24,7 @@ public class Button extends GuiComponent{
 		dimension = new Vector3f(sprite.getDimension());
 		//label.position = new Vector3f(dimension.scale(0.5f));
 		label.dimension = dimension;
-		label.center = new Vector3f(-0.28f,-0.62f,0);
+		label.center = new Vector3f(-0.35f,-0.62f,0);
 	}
 	public TextLabel getLabel(){
 		return label;
@@ -41,16 +41,18 @@ public class Button extends GuiComponent{
 	}
 	@Override
 	public void mouseClicked(MouseEvent event) {
-		if(toggle){
-			on = !on;
-			down = on;
+		if(event.getButton() == MouseEvent.BUTTON1){
+			if(toggle){
+				on = !on;
+				down = on;
+			}
+			
+			ActionEvent actionEvent = new ActionEvent(this,ActionEvent.ACTION_PERFORMED,toggle ? (on ? "DOWN" : "UP") : "CLICK");
+			for(ActionListener i : actionListeners){
+				i.actionPerformed(actionEvent);
+			}
+			super.mouseClicked(event);
 		}
-		
-		ActionEvent actionEvent = new ActionEvent(this,ActionEvent.ACTION_PERFORMED,toggle ? (on ? "DOWN" : "UP") : "CLICK");
-		for(ActionListener i : actionListeners){
-			i.actionPerformed(actionEvent);
-		}
-		super.mouseClicked(event);
 	}
 
 	@Override
