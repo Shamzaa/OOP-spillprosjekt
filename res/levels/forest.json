@@ -1,0 +1,236 @@
+{
+  "images":  ["res/levels/forest.png"],
+  "ambient": "res/music/forest1.wav",
+  "imageMeta":  {
+    "50":  {
+	  "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [1,1,1]
+       },
+      "class":  "game.tile.Ground"
+	},
+	"51":  {
+	  "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [0,3,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"60":  {
+	  "des": "warp to town",
+	  "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [0,3,1]
+      },
+	  "dest": [28,1,1],
+      "level": "town_intro.json",
+      "class": "game.tile.Warp"
+	},
+	"255":  {
+	  "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [0,1,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"254":  {
+	  "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [2,1,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"253":  {
+	  "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [1,0,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"252":  {
+	  "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [1,2,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"251":  {
+	  "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [2,2,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"250":  {
+	  "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [0,2,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"249":  {
+	  "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [0,0,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"248":  {
+	  "sprite":  {
+        "image":  "res/ground_outdoor.png",
+        "index":  [2,0,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"247":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [5,0,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"246":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [6,0,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"245":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [5,1,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"244":  {
+	  "sprite":  {
+        "image":  "res/water_outdoor.png",
+        "index":  [6,1,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	
+	"100":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [4,2,1]
+      },
+	  "height": 0.3,
+      "class":  "game.tile.Wall"
+	},
+	"99":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [4,4,1]
+      },
+      "class":  "game.tile.Wall"
+	},
+	"101":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [4,3,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"102":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [3,3,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"103":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [3,2,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"104":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [5,2,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"105":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [5,3,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"106":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [0,6,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"107":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [1,6,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"108":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [2,6,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"109":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [0,7,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"110":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [1,7,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"111":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [2,7,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"112":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [0,8,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"113":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [1,8,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"114":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [2,8,1]
+      },
+      "class":  "game.tile.Ground"
+	},
+	"115":  {
+	  "sprite":  {
+        "image":  "res/misc_outdoor.png",
+        "index":  [4,1,1]
+      },
+      "class":  "game.tile.Ground",
+	  "depthOffset": -1
+	},
+  }
+}

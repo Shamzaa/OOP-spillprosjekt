@@ -25,9 +25,75 @@
         "image": "res/tile_atlas.png",
         "index": [4,1,1]
       },
-      "dest": [10,18,1],
+      "dest": [2,10,1],
       "level": "home.json",
       "class": "game.tile.Warp"
+	},
+    "101":  {
+      "des":  "bed top",
+	  "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [7,1,1]
+       },
+      "class": "game.tile.Wall",
+      "height": 0.5
+	},
+    "100":  {
+      "des":  "bed bottom",
+	  "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [7,2,1]
+       },
+      "class": "game.tile.Wall"
+	},
+    "102":  {
+      "des":  "table bottom",
+	  "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [6,2,1]
+       },
+      "class": "game.tile.Wall"
+	},
+    "103":  {
+      "des":  "table top",
+	  "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [6,1,1]
+       },
+      "class": "game.tile.Wall",
+      "height": 0.5
+	},
+    "104":  {
+      "des":  "closet left bottom",
+	  "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [4,2,1]
+       },
+      "class": "game.tile.Wall"
+	},
+    "105":  {
+      "des":  "closet right bottom",
+	  "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [5,2,1]
+       },
+      "class": "game.tile.Wall"
+	},
+    "106":  {
+      "des":  "closet right bottom",
+	  "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [4,1,1]
+       },
+      "class": "game.tile.Wall"
+	},
+    "107":  {
+      "des":  "closet right bottom",
+	  "sprite":  {
+        "image":  "res/furniture.png",
+        "index":  [5,1,1]
+       },
+      "class": "game.tile.Wall"
 	}
   }
 }

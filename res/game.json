@@ -1,6 +1,20 @@
 {
   "levels": [
+<<<<<<< HEAD
     "res/levels/outside_cave.json"
+=======
+    "res/levels/start.json",
+    "res/levels/home.json",
+    "res/levels/town_intro.json",
+    "res/levels/town_intro_inn.json",
+    "res/levels/maze.json",
+    "res/levels/example.json",
+    "res/levels/town1.json",
+    "res/levels/cave1.json",
+	"res/levels/forest.json"
+    
+    
+>>>>>>> 13d33e414e0481e0f82da6b94c39e6e6e0a6ad23
   ],
   "player": {
     "position": [3,17,2],
