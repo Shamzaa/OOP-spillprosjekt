@@ -155,6 +155,16 @@
         "index": [7,0,1]
       },
       "class": "game.tile.Wall"
+    },
+    "200": {
+      "class": "game.tile.Warp",
+      "dest": [16.5,11,2],
+      "level": "outside_cave.json"
+    },
+    "201": {
+      "class": "game.tile.Warp",
+      "dest": [3.5,1,1],
+      "level": "maze.json"
     }
   }
 }

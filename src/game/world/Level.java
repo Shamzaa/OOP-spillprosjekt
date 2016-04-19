@@ -114,13 +114,10 @@ public class Level implements KeyListener, MouseListener{
 			for(Object i : ents){
 				JSONObject j = (JSONObject) i;
 				JSONArray pos = j.getJSONArray("position");
-				ClassUtils.newInstance(j.getString("class"), new Object[]{
+				Entity ent = (Entity) ClassUtils.newInstance(j.getString("class"), new Object[]{
 					new Vector3f((float)pos.getDouble(0),(float)pos.getDouble(1),(float)pos.getDouble(2))
 				,j});
-				
-				
-				
-				//addEntity(ents.);
+				addEntity(ent);
 			}
 		}
 	}

@@ -47,7 +47,7 @@ public abstract class Entity {
 		shape = new Rectangle(position,currentSprite.getDimension().mul(new Vector3f(1,0.25f,0)));
 	}
 	public Entity(Vector3f pos,JSONObject data){
-		if(data.has("baseId")){
+		if(data.has("id")){
 			data = Entity.spliceObjects(data.getString("id"), data);
 		}
 		

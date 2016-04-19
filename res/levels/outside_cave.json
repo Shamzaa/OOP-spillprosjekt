@@ -81,6 +81,13 @@
       },
       "class": "game.tile.Ground"
     },    
+    "59": {
+      "sprite": {
+        "image": "res/water_outdoor.png",
+        "index": [6,1,1]
+      },
+      "class": "game.tile.Ground"
+    },
     "60": {
       "des": "dirt",
       "sprite": {
@@ -219,7 +226,24 @@
         "index": [8,4,1]
       },
       "class": "game.tile.Ground"
+    },
+    "200": {
+      "des": "cave entrance",
+      "sprite": {
+        "image": "res/ground_outdoor.png",
+        "index": [9,0,1]
+      },
+      "class": "game.tile.Warp",
+      "dest": [3,16,5],
+      "level": "tr_cave.json"
+    },
+    "201": {
+      "des": "cave entrance bottom",
+      "sprite": {
+        "image": "res/ground_outdoor.png",
+        "index": [9,1,1]
+      },
+      "class": "game.tile.Ground"
     }
-   
   }
 }
