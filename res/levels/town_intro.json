@@ -177,7 +177,7 @@
         "image": "res/tile_atlas.png",
         "index": [1,6,1]
       },
-      "dest": [1,15,1],
+      "dest": [2,16,2],
       "level": "outside_cave.json",
       "class": "game.tile.Warp"
 	},
