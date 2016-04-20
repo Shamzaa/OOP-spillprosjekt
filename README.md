@@ -58,6 +58,9 @@ Iterativ:
  - [Undertale](http://store.steampowered.com/app/391540/), Toby Fox (musikk)
  - [Sprites](http://opengameart.org/content/antifareas-rpg-sprite-set-1-enlarged-w-transparent-background-fixed)
  - [Sprites](http://rpgmaker.net/forums/topics/9810/)
+ - [Teksturer](http://opengameart.org/content/lpc-tile-atlas)
  - [Teksturer](https://facepunch.com/showthread.php?t=1213795)
+ - [Bakgrunn](http://opengameart.org/content/forest-background-art)
+ - [Bakgrunn](http://spritedatabase.net/file/11226)
 
 
